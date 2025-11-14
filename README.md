@@ -121,3 +121,19 @@ Democratizar o conhecimento em tecnologias, com oportunidades de desenvolvimento
 
 ![UX](./UX.png)
 ![MVP](./MVP.png)
+
+
+# 🛑Importante: 
+
+## 🧩 Ferramentas Utilizadas
+
+## 🧩 Outras informações
+
+
+
+
+
+
+
+
+
