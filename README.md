@@ -171,10 +171,18 @@ Alta demanda, autonomia e transição:
 
 ## 🛠️ Ferramentas Utilizadas
 
+- HTML
+- CSS
+- REACT
+- Node.js
 
+## 💻 Como executar o projeto
+
+## 📦 Instalação de Dependências (opcional)
 
 ## 🧩 Outras informações
 
+## 🖼️ Prévia
 
 Metodologias ágeis:  
 👉[Trello](https://trello.com/invite/b/691291b757d0491d7e245873/ATTI68355fc7cebf7ca79f7306398a5cb25f98E55839/gameficacao)
