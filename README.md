@@ -114,4 +114,6 @@ Democratizar o conhecimento em tecnologias, com oportunidades de desenvolvimento
 ![Matriz Suposições](./Suposições.png)
 ![Matriz Duvidas](./Duvidas.png)
 
+## Persona
+![Persona](./Persona.png)
 
