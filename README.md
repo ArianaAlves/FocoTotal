@@ -117,3 +117,7 @@ Democratizar o conhecimento em tecnologias, com oportunidades de desenvolvimento
 ## Persona
 ![Persona](./Persona.png)
 
+## A escolha da persona é feita através de entrevistas e questionários, mas devido ao tempo curto, pesquisamos qual o perfil de estudante, mas se beneficiaria com a proposta do projeto.
+
+![UX](./UX.png)
+![MVP](./MVP.png)
