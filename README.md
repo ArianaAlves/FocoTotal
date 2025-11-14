@@ -108,4 +108,10 @@ Falha no gerenciamento do planejamento diário
 
 Democratizar o conhecimento em tecnologias, com oportunidades de desenvolvimento pessoal e profissional, com foco em gerenciamento de estudos, conectando talentos.
 
+# 📖 Matriz CSD
+
+![Matriz Certezas](./Certezas.png)
+![Matriz Suposições](./Suposições.png)
+![Matriz Duvidas](./Duvidas.png)
+
 
