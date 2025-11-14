@@ -2,6 +2,12 @@
 
 ✨ Desafio DEV: Código que conecta
 
+🗓️ Período: 10 de novembro a 17 de novembro
+
+🧑🏽‍💻 Equipe 4: Carlos, Iago, Ariana, Sheyenne, Beatriz
+
+
+
 ## Briefing
 
 Seu grupo é um squad de desenvolvimento contratado para construir um Módulo de Agendamento e Gestão de Tarefas (MVP) para uma nova plataforma de produtividade, a "Foco Total". O foco é aplicar boas práticas de programação, demonstrar codificação colaborativa eficaz e garantir a integridade dos dados através da integração com um banco de dados.
@@ -108,6 +114,44 @@ Falha no gerenciamento do planejamento diário
 
 Democratizar o conhecimento em tecnologias, com oportunidades de desenvolvimento pessoal e profissional, com foco em gerenciamento de estudos, conectando talentos.
 
+
+## 💡 Insights
+
+➡️Dores identificadas?
+-
+As pesquisas apontam para um conjunto de frustrações e dificuldades emocionais e práticas:
+
+- Sobrecarga e Ansiedade: A dificuldade em lidar com múltiplos prazos (provas, trabalhos, leituras) de diferentes disciplinas simultaneamente causa estresse e ansiedade.
+
+- Perda de Controle: A falta de uma rotina organizada leva à sensação de que o tempo está sendo mal gerido e que o progresso está estagnado, resultando em insatisfação com a própria aprendizagem.
+
+- Procrastinação Frequente: O adiamento não estratégico de tarefas, especialmente estudos diários, gera culpa e impede a progressão acadêmica, sendo um fenômeno muito comum.
+
+- Dificuldade de Autoavaliação: Falta de mecanismos simples para monitorar e refletir se os objetivos de estudo estão sendo alcançados, ou seja, se a meta diária/semanal foi cumprida.
+
+
+➡️Qual o contexto em que estão inseridos?
+-
+Alta demanda, autonomia e transição:
+
+- Ambiente Multifacetado: Eles precisam equilibrar as exigências acadêmicas (aulas, pesquisas, trabalhos), pessoais (vida social, família, hobbies) e, muitas vezes, profissionais (estágios ou empregos).
+
+- Autonomia Forçada: Ao contrário do ensino médio, a universidade exige um alto grau de autonomia e disciplina na gestão do tempo. Não há um controle constante sobre o estudo diário.
+
+- Vida Digital: São usuários intensivos de tecnologia e valorizam soluções que sejam acessíveis, rápidas e que possam ser utilizadas em qualquer dispositivo (mobile).
+
+
+➡️Quais os principais desafios enfrentados por esses usuários?
+-
+- Priorização Efetiva: Decidir qual tarefa (leitura, trabalho, resumo, preparo para prova) é a mais urgente e importante, dada a sobrecarga de demandas.
+  
+- Consistência e Hábito: Transformar o ato de planejar e organizar a agenda de estudos em um hábito diário e sustentável, em vez de apenas um esforço inicial no semestre.
+
+- Foco em Tarefas Pequenas: Evitar procrastinar em relação às tarefas menores e diárias (como leituras obrigatórias ou exercícios) que são cruciais, mas menos assustadoras do que grandes projetos (o que o estudo apontou como sendo o que mais se procrastina).
+
+- Integração de Informação: Centralizar todos os prazos e tarefas dispersos em diferentes fontes (e-mail, plataforma EAD, anotações de aula) em um único local de fácil acesso.
+
+
 # 📖 Matriz CSD
 
 ![Matriz Certezas](./Certezas.png)
@@ -125,12 +169,18 @@ Democratizar o conhecimento em tecnologias, com oportunidades de desenvolvimento
 
 # 🛑Importante: 
 
-## 🧩 Ferramentas Utilizadas
+## 🛠️ Ferramentas Utilizadas
+
+
 
 ## 🧩 Outras informações
 
 
+Metodologias ágeis:  
+👉[Trello](https://trello.com/invite/b/691291b757d0491d7e245873/ATTI68355fc7cebf7ca79f7306398a5cb25f98E55839/gameficacao)
 
+Protótipo no Figma:  
+👉
 
 
 
