@@ -1,37 +1,21 @@
+
 .task-card {
-  background: linear-gradient(135deg, #1a2240 0%, rgba(26, 34, 64, 0.6) 100%);
-  border: 2px solid #2d3a52;
+  background: #F0F4F8;
+  border: 2px solid #E3F0FF;
   border-radius: 12px;
   padding: 18px;
   margin-bottom: 12px;
-  box-shadow: 0 4px 12px rgba(154, 184, 250, 0.08);
+  box-shadow: 0 4px 12px #A7C7E722;
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
   position: relative;
   overflow: hidden;
 }
 
-.task-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(154, 184, 250, 0.1), transparent);
-  transition: left 0.5s ease;
-  z-index: 0;
-}
-
 .task-card:hover {
-  box-shadow: 0 8px 24px rgba(154, 184, 250, 0.15);
+  box-shadow: 0 8px 24px #A7C7E744;
   transform: translateY(-3px);
-  border-color: rgba(154, 184, 250, 0.4);
-  background: linear-gradient(135deg, rgba(154, 184, 250, 0.05) 0%, rgba(26, 34, 64, 0.8) 100%);
-}
-
-.task-card:hover::before {
-  left: 100%;
+  border-color: #A7C7E7;
+  background: #E3F0FF;
 }
 
 .task-card.completed {

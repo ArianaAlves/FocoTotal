@@ -1,10 +1,12 @@
 /* Dashboard Styles */
 
+
 .dashboard-main {
   flex: 1;
   padding: 40px 20px;
   position: relative;
   z-index: 1;
+  background: #F7FAFC;
 }
 
 .dashboard-content {
