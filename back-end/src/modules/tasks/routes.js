@@ -2,7 +2,7 @@ import { Router } from "express";
 import { auth } from "../../middlewares/authMiddleware.js";
 import { taskController } from "./controller.js";
 import { validate } from "../../middlewares/validate.js";
-import { createTaskSchema } from "../tasks/task.schema.js"
+import { createTaskSchema, updateTaskSchema } from "../tasks/task.schema.js"
 import { sanitize } from "../../middlewares/sanitize.js"
 
 const router = Router();

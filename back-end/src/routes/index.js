@@ -4,6 +4,10 @@ import userRoutes from "../modules/user/routes.js";
 
 const router = Router();
 
+router.get("/health", (req, res) => {
+  res.json({ message: "API funcionando!", timestamp: new Date().toISOString() });
+});
+
 router.use("/users", userRoutes);
 router.use("/tasks", taskRoutes);
 
