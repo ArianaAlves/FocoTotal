@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
+import "../styles/Auth.css";
 
 export default function Login() {
   const { login } = useContext(AuthContext);
@@ -25,21 +26,67 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <form onSubmit={handle} className="w-full max-w-md bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
-        <h1 className="text-2xl font-semibold mb-4 text-primary dark:text-primaryLight">Entrar</h1>
-        {error && <div className="mb-3 text-red-500">{error}</div>}
-        <input type="email" placeholder="E-mail" value={email} onChange={e => setEmail(e.target.value)}
-          className="w-full mb-3 p-2 border rounded" required />
-        <input type="password" placeholder="Senha" value={password} onChange={e => setPassword(e.target.value)}
-          className="w-full mb-4 p-2 border rounded" required />
-        <button className="w-full py-2 bg-primary text-white rounded" disabled={loading}>
-          {loading ? "Entrando..." : "Entrar"}
-        </button>
-        <p className="mt-4 text-sm text-muted">
-          Não tem conta? <Link to="/register" className="text-primary">Cadastre-se</Link>
-        </p>
-      </form>
+    <div className="auth-container">
+      <div className="auth-bg-decoration auth-bg-decoration-1"></div>
+      <div className="auth-bg-decoration auth-bg-decoration-2"></div>
+      
+      <div className="auth-form-wrapper">
+        <div className="auth-card">
+          <div className="auth-header">
+            <h1 className="auth-title">Bem-vindo</h1>
+            <p className="auth-subtitle">Acesse sua conta FocoTotal</p>
+          </div>
+
+          <form onSubmit={handle} className="auth-form">
+            {error && <div className="auth-error">{error}</div>}
+            
+            <div className="form-group">
+              <label htmlFor="email">E-mail</label>
+              <input
+                id="email"
+                type="email"
+                placeholder="seu@email.com"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="password">Senha</label>
+              <input
+                id="password"
+                type="password"
+                placeholder="••••••••"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                required
+              />
+            </div>
+
+            <button 
+              type="submit" 
+              className="auth-submit-btn" 
+              disabled={loading}
+            >
+              <span>{loading ? "⏳ Entrando..." : "↗ Entrar"}</span>
+            </button>
+          </form>
+
+          <div className="auth-footer">
+            <p className="auth-footer-text">
+              Não tem conta?{" "}
+              <Link to="/register" className="auth-footer-link">
+                Cadastre-se aqui
+              </Link>
+            </p>
+          </div>
+
+          <div className="auth-info">
+            Use suas credenciais para acessar o painel de controle do FocoTotal
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

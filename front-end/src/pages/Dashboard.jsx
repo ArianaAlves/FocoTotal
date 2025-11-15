@@ -1,16 +1,84 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
+import "../styles/Dashboard.css";
 
 export default function Dashboard() {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <main className="p-6">
-        <h2 className="text-xl mb-4">Painel</h2>
-        <p>Bem-vindo ao FocoTotal. Use o menu para gerenciar seus agendamentos / tarefas.</p>
-        <div className="mt-6">
-          <Link to="/tasks" className="inline-block px-4 py-2 bg-primary text-white rounded">Minhas Tarefas</Link>
+      <main className="dashboard-main">
+        <div className="container">
+          <div className="dashboard-content">
+            <div className="dashboard-header">
+              <h2 className="dashboard-title">Painel de Controle</h2>
+              <p className="dashboard-subtitle">Organize seus projetos e tarefas de forma eficiente</p>
+            </div>
+
+            <div className="dashboard-grid">
+              {/* Card Principal */}
+              <div className="dashboard-card featured">
+                <div className="card-icon">📋</div>
+                <h3>Minhas Tarefas</h3>
+                <p>Gerencie, organize e acompanhe o progresso de todas as suas tarefas</p>
+                <Link to="/tasks" className="dashboard-link-btn">
+                  Acessar Tarefas →
+                </Link>
+              </div>
+
+              {/* Cards Secundários */}
+              <div className="dashboard-card">
+                <div className="card-icon">👤</div>
+                <h3>Meu Perfil</h3>
+                <p>Veja e edite suas informações pessoais e estatísticas</p>
+                <Link to="/profile" className="dashboard-link-btn">
+                  Ver Perfil →
+                </Link>
+              </div>
+
+              <div className="dashboard-card">
+                <div className="card-icon">⚡</div>
+                <h3>Produtividade</h3>
+                <p>Monitore seu progresso e melhore sua produtividade</p>
+                <p className="dashboard-stats">Em desenvolvimento</p>
+              </div>
+
+              <div className="dashboard-card">
+                <div className="card-icon">🎯</div>
+                <h3>Metas</h3>
+                <p>Defina e acompanhe suas metas pessoais e profissionais</p>
+                <p className="dashboard-stats">Em desenvolvimento</p>
+              </div>
+            </div>
+
+            {/* Quick Start Section */}
+            <div className="quick-start-section">
+              <h3>🚀 Primeiros Passos</h3>
+              <div className="quick-start-steps">
+                <div className="step">
+                  <span className="step-number">1</span>
+                  <div>
+                    <strong>Crie sua primeira tarefa</strong>
+                    <p>Acesse "Minhas Tarefas" e crie uma nova tarefa</p>
+                  </div>
+                </div>
+                <div className="step">
+                  <span className="step-number">2</span>
+                  <div>
+                    <strong>Organize por prioridade</strong>
+                    <p>Defina prioridades para melhor gerenciamento</p>
+                  </div>
+                </div>
+                <div className="step">
+                  <span className="step-number">3</span>
+                  <div>
+                    <strong>Acompanhe seu progresso</strong>
+                    <p>Marque tarefas como concluídas e veja suas estatísticas</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
     </div>
