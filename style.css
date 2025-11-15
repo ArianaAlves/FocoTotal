@@ -1,0 +1,51 @@
+.container {
+  max-width: 600px;
+  margin: auto;
+  font-family: Arial;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.searchBox {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.searchBox input,
+.searchBox select {
+  flex: 1;
+  padding: 8px;
+}
+
+button {
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+.taskList {
+  list-style: none;
+  padding: 0;
+}
+
+.taskList li {
+  background: #9ab8fab2;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.taskList li strong {
+  flex: 1;
+}
+
+.taskList li span {
+  color: #fefeff;
+  font-size: 0.9em;
+}
