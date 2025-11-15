@@ -1,0 +1,378 @@
+#root {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  background: linear-gradient(135deg, #0a0e27 0%, #0f1429 50%, #0a0e27 100%);
+  background-attachment: fixed;
+}
+
+/* Fundo decorativo com linhas Matrix e partículas */
+.app-matrix-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Rede de hexágonos e padrões geométricos */
+.app-grid {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(0deg, transparent 24%, rgba(154, 184, 250, 0.04) 25%, rgba(154, 184, 250, 0.04) 26%, transparent 27%, transparent 74%, rgba(154, 184, 250, 0.04) 75%, rgba(154, 184, 250, 0.04) 76%, transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%, rgba(154, 184, 250, 0.04) 25%, rgba(154, 184, 250, 0.04) 26%, transparent 27%, transparent 74%, rgba(154, 184, 250, 0.04) 75%, rgba(154, 184, 250, 0.04) 76%, transparent 77%, transparent);
+  background-size: 60px 60px;
+  animation: grid-move 20s linear infinite;
+}
+
+@keyframes grid-move {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(60px);
+  }
+}
+
+/* Partículas flutuantes */
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: radial-gradient(circle, var(--primary-light), var(--primary));
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--primary), 0 0 12px rgba(154, 184, 250, 0.4);
+  animation: float-particle 20s infinite ease-in-out;
+  opacity: 0.6;
+}
+
+@keyframes float-particle {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(100px);
+    opacity: 0;
+  }
+}
+
+/* Padrão de hexágonos */
+.app-hex {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 400px;
+  background-image: 
+    url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="hex" width="100" height="100" patternUnits="userSpaceOnUse"><polygon points="30,0 70,0 100,50 70,100 30,100 0,50" fill="none" stroke="%239ab8fa" stroke-width="1" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23hex)"/></svg>');
+  background-repeat: repeat;
+  pointer-events: none;
+  z-index: 0;
+  animation: float 20s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-20px);
+    opacity: 0.5;
+  }
+}
+
+/* Partículas de código */
+.app-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.code-particle {
+  position: absolute;
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  color: rgba(154, 184, 250, 0.15);
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.code-particle:nth-child(1) {
+  top: 10%;
+  left: 5%;
+  animation: float-particle 8s ease-in-out infinite;
+}
+
+.code-particle:nth-child(2) {
+  top: 20%;
+  right: 10%;
+  animation: float-particle 10s ease-in-out infinite reverse;
+}
+
+.code-particle:nth-child(3) {
+  top: 50%;
+  left: 15%;
+  animation: float-particle 12s ease-in-out infinite;
+}
+
+.code-particle:nth-child(4) {
+  bottom: 10%;
+  right: 5%;
+  animation: float-particle 9s ease-in-out infinite reverse;
+}
+
+.code-particle:nth-child(5) {
+  top: 70%;
+  left: 50%;
+  animation: float-particle 11s ease-in-out infinite;
+}
+
+/* Linhas conectadas tema computação */
+.connection-line {
+  position: fixed;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(154, 184, 250, 0.1) 50%, 
+    transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.line-1 {
+  width: 300px;
+  height: 2px;
+  top: 20%;
+  left: 10%;
+  transform: rotate(-30deg);
+  animation: pulse-line 3s ease-in-out infinite;
+}
+
+.line-2 {
+  width: 200px;
+  height: 2px;
+  bottom: 30%;
+  right: 15%;
+  transform: rotate(45deg);
+  animation: pulse-line 4s ease-in-out infinite reverse;
+}
+
+.line-3 {
+  width: 250px;
+  height: 2px;
+  top: 60%;
+  right: 5%;
+  transform: rotate(-20deg);
+  animation: pulse-line 3.5s ease-in-out infinite;
+}
+
+@keyframes pulse-line {
+  0%, 100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* Pontos nodais */
+.node-dot {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(154, 184, 250, 0.2);
+  border: 2px solid rgba(154, 184, 250, 0.3);
+  pointer-events: none;
+  z-index: 0;
+  box-shadow: 0 0 8px rgba(154, 184, 250, 0.2);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.node-dot:nth-child(9) {
+  top: 25%;
+  left: 8%;
+  animation-delay: 0s;
+}
+
+.node-dot:nth-child(10) {
+  top: 35%;
+  right: 12%;
+  animation-delay: 0.3s;
+}
+
+.node-dot:nth-child(11) {
+  bottom: 25%;
+  left: 20%;
+  animation-delay: 0.6s;
+}
+
+.node-dot:nth-child(12) {
+  bottom: 15%;
+  right: 8%;
+  animation-delay: 0.9s;
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(154, 184, 250, 0.2);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(154, 184, 250, 0.4);
+    transform: scale(1.3);
+  }
+}
+
+/* Nós conectados com pulsação */
+.connection-node {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: radial-gradient(circle at 30% 30%, var(--primary-light), var(--primary));
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--primary), 0 0 20px rgba(154, 184, 250, 0.5);
+  animation: pulse-node 3s infinite ease-in-out;
+}
+
+@keyframes pulse-node {
+  0%, 100% {
+    box-shadow: 0 0 5px var(--primary), 0 0 10px rgba(154, 184, 250, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--primary), 0 0 40px rgba(154, 184, 250, 0.6);
+  }
+}
+
+/* Gradiente radial flutuante */
+.gradient-sphere {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  mix-blend-mode: screen;
+  opacity: 0.15;
+  animation: float-sphere 40s infinite ease-in-out;
+}
+
+.gradient-sphere-1 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(154, 184, 250, 0.8) 0%, transparent 70%);
+  top: 10%;
+  left: 10%;
+  animation-duration: 45s;
+  animation-delay: 0s;
+}
+
+.gradient-sphere-2 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(0, 255, 65, 0.4) 0%, transparent 70%);
+  top: 60%;
+  right: 5%;
+  animation-duration: 55s;
+  animation-delay: 10s;
+}
+
+.gradient-sphere-3 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(196, 216, 255, 0.3) 0%, transparent 70%);
+  bottom: 20%;
+  left: 50%;
+  animation-duration: 50s;
+  animation-delay: 20s;
+}
+
+@keyframes float-sphere {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(50px, -50px);
+  }
+  50% {
+    transform: translate(-30px, 50px);
+  }
+  75% {
+    transform: translate(80px, 20px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Estilos para as páginas */
+.login-container,
+.register-container,
+.dashboard-container,
+.tasks-container,
+.profile-container {
+  animation: fadeIn 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .app-hex {
+    height: 300px;
+  }
+
+  .particle {
+    font-size: 8px;
+  }
+
+  .connection-line {
+    display: none;
+  }
+
+  .node-dot {
+    width: 4px;
+    height: 4px;
+  }
+}

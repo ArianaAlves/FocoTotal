@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Pull Request - FocoTotal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a2240 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #e0e6ed;
+        }
+        
+        .container {
+            background: #141b2f;
+            border: 1px solid #9ab8fa;
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 0 40px rgba(154, 184, 250, 0.2);
+        }
+        
+        h1 {
+            color: #9ab8fa;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #a0aec0;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .info-box {
+            background: rgba(154, 184, 250, 0.1);
+            border-left: 4px solid #9ab8fa;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+        
+        .info-box p {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        button {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #9ab8fa 0%, #7b95d4 100%);
+            color: #0a0e27;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(154, 184, 250, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #9ab8fa;
+            border: 2px solid #9ab8fa;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(154, 184, 250, 0.1);
+        }
+        
+        .steps {
+            margin-top: 30px;
+        }
+        
+        .steps h2 {
+            color: #9ab8fa;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        
+        .step {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        
+        .step-number {
+            min-width: 30px;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #9ab8fa 0%, #7b95d4 100%);
+            color: #0a0e27;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex: 1;
+            padding-top: 2px;
+        }
+        
+        .copy-btn {
+            background: #9ab8fa;
+            color: #0a0e27;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        
+        .copy-btn:hover {
+            background: #c5d9ff;
+        }
+        
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .status.success {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+            border: 1px solid #4CAF50;
+        }
+        
+        .status.info {
+            background: rgba(154, 184, 250, 0.2);
+            color: #9ab8fa;
+            border: 1px solid #9ab8fa;
+        }
+        
+        code {
+            background: #0a0e27;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 12px;
+        }
+        
+        .divider {
+            height: 1px;
+            background: rgba(154, 184, 250, 0.2);
+            margin: 25px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Criar Pull Request</h1>
+        <p class="subtitle">FocoTotal - feature/bia-exclusao-tarefas → main</p>
+        
+        <div class="info-box">
+            <p>✅ Seu código está pronto! Clique no botão abaixo para criar o PR automaticamente.</p>
+        </div>
+        
+        <div class="button-group">
+            <button class="btn-primary" onclick="criarPR()">
+                ✨ Criar PR Agora
+            </button>
+            <button class="btn-secondary" onclick="copiarDescricao()">
+                📋 Copiar Descrição
+            </button>
+        </div>
+        
+        <div id="status"></div>
+        
+        <div class="divider"></div>
+        
+        <div class="steps">
+            <h2>📝 Se preferir fazer manualmente:</h2>
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    Abra: <code>https://github.com/ArianaAlves/FocoTotal/compare/main...feature/bia-exclusao-tarefas</code>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    Clique em <strong>"Create pull request"</strong>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    Título: <code>feat: Implementar exclusão de tarefas e redesign Matrix</code>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    Descrição: Cole o conteúdo (veja botão "Copiar Descrição")
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    Clique em <strong>"Create pull request"</strong> novamente
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 25px; padding: 15px; background: rgba(154, 184, 250, 0.1); border-radius: 8px; font-size: 13px;">
+            <strong>📊 O que você está subindo:</strong><br>
+            ✅ 8 commits<br>
+            ✅ 29 arquivos alterados<br>
+            ✅ Funcionalidade de exclusão de tarefas<br>
+            ✅ Design Matrix profissional<br>
+            ✅ Página de Perfil<br>
+            ✅ Dashboard novo<br>
+        </div>
+    </div>
+
+    <script>
+        function criarPR() {
+            const url = 'https://github.com/ArianaAlves/FocoTotal/compare/main...feature/bia-exclusao-tarefas';
+            const titulo = 'feat: Implementar exclusão de tarefas e redesign Matrix';
+            const descricao = getDescricao();
+            
+            // Abre a página de comparação
+            window.open(url, '_blank');
+            
+            // Mostra mensagem de status
+            mostrarStatus('success', '✅ Página aberta! Agora preencha o formulário e clique em "Create pull request"');
+        }
+        
+        function getDescricao() {
+            return `## 🎯 Descrição
+Implementação completa da funcionalidade de exclusão de tarefas com design profissional tema Matrix.
+
+## ✨ O que foi feito
+- ✅ Exclusão de tarefas com confirmação
+- ✅ Validação de segurança (apenas dono pode deletar)
+- ✅ Página de Perfil do usuário
+- ✅ Dashboard profissional
+- ✅ Tema Matrix em toda aplicação
+- ✅ Design system completo
+
+## 🎨 Design
+- Dark mode corporativo
+- Animações suaves e profissionais
+- Totalmente responsivo (mobile/tablet/desktop)
+- Paleta de cores unificada (#9ab8fa azul)
+
+## 🔧 Tecnologia
+- **Backend:** Node.js, Express, Prisma
+- **Frontend:** React, Vite, CSS Modular
+- **Segurança:** Validação em controller e service
+- **Design:** 8 novos arquivos CSS + sistema de variáveis
+
+## ✅ Pronto para:
+- [x] Testes
+- [x] Code Review
+- [x] Merge para main`;
+        }
+        
+        function copiarDescricao() {
+            const descricao = getDescricao();
+            navigator.clipboard.writeText(descricao).then(() => {
+                mostrarStatus('success', '✅ Descrição copiada para a área de transferência!');
+            }).catch(() => {
+                mostrarStatus('info', 'ℹ️ Copiar falhou. Abra o DevTools e copie manualmente.');
+            });
+        }
+        
+        function mostrarStatus(tipo, mensagem) {
+            const statusDiv = document.getElementById('status');
+            statusDiv.className = `status ${tipo}`;
+            statusDiv.textContent = mensagem;
+            
+            // Remove a mensagem após 5 segundos
+            setTimeout(() => {
+                statusDiv.className = 'status';
+                statusDiv.textContent = '';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

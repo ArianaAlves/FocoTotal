@@ -30,7 +30,7 @@ export const taskController = {
 
   remove: async (req, res, next) => {
     try {
-      await taskService.delete(Number(req.params.id));
+      await taskService.delete(Number(req.params.id), req.user.id);
       res.json({ message: "Tarefa removida com sucesso." });
     } catch (error) {
       next(error);
