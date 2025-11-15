@@ -15,7 +15,13 @@ export default function App() {
 
   return (
     <div className="app">
+      {/* Grid background */}
+      <div className="app-bg"></div>
+
       {/* Padrão hexagonal animado */}
+      <div className="app-hex"></div>
+
+      {/* Partículas de código */}
       <div className="app-particles">
         {codePatterns.map((pattern, index) => (
           <div key={index} className="particle">
