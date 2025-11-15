@@ -7,9 +7,7 @@ export const taskService = {
       ...data,
       userId,
       dueDate: new Date(data.dueDate),
-      reminderDate: data.reminderDate
-        ? new Date(data.reminderDate)
-        : null,
+      reminderDate: data.reminderDate ? new Date(data.reminderDate) : null,
     });
   },
 
@@ -22,18 +20,11 @@ export const taskService = {
   },
 
   delete: async (id, userId) => {
-    // Verificar se a tarefa existe e pertence ao usuário
-    const task = await prisma.task.findUnique({
-      where: { id }
-    });
+    const task = await prisma.task.findUnique({ where: { id } });
 
-    if (!task) {
-      throw new Error("Tarefa não encontrada");
-    }
-
-    if (task.userId !== userId) {
+    if (!task) throw new Error("Tarefa não encontrada");
+    if (task.userId !== userId)
       throw new Error("Você não tem permissão para deletar esta tarefa");
-    }
 
     return taskRepository.delete(id);
   },

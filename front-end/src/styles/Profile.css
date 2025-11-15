@@ -1,4 +1,4 @@
-/* Paleta de Cores do Projeto */
+
 :root {
   --primary-blue: #9ab8fa;
   --primary-blue-light: #9ab8fab2;
@@ -39,7 +39,7 @@
   }
 }
 
-/* Header com Banner */
+
 .profile-header {
   background: linear-gradient(135deg, rgba(154, 184, 250, 0.15) 0%, rgba(123, 149, 212, 0.1) 100%);
   border-bottom: 2px solid rgba(154, 184, 250, 0.2);
@@ -133,7 +133,7 @@
   color: var(--text-light);
 }
 
-/* Mensagens */
+
 .message {
   margin: 20px 40px 0 40px;
   padding: 16px 18px;
@@ -172,21 +172,19 @@
   }
 }
 
-/* Conteúdo Principal */
 .profile-content {
   padding: 40px;
   display: grid;
   gap: 32px;
 }
 
-/* Grid de Estatísticas */
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
 }
 
-/* Grid de Estatísticas */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -281,7 +279,6 @@
   background-clip: text;
 }
 
-/* Cards de Perfil */
 .profile-card {
   background: linear-gradient(135deg, var(--surface) 0%, rgba(26, 34, 64, 0.6) 100%);
   padding: 32px;
@@ -354,7 +351,6 @@
   box-shadow: var(--shadow-md);
 }
 
-/* Formulário */
 .profile-form {
   display: grid;
   gap: 24px;
@@ -476,7 +472,6 @@
   cursor: not-allowed;
 }
 
-/* Visão de Perfil */
 .profile-view {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -514,7 +509,6 @@
   font-weight: 600;
 }
 
-/* Objetivos */
 .objectives-list {
   display: grid;
   gap: 20px;
@@ -594,7 +588,6 @@
   font-weight: 600;
 }
 
-/* Responsivo */
 @media (max-width: 768px) {
   .profile-container {
     padding: 0;
@@ -690,7 +683,6 @@
   }
 }
 
-/* Header com Banner */
 .profile-header {
   background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
   padding-bottom: 80px;
@@ -746,7 +738,6 @@
   opacity: 0.9;
 }
 
-/* Mensagens */
 .message {
   margin: 20px 30px 0 30px;
   padding: 14px 16px;
@@ -778,14 +769,12 @@
   }
 }
 
-/* Conteúdo Principal */
 .profile-content {
   padding: 30px;
   display: grid;
   gap: 30px;
 }
 
-/* Grid de Estatísticas */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -834,7 +823,6 @@
   color: var(--text-dark);
 }
 
-/* Cards de Perfil */
 .profile-card {
   background: var(--white);
   padding: 28px;
@@ -875,7 +863,6 @@
   color: white;
 }
 
-/* Formulário */
 .profile-form {
   display: grid;
   gap: 20px;
@@ -974,7 +961,6 @@
   cursor: not-allowed;
 }
 
-/* Visão de Perfil */
 .profile-view {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -1005,7 +991,6 @@
   line-height: 1.4;
 }
 
-/* Objetivos */
 .objectives-list {
   display: grid;
   gap: 16px;
@@ -1070,7 +1055,6 @@
   font-weight: 500;
 }
 
-/* Responsivo */
 @media (max-width: 768px) {
   .profile-container {
     padding: 0;

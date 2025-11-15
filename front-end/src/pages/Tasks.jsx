@@ -1,190 +1,132 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { AuthContext } from '../context/AuthContext'
-import { api } from '../api/api'
-import TaskCard from '../components/TaskCard'
-import '../styles/Tasks.css'
+import { useEffect, useState } from "react";
+import { api } from "../api/api"; 
+import "../styles/Tasks.css";
 
 export default function Tasks() {
-  const { user } = useContext(AuthContext)
-  const navigate = useNavigate()
-  const [tasks, setTasks] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [filters, setFilters] = useState({
-    status: '',
-    subject: '',
-    priority: '',
-    search: ''
-  })
+  const [tasks, setTasks] = useState([]);
+  const [titleSearch, setTitleSearch] = useState("");
+  const [statusSearch, setStatusSearch] = useState("");
+
+  const [newTask, setNewTask] = useState({
+    title: "",
+    description: "",
+    dueDate: "",
+    status: "PENDENTE",
+    priority: "ALTA",
+  });
+
+  const fetchTasks = async () => {
+    try {
+      const res = await api.get("/tasks");
+      setTasks(res.data);
+    } catch (error) {
+      console.error("Erro ao buscar tarefas:", error);
+    }
+  };
 
   useEffect(() => {
-    if (!user) {
-      navigate('/login')
-      return
+    fetchTasks();
+  }, []);
+
+  const handleAddTask = async () => {
+    if (!newTask.title || !newTask.dueDate) {
+      alert("Título e Data de Vencimento são obrigatórios!");
+      return;
     }
-    loadTasks()
-  }, [user, navigate])
-
-  const loadTasks = async () => {
     try {
-      setLoading(true)
-      setError(null)
-      const params = new URLSearchParams()
-      
-      if (filters.status) params.append('status', filters.status)
-      if (filters.subject) params.append('subject', filters.subject)
-      if (filters.priority) params.append('priority', filters.priority)
-      if (filters.search) params.append('title', filters.search)
-
-      const response = await api.get(`/tasks?${params.toString()}`)
-      setTasks(response.data)
-    } catch (err) {
-      console.error('Erro ao carregar tarefas:', err)
-      setError('Erro ao carregar tarefas')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const handleDelete = async (taskId) => {
-    try {
-      await api.delete(`/tasks/${taskId}`)
-      setTasks(tasks.filter(t => t.id !== taskId))
+      await api.post("/tasks", newTask);
+      setNewTask({ title: "", description: "", dueDate: "", status: "PENDENTE", priority: "ALTA" });
+      fetchTasks();
     } catch (error) {
-      console.error('Erro ao deletar tarefa:', error)
-      throw error
+      console.error("Erro ao criar tarefa:", error);
     }
-  }
+  };
 
-  const handleUpdate = async (taskId, data) => {
+  const handleDelete = async (id) => {
+    if (!confirm("Tem certeza que deseja excluir esta tarefa?")) return;
     try {
-      const response = await api.put(`/tasks/${taskId}`, data)
-      setTasks(tasks.map(t => t.id === taskId ? response.data : t))
+      await api.delete(`/tasks/${id}`);
+      fetchTasks();
     } catch (error) {
-      console.error('Erro ao atualizar tarefa:', error)
-      throw error
+      console.error("Erro ao deletar tarefa:", error);
     }
-  }
+  };
 
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target
-    setFilters(prev => ({
-      ...prev,
-      [name]: value
-    }))
-  }
+  const concludedTasks = tasks.filter((t) => t.status === "CONCLUIDA");
+  const pendingTasks = tasks.filter((t) => t.status === "PENDENTE" && new Date(t.dueDate) >= new Date());
+  const overdueTasks = tasks.filter((t) => t.status === "PENDENTE" && new Date(t.dueDate) < new Date());
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      loadTasks()
-    }, 500)
-    return () => clearTimeout(timer)
-  }, [filters])
+  const renderTaskCard = (task) => (
+    <div
+      key={task.id}
+      className={`task-card ${
+        task.status === "CONCLUIDA" ? "completed" : ""
+      } ${new Date(task.dueDate) < new Date() && task.status === "PENDENTE" ? "overdue" : ""}`}
+    >
+      <div className="task-inner">
+        <div className="task-front">
+          <span className="task-title">{task.title}</span>
+          <span className="task-date">{task.priority}</span>
+        </div>
 
-  const completedCount = tasks.filter(t => t.status === 'CONCLUIDA').length
-  const pendingCount = tasks.filter(t => t.status === 'PENDENTE').length
-  const overdueCount = tasks.filter(
-    t => new Date(t.dueDate) < new Date() && t.status === 'PENDENTE'
-  ).length
+        <div className="task-back">
+          <span className="task-description">{task.description || "Sem descrição"}</span>
+          <div className="task-actions">
+            <button className="btn-edit" title="Editar">✎</button>
+            <button className="btn-delete" onClick={() => handleDelete(task.id)} title="Excluir">✖</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <div className="tasks-container">
-      <div className="tasks-header">
-        <h1>Minhas Tarefas</h1>
-        <div className="task-stats">
-          <div className="stat">
-            <span className="stat-label">Concluídas</span>
-            <span className="stat-value">{completedCount}</span>
-          </div>
-          <div className="stat">
-            <span className="stat-label">Pendentes</span>
-            <span className="stat-value">{pendingCount}</span>
-          </div>
-          <div className="stat warning">
-            <span className="stat-label">Atrasadas</span>
-            <span className="stat-value">{overdueCount}</span>
-          </div>
-        </div>
-      </div>
 
-      <div className="filters-section">
-        <input
-          type="text"
-          name="search"
-          placeholder="🔍 Buscar por título..."
-          value={filters.search}
-          onChange={handleFilterChange}
-          className="filter-input"
-        />
-
-        <select
-          name="status"
-          value={filters.status}
-          onChange={handleFilterChange}
-          className="filter-select"
-        >
-          <option value="">Todos os Status</option>
+      <aside className="tasks-sidebar">
+        <h2>Criar Tarefa</h2>
+        <input type="text" placeholder="Título" value={newTask.title} onChange={(e) => setNewTask({ ...newTask, title: e.target.value })} />
+        <input type="text" placeholder="Descrição" value={newTask.description} onChange={(e) => setNewTask({ ...newTask, description: e.target.value })} />
+        <input type="date" value={newTask.dueDate} onChange={(e) => setNewTask({ ...newTask, dueDate: e.target.value })} />
+        <select value={newTask.status} onChange={(e) => setNewTask({ ...newTask, status: e.target.value })}>
           <option value="PENDENTE">Pendente</option>
           <option value="CONCLUIDA">Concluída</option>
         </select>
-
-        <select
-          name="priority"
-          value={filters.priority}
-          onChange={handleFilterChange}
-          className="filter-select"
-        >
-          <option value="">Todas as Prioridades</option>
-          <option value="ALTA">Alta</option>
-          <option value="MEDIA">Média</option>
+        <select value={newTask.priority} onChange={(e) => setNewTask({ ...newTask, priority: e.target.value })}>
           <option value="BAIXA">Baixa</option>
+          <option value="MEDIA">Média</option>
+          <option value="ALTA">Alta</option>
         </select>
+        <button onClick={handleAddTask}>Adicionar</button>
 
-        <input
-          type="text"
-          name="subject"
-          placeholder="🎓 Disciplina/Tag..."
-          value={filters.subject}
-          onChange={handleFilterChange}
-          className="filter-input"
-        />
+        <hr />
 
-        <button className="btn-clear" onClick={() => {
-          setFilters({ status: '', subject: '', priority: '', search: '' })
-        }}>
-          Limpar Filtros
-        </button>
-      </div>
+        <h3>Buscar Tarefas</h3>
+        <input type="text" placeholder="Título" value={titleSearch} onChange={(e) => setTitleSearch(e.target.value)} />
+        <select value={statusSearch} onChange={(e) => setStatusSearch(e.target.value)}>
+          <option value="">Todos os status</option>
+          <option value="PENDENTE">Pendente</option>
+          <option value="CONCLUIDA">Concluída</option>
+        </select>
+        <button onClick={fetchTasks}>Buscar</button>
+      </aside>
 
-      {loading && (
-        <div className="loading">⏳ Carregando tarefas...</div>
-      )}
-
-      {error && (
-        <div className="error">{error}</div>
-      )}
-
-      {!loading && tasks.length === 0 && (
-        <div className="no-tasks">
-          {Object.values(filters).some(v => v) 
-            ? '❌ Nenhuma tarefa encontrada com esses filtros'
-            : '✨ Você não tem tarefas! Comece criando uma nova.'}
+      <main className="tasks-main">
+        <div className="tasks-block-container">
+          <div className="tasks-column">
+            <h3>Pendentes</h3>
+            {pendingTasks.map(renderTaskCard)}
+          </div>
+          <div className="tasks-column">
+            <h3>Concluídas</h3>
+            {concludedTasks.map(renderTaskCard)}
+          </div>
+          <div className="tasks-column">
+            <h3>Atrasadas</h3>
+            {overdueTasks.map(renderTaskCard)}
+          </div>
         </div>
-      )}
-
-      {!loading && tasks.length > 0 && (
-        <div className="tasks-list">
-          {tasks.map(task => (
-            <TaskCard
-              key={task.id}
-              task={task}
-              onDelete={handleDelete}
-              onUpdate={handleUpdate}
-            />
-          ))}
-        </div>
-      )}
+      </main>
     </div>
-  )
+  );
 }

@@ -6,7 +6,6 @@ import "../styles/Dashboard.css";
 export default function Dashboard() {
   return (
     <div className="min-h-screen">
-      <Navbar />
       <main className="dashboard-main">
         <div className="container">
           <div className="dashboard-content">
@@ -16,7 +15,6 @@ export default function Dashboard() {
             </div>
 
             <div className="dashboard-grid">
-              {/* Card Principal */}
               <div className="dashboard-card featured">
                 <div className="card-icon">📋</div>
                 <h3>Minhas Tarefas</h3>
@@ -26,7 +24,7 @@ export default function Dashboard() {
                 </Link>
               </div>
 
-              {/* Cards Secundários */}
+
               <div className="dashboard-card">
                 <div className="card-icon">👤</div>
                 <h3>Meu Perfil</h3>
@@ -51,7 +49,7 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {/* Quick Start Section */}
+
             <div className="quick-start-section">
               <h3>🚀 Primeiros Passos</h3>
               <div className="quick-start-steps">
