@@ -8,13 +8,11 @@
   --border-color: #e1e8ed;
 }
 
+
 .navbar {
-  background: linear-gradient(135deg, rgba(20, 27, 47, 0.95) 0%, rgba(15, 20, 41, 0.95) 100%);
-  backdrop-filter: blur(20px);
-  border-bottom: 2px solid rgba(154, 184, 250, 0.2);
-  box-shadow: 
-    0 8px 32px rgba(154, 184, 250, 0.15),
-    inset 0 1px 0 rgba(154, 184, 250, 0.1);
+  background: #F7FAFC;
+  border-bottom: 2px solid #E3F0FF;
+  box-shadow: 0 2px 8px #A7C7E722;
   position: sticky;
   top: 0;
   z-index: 1000;

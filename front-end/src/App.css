@@ -5,11 +5,12 @@
   z-index: 1;
 }
 
+
 .app {
   width: 100%;
   min-height: 100vh;
   position: relative;
-  background: linear-gradient(135deg, #0a0e27 0%, #0f1429 50%, #0a0e27 100%);
+  background: #F7FAFC;
   background-attachment: fixed;
 }
 
