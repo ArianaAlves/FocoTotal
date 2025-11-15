@@ -4,6 +4,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Dashboard from "../pages/Dashboard";
 import Tasks from "../pages/Tasks";
+import Profile from "../pages/Profile";
 import { AuthContext } from "../context/AuthContext";
 
 const Private = ({ children }) => {
@@ -19,6 +20,7 @@ export default function AppRoutes() {
       <Route path="/register" element={<Register />} />
       <Route path="/dashboard" element={<Private><Dashboard /></Private>} />
       <Route path="/tasks" element={<Private><Tasks /></Private>} />
+      <Route path="/profile" element={<Private><Profile /></Private>} />
     </Routes>
   );
 }
