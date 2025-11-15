@@ -1,12 +1,10 @@
 import React, { createContext, useEffect, useState } from "react";
 import { api } from "../api/api";
-import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const nav = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("ft_token");
@@ -33,7 +31,6 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("ft_token");
     localStorage.removeItem("ft_user");
     setUser(null);
-    nav("/login");
   };
 
   return (
