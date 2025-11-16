@@ -29,9 +29,9 @@ export default function Dashboard() {
                   {/* Primeiro lugar */}
                   <div className="rank-item first">
                     <div className="rank-avatar" aria-hidden>
-                      <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Antonio%20Lima" alt="Avatar de Antonio Lima" />
+                      <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Karine%20Andrade" alt="Avatar de Karine Andrade" />
                     </div>
-                    <div className="name-chip">Antonio Lima</div>
+                    <div className="name-chip">Karine Andrade</div>
                     <div className="podium-card first">
                       <div className="medal">🏆</div>
                       <div className="podium-value">24</div>
