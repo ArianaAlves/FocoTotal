@@ -16,7 +16,7 @@ export default function Dashboard() {
                   {/* Segundo lugar */}
                   <div className="rank-item second">
                     <div className="rank-avatar" aria-hidden>
-                      <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=fernanda-girl&mouth=smile&hairColor=E91E63&skinColor=FEE5D7" alt="Avatar de Fernanda Araujo" crossOrigin="anonymous" />
+                      <img src="https://api.dicebear.com/7.x/big-smile/svg?seed=fernanda" alt="Avatar de Fernanda Araujo" crossOrigin="anonymous" />
                     </div>
                     <div className="name-chip">Fernanda Araujo</div>
                     <div className="podium-card second">
