@@ -62,6 +62,8 @@ export default function Dashboard() {
                   Acessar Tarefas →
                 </Link>
               </div>
+            </div>
+
             {/* Demais cards */}
             <div className="dashboard-grid">
               <div className="dashboard-card">
