@@ -1,0 +1,315 @@
+/* ======================================
+   SISTEMA DE TEMA PROFISSIONAL UNIFICADO
+   ====================================== */
+
+:root {
+  /* ============= CORES PRIMÁRIAS ============= */
+  /* Azul profissional - cor principal */
+  --primary: #5B7EC4;
+  --primary-dark: #4A5FA0;
+  --primary-light: #7A99D4;
+  --primary-lighter: #E8EDFC;
+
+  /* ============= CORES SECUNDÁRIAS ============= */
+  --success: #2E7D32;
+  --success-light: #E8F5E9;
+  --warning: #D99E00;
+  --warning-light: #FFF8E1;
+  --danger: #C62828;
+  --danger-light: #FFEBEE;
+  --info: #0891B2;
+  --info-light: #E0F2FE;
+
+  /* ============= CORES DE ESTADO ============= */
+  --accent-light: #E0F2FE;
+  --accent-light-hover: #B3E5FC;
+
+  /* ============= TEMA LIGHT (PADRÃO) ============= */
+  /* Background */
+  --bg: #F9FAFB;
+  --bg-secondary: #F3F4F6;
+  --bg-tertiary: #EEEFF2;
+
+  /* Superfícies */
+  --surface: #FFFFFF;
+  --surface-light: #F9FAFB;
+  --surface-secondary: #F3F4F6;
+
+  /* Texto */
+  --text: #1F2937;
+  --text-secondary: #374151;
+  --text-light: #6B7280;
+  --text-lighter: #9CA3AF;
+
+  /* Borders */
+  --border: #E5E7EB;
+  --border-light: #F3F4F6;
+
+  /* Inputs */
+  --input-bg: #FFFFFF;
+  --input-text: #1F2937;
+  --input-border: #D1D5DB;
+  --input-border-focus: #5B7EC4;
+  --input-caret: #5B7EC4;
+
+  /* ============= EFEITOS ESPECIAIS ============= */
+  --matrix-green: #10B981;
+  --matrix-cyan: #06B6D4;
+  --glow: 0 0 20px rgba(91, 126, 196, 0.2);
+
+  /* ============= SOMBRAS ============= */
+  --shadow-xs: 0 1px 1px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+/* ============= TEMA DARK ============= */
+html.dark-mode {
+  /* Background */
+  --bg: #0F172A;
+  --bg-secondary: #1E293B;
+  --bg-tertiary: #334155;
+
+  /* Superfícies */
+  --surface: #1E293B;
+  --surface-light: #334155;
+  --surface-secondary: #475569;
+
+  /* Texto */
+  --text: #F1F5F9;
+  --text-secondary: #E2E8F0;
+  --text-light: #CBD5E1;
+  --text-lighter: #94A3B8;
+
+  /* Borders */
+  --border: #334155;
+  --border-light: #475569;
+
+  /* Inputs */
+  --input-bg: #1E293B;
+  --input-text: #F1F5F9;
+  --input-border: #475569;
+  --input-border-focus: #7A99D4;
+  --input-caret: #7A99D4;
+
+  /* Efeitos */
+  --glow: 0 0 20px rgba(91, 126, 196, 0.3);
+}
+
+/* ============= ESTILOS GLOBAIS ============= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ============= INPUTS GLOBAIS - PROFISSIONAL ============= */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+input[type="date"],
+input[type="time"],
+textarea,
+select {
+  background: var(--input-bg);
+  color: var(--input-text);
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+/* Cursor em inputs */
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+input[type="search"]::placeholder,
+textarea::placeholder {
+  color: var(--text-light);
+}
+
+/* Foco nos inputs */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--input-border-focus);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px rgba(91, 126, 196, 0.1);
+  caret-color: var(--input-caret);
+}
+
+/* ============= BOTÕES GLOBAIS - PROFISSIONAL ============= */
+button, .btn {
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 20px;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+button:focus, .btn:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* ============= ANIMAÇÕES ============= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* ============= CLASSES UTILITÁRIAS ============= */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary);
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-primary {
+  background: var(--primary-lighter);
+  color: var(--primary-dark);
+}
+
+.badge-success {
+  background: var(--success-light);
+  color: var(--success);
+}
+
+.badge-warning {
+  background: var(--warning-light);
+  color: #B8860B;
+}
+
+.badge-danger {
+  background: var(--danger-light);
+  color: var(--danger);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-light {
+  color: var(--text-light);
+}
+
+.mb-1 { margin-bottom: 4px; }
+.mb-2 { margin-bottom: 8px; }
+.mb-3 { margin-bottom: 12px; }
+.mb-4 { margin-bottom: 16px; }
+.mb-5 { margin-bottom: 20px; }
+.mb-6 { margin-bottom: 24px; }
+
+.mt-1 { margin-top: 4px; }
+.mt-2 { margin-top: 8px; }
+.mt-3 { margin-top: 12px; }
+.mt-4 { margin-top: 16px; }
+.mt-5 { margin-top: 20px; }
+.mt-6 { margin-top: 24px; }
+
+.gap-1 { gap: 4px; }
+.gap-2 { gap: 8px; }
+.gap-3 { gap: 12px; }
+.gap-4 { gap: 16px; }
+.gap-5 { gap: 20px; }
+.gap-6 { gap: 24px; }
