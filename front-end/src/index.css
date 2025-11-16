@@ -18,7 +18,7 @@
   --surface: #141b2f;
   --surface-light: #1a2240;
   --text: #e0e6ed;
-  --text-light: #a0aec0;
+  --text-light: #222831;
   --border: #1f2a45;
   --border-light: #2d3a52;
   
@@ -52,7 +52,7 @@ html {
 
 body {
   background: #F7FAFC;
-  color: #222;
+  color: #4285F4;
   font-family: 'Inter', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
