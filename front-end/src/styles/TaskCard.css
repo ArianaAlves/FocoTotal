@@ -1,7 +1,7 @@
 
 .task-card {
   background: #F0F4F8;
-  border: 2px solid #E3F0FF;
+  border: 2px solid #5D5FEF;
   border-radius: 12px;
   padding: 18px;
   margin-bottom: 12px;
@@ -12,10 +12,10 @@
 }
 
 .task-card:hover {
-  box-shadow: 0 8px 24px #A7C7E744;
+  box-shadow: 0 8px 24px #5D5FEF44;
   transform: translateY(-3px);
-  border-color: #A7C7E7;
-  background: #E3F0FF;
+  border-color: #5D5FEF;
+  background: #F5F3FF;
 }
 
 .task-card.completed {
