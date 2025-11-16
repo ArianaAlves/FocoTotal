@@ -46,7 +46,7 @@ export default function Dashboard() {
                   {/* Terceiro lugar */}
                   <div className="rank-item third">
                     <div className="rank-avatar" aria-hidden>
-                      <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=robson&mouth=grimace&hairColor=6B4F3A&skinColor=C68642" alt="Avatar de Robson Campelo" crossOrigin="anonymous" />
+                      <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=robson-fun&mouth=twinkle&hairColor=7D3C98&skinColor=F1C27D" alt="Avatar de Robson Campelo" crossOrigin="anonymous" />
                     </div>
                     <div className="name-chip">Robson Campelo</div>
                     <div className="podium-card third">
