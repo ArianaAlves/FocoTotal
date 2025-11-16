@@ -458,9 +458,9 @@
 }
 
 .profile-card:hover {
-  box-shadow: var(--shadow-md);
-  border-color: rgba(154, 184, 250, 0.4);
-  background: linear-gradient(135deg, rgba(154, 184, 250, 0.08) 0%, var(--surface) 100%);
+  box-shadow: 0 8px 24px rgba(93, 95, 239, 0.2);
+  border-color: rgba(93, 95, 239, 0.4);
+  background: linear-gradient(135deg, rgba(93, 95, 239, 0.08) 0%, #ffffff 100%);
 }
 
 .profile-card-header {
