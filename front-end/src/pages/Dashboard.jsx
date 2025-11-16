@@ -16,7 +16,7 @@ export default function Dashboard() {
                   {/* Segundo lugar */}
                   <div className="rank-item second">
                     <div className="rank-avatar" aria-hidden>
-                      <img src="https://api.dicebear.com/7.x/personas/svg?seed=fernanda" alt="Avatar de Fernanda Araujo" crossOrigin="anonymous" />
+                      <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=fernanda&mouth=smile&hairColor=0000FF&skinColor=F1C27D" alt="Avatar de Fernanda Araujo" crossOrigin="anonymous" />
                     </div>
                     <div className="name-chip">Fernanda Araujo</div>
                     <div className="podium-card second">
@@ -30,7 +30,7 @@ export default function Dashboard() {
                   <div className="rank-item first">
                     <div className="rank-avatar" aria-hidden>
                       <img
-                        src="https://api.dicebear.com/7.x/personas/svg?seed=karine"
+                        src="https://api.dicebear.com/7.x/avataaars/svg?seed=karine&mouth=smile&hairColor=000000&skinColor=8D5524"
                         alt="Avatar de Karine Andrade"
                         crossOrigin="anonymous"
                       />
@@ -46,7 +46,7 @@ export default function Dashboard() {
                   {/* Terceiro lugar */}
                   <div className="rank-item third">
                     <div className="rank-avatar" aria-hidden>
-                      <img src="https://api.dicebear.com/7.x/personas/svg?seed=robson" alt="Avatar de Robson Campelo" crossOrigin="anonymous" />
+                      <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=robson&mouth=default&hairColor=000000&skinColor=C68642" alt="Avatar de Robson Campelo" crossOrigin="anonymous" />
                     </div>
                     <div className="name-chip">Robson Campelo</div>
                     <div className="podium-card third">
