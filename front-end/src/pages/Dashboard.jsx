@@ -42,9 +42,9 @@ export default function Dashboard() {
                   {/* Terceiro lugar */}
                   <div className="rank-item third">
                     <div className="rank-avatar" aria-hidden>
-                      <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Vadilene%20Carvalho" alt="Avatar de Vadilene Carvalho" />
+                      <span role="img" aria-label="avatar">👨🏽‍💼</span>
                     </div>
-                    <div className="name-chip">Vadilene Carvalho</div>
+                    <div className="name-chip">Robson Campelo</div>
                     <div className="podium-card third">
                       <div className="medal">🥉</div>
                       <div className="podium-value">21</div>
