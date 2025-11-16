@@ -371,7 +371,7 @@ label {
 
 /* Links */
 a {
-  color: var(--primary);
+  color: #3694FF;
   text-decoration: none;
   transition: all 0.3s ease;
   position: relative;
@@ -384,12 +384,12 @@ a::after {
   left: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+  background: linear-gradient(90deg, #3694FF, #5db3ff);
   transition: width 0.3s ease;
 }
 
 a:hover {
-  color: var(--primary-light);
+  color: #5db3ff;
 }
 
 a:hover::after {

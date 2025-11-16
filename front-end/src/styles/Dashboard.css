@@ -112,7 +112,7 @@
 
 .dashboard-card.featured:hover {
   border-color: #3694FF;
-  box-shadow: 0 16px 48px #3694FF22;
+  box-shadow: 0 16px 48px #5D5FEF;
   background: #E8F4FF;
 }
 
@@ -120,6 +120,7 @@
 .card-icon {
   font-size: 32px;
   margin-bottom: 8px;
+  color: #5D5FEF;
 }
 
 /* Card Title */
@@ -128,7 +129,7 @@
   font-weight: 800;
   color: #222;
   margin: 0;
-  background: linear-gradient(135deg, #5D5FEF 0%, #7c7eff 100%);
+  background: linear-gradient(135deg, #3694FF 0%, #5db3ff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -230,7 +231,7 @@
 
 .step strong {
   display: block;
-  color: #e0e6ed;
+  color: #3694FF;
   font-weight: 700;
   margin-bottom: 4px;
   font-size: 14px;
