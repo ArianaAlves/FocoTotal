@@ -9,12 +9,51 @@ export default function Dashboard() {
       <main className="dashboard-main">
         <div className="container">
           <div className="dashboard-content">
-            <div className="dashboard-header">
-              <h2 className="dashboard-title">Painel de Controle</h2>
-              <p className="dashboard-subtitle">Organize seus projetos e tarefas de forma eficiente</p>
-            </div>
+            {/* Top row: Rank panel (left) + Featured card (right) */}
+            <div className="dashboard-top-row">
+              <div className="rank-panel" aria-label="Ranking de Habilidades">
+                <div className="rank-grid">
+                  {/* Segundo lugar */}
+                  <div className="rank-item second">
+                    <div className="rank-avatar" aria-hidden>
+                      <span role="img" aria-label="avatar">🧑‍🎨</span>
+                    </div>
+                    <div className="name-chip">Fernanda Araujo</div>
+                    <div className="podium-card second">
+                      <div className="medal">🥈</div>
+                      <div className="podium-value">22</div>
+                      <div className="podium-label">Habilidades</div>
+                    </div>
+                  </div>
 
-            <div className="dashboard-grid">
+                  {/* Primeiro lugar */}
+                  <div className="rank-item first">
+                    <div className="rank-avatar" aria-hidden>
+                      <span role="img" aria-label="avatar">🧑‍💻</span>
+                    </div>
+                    <div className="name-chip">Antonio Lima</div>
+                    <div className="podium-card first">
+                      <div className="medal">🏆</div>
+                      <div className="podium-value">24</div>
+                      <div className="podium-label">Habilidades</div>
+                    </div>
+                  </div>
+
+                  {/* Terceiro lugar */}
+                  <div className="rank-item third">
+                    <div className="rank-avatar" aria-hidden>
+                      <span role="img" aria-label="avatar">👩🏽‍🎨</span>
+                    </div>
+                    <div className="name-chip">Vadilene Carvalho</div>
+                    <div className="podium-card third">
+                      <div className="medal">🥉</div>
+                      <div className="podium-value">21</div>
+                      <div className="podium-label">Habilidades</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div className="dashboard-card featured">
                 <div className="card-icon">📋</div>
                 <h3>Minhas Tarefas</h3>
@@ -23,8 +62,8 @@ export default function Dashboard() {
                   Acessar Tarefas →
                 </Link>
               </div>
-
-
+            {/* Demais cards */}
+            <div className="dashboard-grid">
               <div className="dashboard-card">
                 <div className="card-icon">👤</div>
                 <h3>Meu Perfil</h3>
