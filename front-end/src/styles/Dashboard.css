@@ -6,7 +6,8 @@
   padding: 40px 20px;
   position: relative;
   z-index: 1;
-  background: #F7FAFC;
+  background: var(--bg);
+  transition: background-color 0.3s ease;
 }
 
 .dashboard-content {

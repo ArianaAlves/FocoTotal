@@ -1,10 +1,12 @@
 import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
+import { ThemeContext } from '../context/ThemeContext'
 import '../styles/Navbar.css'
 
 export default function Navbar() {
   const { user, logout } = useContext(AuthContext)
+  const { isDark, toggleTheme } = useContext(ThemeContext)
   const navigate = useNavigate()
 
   const handleLogout = () => {
@@ -35,6 +37,14 @@ export default function Navbar() {
 
         <div className="navbar-user">
           <span className="user-name">{user.name}</span>
+          <button 
+            className="btn-theme-toggle" 
+            onClick={toggleTheme}
+            title={isDark ? 'Ativar modo claro' : 'Ativar modo escuro'}
+            aria-label={isDark ? 'Ativar modo claro' : 'Ativar modo escuro'}
+          >
+            {isDark ? '☀️' : '🌙'}
+          </button>
           <button className="btn-logout" onClick={handleLogout}>
             Sair
           </button>

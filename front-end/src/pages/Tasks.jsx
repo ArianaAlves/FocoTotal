@@ -62,7 +62,7 @@ export default function Tasks() {
 
   const concludedTasks = tasks.filter((t) => t.status === "CONCLUIDA");
   const pendingTasks = tasks.filter((t) => t.status === "PENDENTE" && new Date(t.dueDate) >= new Date());
-  const overdueTasks = tasks.filter((t) => t.status === "PENDENTE" && new Date(t.dueDate) < new Date());
+  const overdueTasks = tasks.filter((t) => t.status === "ATRASADA" || (t.status === "PENDENTE" && new Date(t.dueDate) < new Date()));
 
   const renderTaskCard = (task) => (
     <div
@@ -98,6 +98,7 @@ export default function Tasks() {
         <input type="date" value={newTask.dueDate} onChange={(e) => setNewTask({ ...newTask, dueDate: e.target.value })} />
         <select value={newTask.status} onChange={(e) => setNewTask({ ...newTask, status: e.target.value })}>
           <option value="PENDENTE">Pendente</option>
+          <option value="ATRASADA">Atrasada</option>
           <option value="CONCLUIDA">Concluída</option>
         </select>
         <select value={newTask.priority} onChange={(e) => setNewTask({ ...newTask, priority: e.target.value })}>
@@ -114,6 +115,7 @@ export default function Tasks() {
         <select value={statusSearch} onChange={(e) => setStatusSearch(e.target.value)}>
           <option value="">Todos os status</option>
           <option value="PENDENTE">Pendente</option>
+          <option value="ATRASADA">Atrasada</option>
           <option value="CONCLUIDA">Concluída</option>
         </select>
         <button onClick={fetchTasks}>Buscar</button>

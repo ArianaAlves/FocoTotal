@@ -1,21 +1,21 @@
-
 .task-card {
-  background: #F0F4F8;
-  border: 2px solid #E3F0FF;
+  background: var(--surface);
+  border: 2px solid var(--border);
   border-radius: 12px;
   padding: 18px;
   margin-bottom: 12px;
-  box-shadow: 0 4px 12px #A7C7E722;
+  box-shadow: 0 4px 12px rgba(154, 184, 250, 0.08);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  color: var(--text);
 }
 
 .task-card:hover {
-  box-shadow: 0 8px 24px #A7C7E744;
+  box-shadow: 0 8px 24px rgba(154, 184, 250, 0.15);
   transform: translateY(-3px);
-  border-color: #A7C7E7;
-  background: #E3F0FF;
+  border-color: var(--primary);
+  background: var(--surface-light);
 }
 
 .task-card.completed {
@@ -24,10 +24,24 @@
 }
 
 .task-card.completed .task-title {
-  color: #a0aec0;
+  color: var(--text-light);
   text-decoration: line-through;
 }
 
+.task-card.late {
+  background-color: rgba(244, 67, 54, 0.08);
+  border-color: rgba(244, 67, 54, 0.3);
+}
+
+.task-card.late {
+  background-color: rgba(244, 67, 54, 0.08);
+  border-color: rgba(244, 67, 54, 0.3);
+}
+
+.task-card.overdue {
+  background-color: rgba(255, 193, 7, 0.08);
+  border-color: rgba(255, 193, 7, 0.3);
+}
 .task-card.overdue {
   border-left: 4px solid #F44336;
   background-color: rgba(244, 67, 54, 0.08);
@@ -47,7 +61,7 @@
   margin: 0;
   font-size: 16px;
   font-weight: 600;
-  color: #e0e6ed;
+  color: var(--text);
   flex: 1;
 }
 
@@ -106,6 +120,7 @@
   margin-top: 12px;
   position: relative;
   z-index: 1;
+  flex-wrap: wrap;
 }
 
 button {
@@ -118,40 +133,75 @@ button {
   transition: all 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  flex: 1;
+  min-width: 80px;
 }
 
 .btn-status {
   flex: 1;
-  background: linear-gradient(135deg, var(--accent-green), #45a049);
+  background: linear-gradient(135deg, #2E7D32, #1B5E20);
   color: white;
 }
 
 .btn-status:hover:not(:disabled) {
-  background: linear-gradient(135deg, #45a049, #388e3c);
-  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+  background: linear-gradient(135deg, #1B5E20, #145B2E);
+  box-shadow: 0 2px 8px rgba(46, 125, 50, 0.2);
   transform: translateY(-2px);
 }
 
 .btn-status.completed {
-  background: linear-gradient(135deg, #87CEEB, #5dade2);
-  color: #0a0e27;
+  background: linear-gradient(135deg, #5B7EC4, #4A5FA0);
+  color: white;
 }
 
 .btn-status.completed:hover:not(:disabled) {
-  background: linear-gradient(135deg, #5dade2, #3498db);
-  box-shadow: 0 4px 12px rgba(93, 173, 226, 0.3);
+  background: linear-gradient(135deg, #4A5FA0, #3A4A7F);
+  box-shadow: 0 2px 8px rgba(91, 126, 196, 0.2);
+  transform: translateY(-2px);
+}
+
+.btn-status.late {
+  background: linear-gradient(135deg, #D99E00, #B8860B);
+  color: white;
+}
+
+.btn-status.late:hover:not(:disabled) {
+  background: linear-gradient(135deg, #B8860B, #996D0A);
+  box-shadow: 0 2px 8px rgba(217, 158, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.btn-late {
+  background: linear-gradient(135deg, #D99E00, #B8860B);
+  color: white;
+}
+
+.btn-late:hover:not(:disabled) {
+  background: linear-gradient(135deg, #B8860B, #996D0A);
+  box-shadow: 0 2px 8px rgba(217, 158, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.btn-late.marked {
+  background: linear-gradient(135deg, #C62828, #8E1010);
+  color: white;
+}
+
+.btn-late.marked:hover:not(:disabled) {
+  background: linear-gradient(135deg, #8E1010, #6B0B0B);
+  box-shadow: 0 2px 8px rgba(198, 40, 40, 0.2);
   transform: translateY(-2px);
 }
 
 .btn-delete {
-  background: linear-gradient(135deg, #F44336, #da190b);
+  background: linear-gradient(135deg, #C62828, #8E1010);
   color: white;
   flex: 0 0 auto;
 }
 
 .btn-delete:hover:not(:disabled) {
-  background: linear-gradient(135deg, #da190b, #c10015);
-  box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+  background: linear-gradient(135deg, #8E1010, #6B0B0B);
+  box-shadow: 0 2px 8px rgba(198, 40, 40, 0.2);
   transform: translateY(-2px);
 }
 

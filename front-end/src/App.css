@@ -10,8 +10,9 @@
   width: 100%;
   min-height: 100vh;
   position: relative;
-  background: #F7FAFC;
+  background: var(--bg);
   background-attachment: fixed;
+  transition: background-color 0.3s ease;
 }
 
 /* Fundo decorativo com linhas Matrix e partículas */
