@@ -16,7 +16,7 @@ export default function Dashboard() {
                   {/* Segundo lugar */}
                   <div className="rank-item second">
                     <div className="rank-avatar" aria-hidden>
-                      <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Fernanda%20Araujo&top=LongHairStraight&hairColor=Brown&skin=Light&eyeType=Default&mouthType=Smile" alt="Avatar de Fernanda Araujo" />
+                      <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=fernanda" alt="Avatar de Fernanda Araujo" crossOrigin="anonymous" />
                     </div>
                     <div className="name-chip">Fernanda Araujo</div>
                     <div className="podium-card second">
@@ -30,8 +30,9 @@ export default function Dashboard() {
                   <div className="rank-item first">
                     <div className="rank-avatar" aria-hidden>
                       <img
-                        src="https://api.dicebear.com/7.x/avataaars/svg?seed=Karine%20Andrade&top=LongHairDreads&hairColor=Black&skin=DarkBrown&accessoriesType=Blank&eyeType=Default&mouthType=Smile"
+                        src="https://api.dicebear.com/7.x/avataaars/svg?seed=karine"
                         alt="Avatar de Karine Andrade"
+                        crossOrigin="anonymous"
                       />
                     </div>
                     <div className="name-chip">Karine Andrade</div>
@@ -45,7 +46,7 @@ export default function Dashboard() {
                   {/* Terceiro lugar */}
                   <div className="rank-item third">
                     <div className="rank-avatar" aria-hidden>
-                      <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Robson%20Campelo&top=ShortHairShortFlat&hairColor=Black&skin=Tanned&eyeType=Default&mouthType=Smile" alt="Avatar de Robson Campelo" />
+                      <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=robson" alt="Avatar de Robson Campelo" crossOrigin="anonymous" />
                     </div>
                     <div className="name-chip">Robson Campelo</div>
                     <div className="podium-card third">
