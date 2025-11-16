@@ -1,18 +1,32 @@
-import React, { useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { AuthContext } from '../context/AuthContext'
-import '../styles/Navbar.css'
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import ThemeToggle from "./ThemeToggle";
+import "../styles/Navbar.css";
 
 export default function Navbar() {
-  const { user, logout } = useContext(AuthContext)
-  const navigate = useNavigate()
+  const { user, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout()
-    navigate('/login')
-  }
+    logout();
+    navigate("/login");
+  };
 
-  if (!user) return null
+  if (!user) {
+    return (
+      <nav className="navbar">
+        <div className="navbar-container">
+          <Link to="/" className="navbar-logo">
+            🎯 Foco Total
+          </Link>
+          <div style={{ marginLeft: "auto" }}>
+            <ThemeToggle />
+          </div>
+        </div>
+      </nav>
+    );
+  }
 
   return (
     <nav className="navbar">
@@ -34,6 +48,7 @@ export default function Navbar() {
         </div>
 
         <div className="navbar-user">
+          <ThemeToggle />
           <span className="user-name">{user.name}</span>
           <button className="btn-logout" onClick={handleLogout}>
             Sair
@@ -41,5 +56,5 @@ export default function Navbar() {
         </div>
       </div>
     </nav>
-  )
+  );
 }

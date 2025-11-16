@@ -10,13 +10,21 @@ export default function App() {
     "{ code }",
     "$ npm run",
     "> console.log()",
-    "📱 App"
+    "📱 App",
   ];
 
   return (
     <div className="app">
-      {/* Grid background */}
-      <div className="app-bg"></div>
+      {/* Background decorativo Matrix */}
+      <div className="app-matrix-bg">
+        {/* Grid animado */}
+        <div className="app-grid"></div>
+
+        {/* Esferas de gradiente flutuantes */}
+        <div className="gradient-sphere gradient-sphere-1"></div>
+        <div className="gradient-sphere gradient-sphere-2"></div>
+        <div className="gradient-sphere gradient-sphere-3"></div>
+      </div>
 
       {/* Padrão hexagonal animado */}
       <div className="app-hex"></div>
@@ -24,9 +32,22 @@ export default function App() {
       {/* Partículas de código */}
       <div className="app-particles">
         {codePatterns.map((pattern, index) => (
-          <div key={index} className="particle">
+          <div key={index} className="code-particle">
             {pattern}
           </div>
+        ))}
+
+        {/* Partículas flutuantes */}
+        {[...Array(8)].map((_, index) => (
+          <div
+            key={`particle-${index}`}
+            className="particle"
+            style={{
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 20}s`,
+              animationDuration: `${15 + Math.random() * 10}s`,
+            }}
+          ></div>
         ))}
       </div>
 
