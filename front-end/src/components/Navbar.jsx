@@ -1,20 +1,21 @@
-import React, { useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { AuthContext } from '../context/AuthContext'
-import { ThemeContext } from '../context/ThemeContext'
-import '../styles/Navbar.css'
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import { ThemeContext } from "../context/ThemeContext";
+import "../styles/Navbar.css";
 
 export default function Navbar() {
-  const { user, logout } = useContext(AuthContext)
-  const { isDark, toggleTheme } = useContext(ThemeContext)
-  const navigate = useNavigate()
+  const { user, logout } = useContext(AuthContext);
+  const { cycleTheme, getThemeIcon, getThemeLabel, themeMode } =
+    useContext(ThemeContext);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout()
-    navigate('/login')
-  }
+    logout();
+    navigate("/login");
+  };
 
-  if (!user) return null
+  if (!user) return null;
 
   return (
     <nav className="navbar">
@@ -37,13 +38,13 @@ export default function Navbar() {
 
         <div className="navbar-user">
           <span className="user-name">{user.name}</span>
-          <button 
-            className="btn-theme-toggle" 
-            onClick={toggleTheme}
-            title={isDark ? 'Ativar modo claro' : 'Ativar modo escuro'}
-            aria-label={isDark ? 'Ativar modo claro' : 'Ativar modo escuro'}
+          <button
+            className="btn-theme-toggle"
+            onClick={cycleTheme}
+            title={getThemeLabel()}
+            aria-label={getThemeLabel()}
           >
-            {isDark ? '☀️' : '🌙'}
+            {getThemeIcon()}
           </button>
           <button className="btn-logout" onClick={handleLogout}>
             Sair
@@ -51,5 +52,5 @@ export default function Navbar() {
         </div>
       </div>
     </nav>
-  )
+  );
 }
