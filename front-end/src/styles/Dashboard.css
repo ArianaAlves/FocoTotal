@@ -86,10 +86,10 @@
 }
 
 .dashboard-card:hover {
-  border-color: rgba(154, 184, 250, 0.4);
-  box-shadow: 0 12px 40px rgba(154, 184, 250, 0.15);
+  border-color: #3694FF;
+  box-shadow: 0 12px 40px #3694FF22;
   transform: translateY(-6px);
-  background: linear-gradient(135deg, rgba(154, 184, 250, 0.08) 0%, rgba(26, 34, 64, 0.8) 100%);
+  background: #E8F4FF;
 }
 
 .dashboard-card:hover::before {
@@ -111,11 +111,9 @@
 }
 
 .dashboard-card.featured:hover {
-  border-color: rgba(154, 184, 250, 0.6);
-  box-shadow: 
-    0 16px 48px rgba(154, 184, 250, 0.2),
-    inset 0 1px 0 rgba(154, 184, 250, 0.1);
-  background: linear-gradient(135deg, rgba(154, 184, 250, 0.2) 0%, rgba(123, 149, 212, 0.12) 100%);
+  border-color: #3694FF;
+  box-shadow: 0 16px 48px #3694FF22;
+  background: #E8F4FF;
 }
 
 /* Card Icon */
@@ -171,10 +169,10 @@
 }
 
 .dashboard-link-btn:hover {
-  background: linear-gradient(135deg, rgba(93, 95, 239, 0.3), rgba(93, 95, 239, 0.2));
-  border-color: rgba(93, 95, 239, 0.6);
-  color: #7c7eff;
-  box-shadow: 0 6px 16px rgba(93, 95, 239, 0.2);
+  background: #3694FF22;
+  border-color: #3694FF;
+  color: #3694FF;
+  box-shadow: 0 6px 16px #3694FF22;
   transform: translateX(4px);
 }
 
@@ -188,8 +186,8 @@
 }
 
 .quick-start-section:hover {
-  border-color: #5D5FEF;
-  box-shadow: 0 12px 40px rgba(93, 95, 239, 0.2);
+  border-color: #3694FF;
+  box-shadow: 0 12px 40px #3694FF22;
 }
 
 .quick-start-section h3 {

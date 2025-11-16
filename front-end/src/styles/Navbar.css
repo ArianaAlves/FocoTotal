@@ -11,8 +11,8 @@
 
 .navbar {
   background: #F7FAFC;
-  border-bottom: 2px solid #5D5FEF;
-  box-shadow: 0 2px 8px #5D5FEF22;
+  border-bottom: 2px solid #E3F0FF;
+  box-shadow: 0 2px 8px #A7C7E722;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -20,10 +20,8 @@
 }
 
 .navbar:hover {
-  border-bottom-color: rgba(154, 184, 250, 0.4);
-  box-shadow: 
-    0 12px 40px rgba(154, 184, 250, 0.2),
-    inset 0 1px 0 rgba(154, 184, 250, 0.15);
+  border-bottom-color: #3694FF;
+  box-shadow: 0 12px 40px #3694FF22;
 }
 
 .navbar-container {
@@ -93,10 +91,10 @@
 }
 
 .nav-link:hover {
-  background: rgba(154, 184, 250, 0.12);
-  color: var(--primary-blue-dark);
+  background: #3694FF15;
+  color: #3694FF;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(154, 184, 250, 0.2);
+  box-shadow: 0 4px 12px #3694FF22;
 }
 
 .nav-link:hover::after {

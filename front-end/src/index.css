@@ -459,10 +459,10 @@ p {
 }
 
 .card:hover {
-  box-shadow: 0 8px 24px #5D5FEF44;
+  box-shadow: 0 8px 24px #3694FF44;
   transform: translateY(-4px);
-  border-color: #5D5FEF;
-  background: #F5F3FF;
+  border-color: #3694FF;
+  background: #E8F4FF;
 }
 
 .card:hover::before {
