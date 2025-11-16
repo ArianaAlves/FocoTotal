@@ -16,7 +16,7 @@ export default function Dashboard() {
                   {/* Segundo lugar */}
                   <div className="rank-item second">
                     <div className="rank-avatar" aria-hidden>
-                      <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Fernanda%20Araujo" alt="Avatar de Fernanda Araujo" />
+                      <img src="https://api.dicebear.com/9.x/adventurer/svg?seed=Fernanda" alt="Avatar de Fernanda Araujo" />
                     </div>
                     <div className="name-chip">Fernanda Araujo</div>
                     <div className="podium-card second">
@@ -29,7 +29,7 @@ export default function Dashboard() {
                   {/* Primeiro lugar */}
                   <div className="rank-item first">
                     <div className="rank-avatar" aria-hidden>
-                      <span role="img" aria-label="avatar">👩🏾‍🎓</span>
+                      <img src="https://api.dicebear.com/9.x/adventurer/svg?seed=Karine" alt="Avatar de Karine Andrade" />
                     </div>
                     <div className="name-chip">Karine Andrade</div>
                     <div className="podium-card first">
@@ -42,7 +42,7 @@ export default function Dashboard() {
                   {/* Terceiro lugar */}
                   <div className="rank-item third">
                     <div className="rank-avatar" aria-hidden>
-                      <span role="img" aria-label="avatar">👨🏽‍💼</span>
+                      <img src="https://api.dicebear.com/9.x/adventurer/svg?seed=Robson" alt="Avatar de Robson Campelo" />
                     </div>
                     <div className="name-chip">Robson Campelo</div>
                     <div className="podium-card third">
