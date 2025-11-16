@@ -26,7 +26,11 @@
 .auth-bg-decoration-1 {
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(154, 184, 250, 0.8) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(154, 184, 250, 0.8) 0%,
+    transparent 70%
+  );
   top: -100px;
   left: -100px;
 }
@@ -34,7 +38,11 @@
 .auth-bg-decoration-2 {
   width: 300px;
   height: 300px;
-  background: radial-gradient(circle, rgba(0, 255, 65, 0.4) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(0, 255, 65, 0.4) 0%,
+    transparent 70%
+  );
   bottom: -50px;
   right: -50px;
   animation-delay: 10s;
@@ -67,22 +75,42 @@
 
 /* Card Principal */
 .auth-card {
-  background: linear-gradient(135deg, #1a2240 0%, rgba(26, 34, 64, 0.8) 100%);
   backdrop-filter: blur(20px);
-  border: 2px solid rgba(154, 184, 250, 0.2);
   border-radius: 16px;
   padding: 40px;
-  box-shadow: 
-    0 16px 48px rgba(154, 184, 250, 0.15),
-    inset 0 1px 0 rgba(154, 184, 250, 0.1);
   animation: fadeIn 0.5s ease;
   transition: all 0.3s ease;
 }
 
-.auth-card:hover {
+/* Light theme auth card */
+[data-theme="light"] .auth-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(248, 250, 252, 0.9) 100%
+  );
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  box-shadow: 0 12px 32px rgba(71, 85, 105, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] .auth-card:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 16px 40px rgba(99, 102, 241, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Dark theme auth card */
+[data-theme="dark"] .auth-card {
+  background: linear-gradient(135deg, #1a2240 0%, rgba(26, 34, 64, 0.8) 100%);
+  border: 2px solid rgba(154, 184, 250, 0.2);
+  box-shadow: 0 16px 48px rgba(154, 184, 250, 0.15),
+    inset 0 1px 0 rgba(154, 184, 250, 0.1);
+}
+
+[data-theme="dark"] .auth-card:hover {
   border-color: rgba(154, 184, 250, 0.4);
-  box-shadow: 
-    0 20px 60px rgba(154, 184, 250, 0.2),
+  box-shadow: 0 20px 60px rgba(154, 184, 250, 0.2),
     inset 0 1px 0 rgba(154, 184, 250, 0.15);
 }
 
@@ -163,10 +191,8 @@
   outline: none;
   border-color: #9ab8fa;
   background: rgba(10, 14, 39, 0.95);
-  box-shadow: 
-    0 0 0 3px rgba(154, 184, 250, 0.15),
-    inset 0 0 0 1px rgba(154, 184, 250, 0.2),
-    0 0 20px rgba(154, 184, 250, 0.3);
+  box-shadow: 0 0 0 3px rgba(154, 184, 250, 0.15),
+    inset 0 0 0 1px rgba(154, 184, 250, 0.2), 0 0 20px rgba(154, 184, 250, 0.3);
 }
 
 .form-group input:hover:not(:focus) {
@@ -201,7 +227,7 @@
 }
 
 .auth-error::before {
-  content: '⚠';
+  content: "⚠";
   font-size: 16px;
 }
 
@@ -224,7 +250,7 @@
 }
 
 .auth-submit-btn::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -244,8 +270,7 @@
 
 .auth-submit-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 
-    0 12px 32px rgba(154, 184, 250, 0.3),
+  box-shadow: 0 12px 32px rgba(154, 184, 250, 0.3),
     0 0 20px rgba(154, 184, 250, 0.2);
 }
 
@@ -287,7 +312,7 @@
 }
 
 .auth-footer-link::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -2px;
   left: 0;
@@ -321,7 +346,7 @@
 }
 
 .auth-info::before {
-  content: 'ℹ';
+  content: "ℹ";
   font-weight: 800;
   font-size: 16px;
   flex-shrink: 0;

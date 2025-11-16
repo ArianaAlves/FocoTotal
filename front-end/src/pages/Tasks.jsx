@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { api } from "../api/api"; 
+import { useTheme } from "../context/ThemeContext";
+import { api } from "../api/api";
 import "../styles/Tasks.css";
 
 export default function Tasks() {
+  const { theme } = useTheme();
   const [tasks, setTasks] = useState([]);
   const [titleSearch, setTitleSearch] = useState("");
   const [statusSearch, setStatusSearch] = useState("");
@@ -35,7 +37,13 @@ export default function Tasks() {
     }
     try {
       await api.post("/tasks", newTask);
-      setNewTask({ title: "", description: "", dueDate: "", status: "PENDENTE", priority: "ALTA" });
+      setNewTask({
+        title: "",
+        description: "",
+        dueDate: "",
+        status: "PENDENTE",
+        priority: "ALTA",
+      });
       fetchTasks();
     } catch (error) {
       console.error("Erro ao criar tarefa:", error);
@@ -53,15 +61,21 @@ export default function Tasks() {
   };
 
   const concludedTasks = tasks.filter((t) => t.status === "CONCLUIDA");
-  const pendingTasks = tasks.filter((t) => t.status === "PENDENTE" && new Date(t.dueDate) >= new Date());
-  const overdueTasks = tasks.filter((t) => t.status === "PENDENTE" && new Date(t.dueDate) < new Date());
+  const pendingTasks = tasks.filter(
+    (t) => t.status === "PENDENTE" && new Date(t.dueDate) >= new Date()
+  );
+  const overdueTasks = tasks.filter(
+    (t) => t.status === "PENDENTE" && new Date(t.dueDate) < new Date()
+  );
 
   const renderTaskCard = (task) => (
     <div
       key={task.id}
-      className={`task-card ${
-        task.status === "CONCLUIDA" ? "completed" : ""
-      } ${new Date(task.dueDate) < new Date() && task.status === "PENDENTE" ? "overdue" : ""}`}
+      className={`task-card ${task.status === "CONCLUIDA" ? "completed" : ""} ${
+        new Date(task.dueDate) < new Date() && task.status === "PENDENTE"
+          ? "overdue"
+          : ""
+      }`}
     >
       <div className="task-inner">
         <div className="task-front">
@@ -70,10 +84,20 @@ export default function Tasks() {
         </div>
 
         <div className="task-back">
-          <span className="task-description">{task.description || "Sem descrição"}</span>
+          <span className="task-description">
+            {task.description || "Sem descrição"}
+          </span>
           <div className="task-actions">
-            <button className="btn-edit" title="Editar">✎</button>
-            <button className="btn-delete" onClick={() => handleDelete(task.id)} title="Excluir">✖</button>
+            <button className="btn-edit" title="Editar">
+              ✎
+            </button>
+            <button
+              className="btn-delete"
+              onClick={() => handleDelete(task.id)}
+              title="Excluir"
+            >
+              ✖
+            </button>
           </div>
         </div>
       </div>
@@ -81,18 +105,39 @@ export default function Tasks() {
   );
 
   return (
-    <div className="tasks-container">
-
+    <div className="tasks-container" data-theme={theme}>
       <aside className="tasks-sidebar">
         <h2>Criar Tarefa</h2>
-        <input type="text" placeholder="Título" value={newTask.title} onChange={(e) => setNewTask({ ...newTask, title: e.target.value })} />
-        <input type="text" placeholder="Descrição" value={newTask.description} onChange={(e) => setNewTask({ ...newTask, description: e.target.value })} />
-        <input type="date" value={newTask.dueDate} onChange={(e) => setNewTask({ ...newTask, dueDate: e.target.value })} />
-        <select value={newTask.status} onChange={(e) => setNewTask({ ...newTask, status: e.target.value })}>
+        <input
+          type="text"
+          placeholder="Título"
+          value={newTask.title}
+          onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
+        />
+        <input
+          type="text"
+          placeholder="Descrição"
+          value={newTask.description}
+          onChange={(e) =>
+            setNewTask({ ...newTask, description: e.target.value })
+          }
+        />
+        <input
+          type="date"
+          value={newTask.dueDate}
+          onChange={(e) => setNewTask({ ...newTask, dueDate: e.target.value })}
+        />
+        <select
+          value={newTask.status}
+          onChange={(e) => setNewTask({ ...newTask, status: e.target.value })}
+        >
           <option value="PENDENTE">Pendente</option>
           <option value="CONCLUIDA">Concluída</option>
         </select>
-        <select value={newTask.priority} onChange={(e) => setNewTask({ ...newTask, priority: e.target.value })}>
+        <select
+          value={newTask.priority}
+          onChange={(e) => setNewTask({ ...newTask, priority: e.target.value })}
+        >
           <option value="BAIXA">Baixa</option>
           <option value="MEDIA">Média</option>
           <option value="ALTA">Alta</option>
@@ -102,8 +147,16 @@ export default function Tasks() {
         <hr />
 
         <h3>Buscar Tarefas</h3>
-        <input type="text" placeholder="Título" value={titleSearch} onChange={(e) => setTitleSearch(e.target.value)} />
-        <select value={statusSearch} onChange={(e) => setStatusSearch(e.target.value)}>
+        <input
+          type="text"
+          placeholder="Título"
+          value={titleSearch}
+          onChange={(e) => setTitleSearch(e.target.value)}
+        />
+        <select
+          value={statusSearch}
+          onChange={(e) => setStatusSearch(e.target.value)}
+        >
           <option value="">Todos os status</option>
           <option value="PENDENTE">Pendente</option>
           <option value="CONCLUIDA">Concluída</option>
