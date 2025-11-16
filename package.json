@@ -1,0 +1,8 @@
+{
+  "name": "focototal-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev:all": "powershell -NoProfile -ExecutionPolicy Bypass -File ./start-dev.ps1"
+  }
+}
