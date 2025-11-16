@@ -29,7 +29,10 @@ export default function Dashboard() {
                   {/* Primeiro lugar */}
                   <div className="rank-item first">
                     <div className="rank-avatar" aria-hidden>
-                      <img src="https://api.dicebear.com/9.x/avataaars/svg?seed=Karine%20Andrade" alt="Avatar de Karine Andrade" />
+                      <img
+                        src="https://api.dicebear.com/7.x/avataaars/svg?seed=Karine%20Andrade&top=LongHairDreads&hairColor=Black&skin=DarkBrown&accessoriesType=Blank&eyeType=Default&mouthType=Smile"
+                        alt="Avatar de Karine Andrade"
+                      />
                     </div>
                     <div className="name-chip">Karine Andrade</div>
                     <div className="podium-card first">
