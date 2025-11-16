@@ -34,11 +34,19 @@ export default function Tasks() {
       return;
     }
     try {
-      await api.post("/tasks", newTask);
+      const response = await api.post("/tasks", newTask);
+      console.log("Tarefa criada com sucesso:", response.data);
       setNewTask({ title: "", description: "", dueDate: "", status: "PENDENTE", priority: "ALTA" });
       fetchTasks();
+      alert("Tarefa criada com sucesso!");
     } catch (error) {
       console.error("Erro ao criar tarefa:", error);
+      if (error.response) {
+        console.error("Detalhes do erro:", error.response.data);
+        alert(`Erro ao criar tarefa: ${error.response.data.message || JSON.stringify(error.response.data)}`);
+      } else {
+        alert("Erro ao criar tarefa. Verifique se você está logado e se o servidor está rodando.");
+      }
     }
   };
 
