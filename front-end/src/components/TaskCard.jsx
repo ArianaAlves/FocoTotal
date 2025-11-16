@@ -3,6 +3,7 @@ import '../styles/TaskCard.css'
 
 export default function TaskCard({ task, onDelete, onUpdate }) {
   const [isDeleting, setIsDeleting] = useState(false)
+  const [isLate, setIsLate] = useState(task.isLate || false)
 
   const handleDelete = async () => {
     if (window.confirm(`Tem certeza que quer deletar a tarefa "${task.title}"?`)) {
@@ -19,12 +20,30 @@ export default function TaskCard({ task, onDelete, onUpdate }) {
   }
 
   const handleStatusChange = async () => {
-    const newStatus = task.status === 'PENDENTE' ? 'CONCLUIDA' : 'PENDENTE'
+    // Ciclo: PENDENTE -> ATRASADA -> CONCLUIDA -> PENDENTE
+    const statusCycle = {
+      'PENDENTE': 'ATRASADA',
+      'ATRASADA': 'CONCLUIDA',
+      'CONCLUIDA': 'PENDENTE'
+    }
+    const newStatus = statusCycle[task.status] || 'PENDENTE'
     try {
       await onUpdate(task.id, { status: newStatus })
     } catch (error) {
       console.error('Erro ao atualizar status:', error)
       alert('Erro ao atualizar status')
+    }
+  }
+
+  const handleMarkAsLate = async () => {
+    const newIsLate = !isLate
+    setIsLate(newIsLate)
+    try {
+      await onUpdate(task.id, { isLate: newIsLate })
+    } catch (error) {
+      console.error('Erro ao marcar como atrasada:', error)
+      setIsLate(!newIsLate)
+      alert('Erro ao marcar como atrasada')
     }
   }
 
@@ -40,8 +59,26 @@ export default function TaskCard({ task, onDelete, onUpdate }) {
 
   const isOverdue = new Date(task.dueDate) < new Date() && task.status === 'PENDENTE'
 
+  const getStatusLabel = () => {
+    const labels = {
+      'PENDENTE': '⏳ Pendente',
+      'ATRASADA': '⏰ Atrasada',
+      'CONCLUIDA': '✓ Concluída'
+    }
+    return labels[task.status] || task.status
+  }
+
+  const getStatusTitle = () => {
+    const titles = {
+      'PENDENTE': 'Clicar para marcar como atrasada',
+      'ATRASADA': 'Clicar para marcar como concluída',
+      'CONCLUIDA': 'Clicar para voltar a pendente'
+    }
+    return titles[task.status] || 'Mudar status'
+  }
+
   return (
-    <div className={`task-card ${task.status === 'CONCLUIDA' ? 'completed' : ''} ${isOverdue ? 'overdue' : ''}`}>
+    <div className={`task-card ${task.status === 'CONCLUIDA' ? 'completed' : ''} ${isLate ? 'late' : ''} ${isOverdue ? 'overdue' : ''}`}>
       <div className="task-header">
         <h3 className="task-title">{task.title}</h3>
         <span className="task-priority" style={{ backgroundColor: getPriorityColor(task.priority) }}>
@@ -64,11 +101,19 @@ export default function TaskCard({ task, onDelete, onUpdate }) {
 
       <div className="task-actions">
         <button
-          className={`btn-status ${task.status === 'CONCLUIDA' ? 'completed' : ''}`}
+          className={`btn-status ${task.status === 'CONCLUIDA' ? 'completed' : ''} ${task.status === 'ATRASADA' ? 'late' : ''}`}
           onClick={handleStatusChange}
-          title={task.status === 'PENDENTE' ? 'Marcar como concluída' : 'Marcar como pendente'}
+          title={getStatusTitle()}
         >
-          {task.status === 'PENDENTE' ? '✓ Concluir' : '↩ Reabrir'}
+          {getStatusLabel()}
+        </button>
+
+        <button
+          className={`btn-late ${isLate ? 'marked' : ''}`}
+          onClick={handleMarkAsLate}
+          title={isLate ? 'Remover marcação de atrasada' : 'Marcar como atrasada'}
+        >
+          {isLate ? '⏰ Atrasada' : '⏰'}
         </button>
 
         <button

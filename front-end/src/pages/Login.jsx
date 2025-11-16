@@ -7,12 +7,23 @@ export default function Login() {
   const { login } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [touched, setTouched] = useState({ email: false, password: false });
   const nav = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const isFormValid = email.trim() !== "" && password.trim() !== "" && isEmailValid;
+
   const handle = async (e) => {
     e.preventDefault();
+    
+    if (!isFormValid) {
+      setError("Por favor, preencha email e senha corretamente");
+      return;
+    }
+
     setLoading(true);
     setError("");
     try {
@@ -41,33 +52,58 @@ export default function Login() {
             {error && <div className="auth-error">{error}</div>}
             
             <div className="form-group">
-              <label htmlFor="email">E-mail</label>
+              <label htmlFor="email">
+                E-mail <span className="required">*</span>
+              </label>
               <input
                 id="email"
                 type="email"
                 placeholder="seu@email.com"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                required
+                onBlur={() => setTouched({ ...touched, email: true })}
+                className={touched.email && !isEmailValid ? "input-error" : ""}
               />
+              {touched.email && !isEmailValid && email.trim() !== "" && (
+                <span className="error-text">Email inválido</span>
+              )}
+              {touched.email && email.trim() === "" && (
+                <span className="error-text">Email é obrigatório</span>
+              )}
             </div>
 
             <div className="form-group">
-              <label htmlFor="password">Senha</label>
-              <input
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                required
-              />
+              <label htmlFor="password">
+                Senha <span className="required">*</span>
+              </label>
+              <div className="password-wrapper">
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  onBlur={() => setTouched({ ...touched, password: true })}
+                  className={touched.password && password.trim() === "" ? "input-error" : ""}
+                />
+                <button
+                  type="button"
+                  className="password-toggle"
+                  onClick={() => setShowPassword(!showPassword)}
+                  title={showPassword ? "Ocultar senha" : "Mostrar senha"}
+                >
+                  {showPassword ? "👁️" : "👁️‍🗨️"}
+                </button>
+              </div>
+              {touched.password && password.trim() === "" && (
+                <span className="error-text">Senha é obrigatória</span>
+              )}
             </div>
 
             <button 
               type="submit" 
               className="auth-submit-btn" 
-              disabled={loading}
+              disabled={loading || !isFormValid}
             >
               <span>{loading ? "⏳ Entrando..." : "↗ Entrar"}</span>
             </button>

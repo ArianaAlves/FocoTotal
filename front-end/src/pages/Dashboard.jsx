@@ -1,37 +1,75 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
-import { useTheme } from "../context/ThemeContext";
 import "../styles/Dashboard.css";
 
 export default function Dashboard() {
-  const { theme } = useTheme();
-
   return (
     <div className="min-h-screen">
-      <main className="dashboard-main" data-theme={theme}>
+      <main className="dashboard-main">
         <div className="container">
           <div className="dashboard-content">
-            <div className="dashboard-header">
-              <h2 className="dashboard-title">Painel de Controle</h2>
-              <p className="dashboard-subtitle">
-                Organize seus projetos e tarefas de forma eficiente
-              </p>
-            </div>
+            {/* Top row: Rank panel (left) + Featured card (right) */}
+            <div className="dashboard-top-row">
+              <div className="rank-panel" aria-label="Ranking de Habilidades">
+                <div className="rank-grid">
+                  {/* Segundo lugar */}
+                  <div className="rank-item second">
+                    <div className="rank-avatar" aria-hidden>
+                      <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=fernanda&mouth=smile&hairColor=0000FF&skinColor=F1C27D" alt="Avatar de Fernando Araujo" crossOrigin="anonymous" />
+                    </div>
+                    <div className="name-chip">Fernando Araujo</div>
+                    <div className="podium-card second">
+                      <div className="medal">🥈</div>
+                      <div className="podium-value">22</div>
+                      <div className="podium-label">Habilidades</div>
+                    </div>
+                  </div>
 
-            <div className="dashboard-grid">
+                  {/* Primeiro lugar */}
+                  <div className="rank-item first">
+                    <div className="rank-avatar" aria-hidden>
+                      <img
+                        src="https://api.dicebear.com/7.x/avataaars/svg?seed=karine&mouth=smile&hairColor=000000&skinColor=8D5524"
+                        alt="Avatar de Karine Andrade"
+                        crossOrigin="anonymous"
+                      />
+                    </div>
+                    <div className="name-chip">Karine Andrade</div>
+                    <div className="podium-card first">
+                      <div className="medal">🏆</div>
+                      <div className="podium-value">24</div>
+                      <div className="podium-label">Habilidades</div>
+                    </div>
+                  </div>
+
+                  {/* Terceiro lugar */}
+                  <div className="rank-item third">
+                    <div className="rank-avatar" aria-hidden>
+                      <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=robson-fun&mouth=twinkle&hairColor=7D3C98&skinColor=F1C27D" alt="Avatar de Robson Campelo" crossOrigin="anonymous" />
+                    </div>
+                    <div className="name-chip">Robson Campelo</div>
+                    <div className="podium-card third">
+                      <div className="medal">🥉</div>
+                      <div className="podium-value">21</div>
+                      <div className="podium-label">Habilidades</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div className="dashboard-card featured">
                 <div className="card-icon">📋</div>
                 <h3>Minhas Tarefas</h3>
-                <p>
-                  Gerencie, organize e acompanhe o progresso de todas as suas
-                  tarefas
-                </p>
+                <p>Gerencie, organize e acompanhe o progresso de todas as suas tarefas</p>
                 <Link to="/tasks" className="dashboard-link-btn">
                   Acessar Tarefas →
                 </Link>
               </div>
+            </div>
 
+            {/* Demais cards */}
+            <div className="dashboard-grid">
               <div className="dashboard-card">
                 <div className="card-icon">👤</div>
                 <h3>Meu Perfil</h3>
@@ -56,6 +94,7 @@ export default function Dashboard() {
               </div>
             </div>
 
+
             <div className="quick-start-section">
               <h3>🚀 Primeiros Passos</h3>
               <div className="quick-start-steps">
@@ -77,9 +116,7 @@ export default function Dashboard() {
                   <span className="step-number">3</span>
                   <div>
                     <strong>Acompanhe seu progresso</strong>
-                    <p>
-                      Marque tarefas como concluídas e veja suas estatísticas
-                    </p>
+                    <p>Marque tarefas como concluídas e veja suas estatísticas</p>
                   </div>
                 </div>
               </div>
