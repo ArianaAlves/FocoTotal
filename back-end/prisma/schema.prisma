@@ -6,29 +6,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
-}
-
-// ===========================================
-// ENUMS
-// ===========================================
-
-enum TaskStatus {
-  PENDENTE
-  CONCLUIDA
-}
-
-enum Priority {
-  BAIXA
-  MEDIA
-  ALTA
-}
-
-enum GoalStatus {
-  EM_PROGRESSO
-  CONCLUIDA
-  ATRASADA
 }
 
 // ===========================================
@@ -49,37 +28,37 @@ model User {
 }
 
 model Task {
-  id          Int        @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   title       String
   description String?
   dueDate     DateTime?
-  status      TaskStatus @default(PENDENTE)
-  priority    Priority   @default(MEDIA)
+  status      String   @default("PENDENTE") // PENDENTE, CONCLUIDA
+  priority    String   @default("MEDIA")    // BAIXA, MEDIA, ALTA
   
   userId      Int
-  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@map("tasks")
 }
 
 model Goal {
-  id              Int        @id @default(autoincrement())
+  id              Int      @id @default(autoincrement())
   title           String
   description     String?
   target          Int
-  currentProgress Int        @default(0)
-  status          GoalStatus @default(EM_PROGRESSO)
-  category        String     @default("Outros")
+  currentProgress Int      @default(0)
+  status          String   @default("EM_PROGRESSO") // EM_PROGRESSO, CONCLUIDA, ATRASADA
+  category        String   @default("Outros")
   dueDate         DateTime
   
   userId          Int
-  user            User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  createdAt       DateTime   @default(now())
-  updatedAt       DateTime   @updatedAt
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   @@map("goals")
 }

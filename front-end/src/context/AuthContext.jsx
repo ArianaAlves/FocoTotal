@@ -10,17 +10,20 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem("ft_token");
     const storedUser = localStorage.getItem("ft_user");
-    
-    console.log('AuthContext init:', { hasToken: !!token, hasUser: !!storedUser });
-    
+
+    console.log("AuthContext init:", {
+      hasToken: !!token,
+      hasUser: !!storedUser,
+    });
+
     if (token && storedUser) {
       try {
         setAuthToken(token);
         const userData = JSON.parse(storedUser);
         setUser(userData);
-        console.log('User restored from localStorage:', userData.email);
+        console.log("User restored from localStorage:", userData.email);
       } catch (error) {
-        console.log('Error parsing stored user data:', error);
+        console.log("Error parsing stored user data:", error);
         // Dados corrompidos, limpar
         localStorage.removeItem("ft_token");
         localStorage.removeItem("ft_user");
@@ -28,14 +31,13 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
       }
     } else {
-      console.log('No token or user found in localStorage');
+      console.log("No token or user found in localStorage");
     }
     setLoading(false);
   }, []);
 
   const login = async (email, password) => {
-    // Usar rota simples temporariamente
-    const res = await api.post("/login", { email, password });
+    const res = await api.post("/auth/login", { email, password });
     const { token, user } = res.data;
 
     localStorage.setItem("ft_token", token);
@@ -48,8 +50,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const register = async (data) => {
-    // Usar rota simples temporariamente
-    const res = await api.post("/register", data);
+    const res = await api.post("/auth/register", data);
     return res.data;
   };
   const logout = () => {

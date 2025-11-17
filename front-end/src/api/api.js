@@ -1,9 +1,7 @@
 import axios from "axios";
 
-// Força a URL de produção se estivermos no Vercel ou produção
-const API_BASE = (import.meta.env.MODE === 'production' || window.location.hostname.includes('vercel.app'))
-    ? "https://focototal.onrender.com/api"
-    : (import.meta.env.VITE_API_BASE_URL || "http://localhost:3000/api");
+// Configuração da API - usar sempre o servidor Render que está funcionando
+const API_BASE = "https://focototal.onrender.com/api";
 
 export const api = axios.create({
     baseURL: API_BASE,
@@ -39,7 +37,7 @@ api.interceptors.response.use(
     (response) => response,
     (error) => {
         console.log('API Error:', error.response?.status, error.config?.url);
-        
+
         // Só redirecionar para login se for um erro 401 em rotas protegidas
         // E não durante a inicialização da app
         if (error.response?.status === 401 && !error.config?.url?.includes('/user/profile')) {

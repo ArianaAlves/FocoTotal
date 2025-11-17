@@ -11,9 +11,13 @@ import { AuthContext } from "../context/AuthContext";
 
 const Private = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
-  
+
   // Debug: verificar estado
-  console.log('Private component:', { user: !!user, loading, hasToken: !!localStorage.getItem("ft_token") });
+  console.log("Private component:", {
+    user: !!user,
+    loading,
+    hasToken: !!localStorage.getItem("ft_token"),
+  });
 
   if (loading) {
     return (
@@ -58,8 +62,7 @@ export default function AppRoutes() {
     <Routes>
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-           {" "}
+            <Route path="/register" element={<Register />} />     {" "}
       <Route
         path="/dashboard"
         element={
