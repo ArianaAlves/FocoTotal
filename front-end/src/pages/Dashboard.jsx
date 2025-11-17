@@ -14,7 +14,11 @@ export default function Dashboard() {
                 <div className="rank-grid">
                   <div className="rank-item second">
                     <div className="rank-avatar" aria-hidden>
-                      <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=fernanda&mouth=smile&hairColor=0000FF&skinColor=F1C27D" alt="Avatar de Fernando Araujo" crossOrigin="anonymous" />
+                      <img
+                        src="https://api.dicebear.com/7.x/avataaars/svg?seed=fernanda&mouth=smile&hairColor=0000FF&skinColor=F1C27D"
+                        alt="Avatar de Fernando Araujo"
+                        crossOrigin="anonymous"
+                      />
                     </div>
                     <div className="name-chip">Fernando Araujo</div>
                     <div className="podium-card second">
@@ -40,7 +44,11 @@ export default function Dashboard() {
                   </div>
                   <div className="rank-item third">
                     <div className="rank-avatar" aria-hidden>
-                      <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=robson-fun&mouth=twinkle&hairColor=7D3C98&skinColor=F1C27D" alt="Avatar de Robson Campelo" crossOrigin="anonymous" />
+                      <img
+                        src="https://api.dicebear.com/7.x/avataaars/svg?seed=robson-fun&mouth=twinkle&hairColor=7D3C98&skinColor=F1C27D"
+                        alt="Avatar de Robson Campelo"
+                        crossOrigin="anonymous"
+                      />
                     </div>
                     <div className="name-chip">Robson Campelo</div>
                     <div className="podium-card third">
@@ -55,7 +63,10 @@ export default function Dashboard() {
               <div className="dashboard-card featured">
                 <div className="card-icon">📋</div>
                 <h3>Minhas Tarefas</h3>
-                <p>Gerencie, organize e acompanhe o progresso de todas as suas tarefas</p>
+                <p>
+                  Gerencie, organize e acompanhe o progresso de todas as suas
+                  tarefas
+                </p>
                 <Link to="/tasks" className="dashboard-link-btn">
                   Acessar Tarefas →
                 </Link>
@@ -89,7 +100,6 @@ export default function Dashboard() {
               </div>
             </div>
 
-
             <div className="quick-start-section">
               <h3>🚀 Primeiros Passos</h3>
               <div className="quick-start-steps">
@@ -111,7 +121,9 @@ export default function Dashboard() {
                   <span className="step-number">3</span>
                   <div>
                     <strong>Acompanhe seu progresso</strong>
-                    <p>Marque tarefas como concluídas e veja suas estatísticas</p>
+                    <p>
+                      Marque tarefas como concluídas e veja suas estatísticas
+                    </p>
                   </div>
                 </div>
               </div>
