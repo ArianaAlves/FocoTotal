@@ -31,23 +31,38 @@ export const userService = {
   },
 
   login: async ({ email, password }) => {
-    // Validação básica
-    if (!email || !password) {
-      throw new Error("Email e senha são obrigatórios");
+    try {
+      // Validação básica
+      if (!email || !password) {
+        throw new Error("Email e senha são obrigatórios");
+      }
+
+      // Log para debug (sem dados sensíveis)
+      console.log("🔐 Login attempt for email:", email.substring(0, 3) + "***");
+
+      const user = await userRepository.findByEmail(email);
+
+      if (!user) {
+        console.log("❌ User not found for email:", email.substring(0, 3) + "***");
+        throw new Error("Usuário não encontrado.");
+      }
+
+      const valid = await bcrypt.compare(password, user.password);
+
+      if (!valid) {
+        console.log("❌ Invalid password for user:", user.id);
+        throw new Error("Senha incorreta.");
+      }
+
+      const token = generateToken(user.id);
+      console.log("✅ Login successful for user:", user.id);
+
+      // Remover senha do retorno
+      const { password: _, ...userWithoutPassword } = user;
+      return { token, user: userWithoutPassword };
+    } catch (error) {
+      console.error("❌ Login service error:", error.message);
+      throw error;
     }
-
-    const user = await userRepository.findByEmail(email);
-
-    if (!user) throw new Error("Usuário não encontrado.");
-
-    const valid = await bcrypt.compare(password, user.password);
-
-    if (!valid) throw new Error("Senha incorreta.");
-
-    const token = generateToken(user.id);
-
-    // Remover senha do retorno
-    const { password: _, ...userWithoutPassword } = user;
-    return { token, user: userWithoutPassword };
   },
 };

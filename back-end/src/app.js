@@ -6,8 +6,37 @@ import routes from "./routes/index.js";
 
 const app = express();
 
-app.use(cors());
-app.use(express.json());
+// CORS configurado para aceitar requisições do frontend
+const corsOptions = {
+  origin: [
+    'http://localhost:5173',  // Vite dev
+    'http://localhost:3000',  // React dev alternativo
+    'https://foco-total.vercel.app',  // Produção Vercel
+    'https://focototal.vercel.app'    // Variação do domínio
+  ],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
+
+// Middleware para parsing JSON com tratamento de erro
+app.use(express.json({
+  limit: '10mb',
+  strict: true
+}));
+
+// Middleware para tratar erros de JSON malformado
+app.use((err, req, res, next) => {
+  if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
+    return res.status(400).json({
+      message: 'Formato JSON inválido',
+      error: 'Malformed JSON in request body'
+    });
+  }
+  next(err);
+});
+
 app.use(requestLogger);
 
 // Health check endpoint for Render
