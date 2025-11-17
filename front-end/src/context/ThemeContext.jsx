@@ -4,9 +4,8 @@ export const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
   const [themeMode, setThemeMode] = useState(() => {
-    // Recuperar preferência do localStorage
     const saved = localStorage.getItem("themeMode");
-    return saved || "system"; // 'light', 'dark', 'system'
+    return saved || "system"; 
   });
 
   const [isDark, setIsDark] = useState(false);
@@ -20,7 +19,6 @@ export function ThemeProvider({ children }) {
       } else if (themeMode === "light") {
         shouldBeDark = false;
       } else {
-        // system
         shouldBeDark = window.matchMedia(
           "(prefers-color-scheme: dark)"
         ).matches;
@@ -28,7 +26,6 @@ export function ThemeProvider({ children }) {
 
       setIsDark(shouldBeDark);
 
-      // Aplicar tema no documento
       const root = document.documentElement;
       if (shouldBeDark) {
         root.classList.add("dark-mode");
@@ -41,10 +38,8 @@ export function ThemeProvider({ children }) {
 
     updateTheme();
 
-    // Salvar preferência
     localStorage.setItem("themeMode", themeMode);
 
-    // Escutar mudanças no tema do sistema
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const handleSystemThemeChange = () => {
       if (themeMode === "system") {
@@ -149,7 +144,6 @@ export function ThemeProvider({ children }) {
         cycleTheme,
         getThemeIcon,
         getThemeLabel,
-        // Manter compatibilidade com código existente
         toggleTheme: cycleTheme,
       }}
     >

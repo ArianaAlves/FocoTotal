@@ -15,7 +15,6 @@
   transition: background-color 0.3s ease;
 }
 
-/* Fundo decorativo com linhas Matrix e partículas */
 .app-matrix-bg {
   position: fixed;
   top: 0;
@@ -27,7 +26,6 @@
   overflow: hidden;
 }
 
-/* Rede de hexágonos e padrões geométricos */
 .app-grid {
   position: absolute;
   width: 100%;
@@ -48,7 +46,6 @@
   }
 }
 
-/* Partículas flutuantes */
 .particle {
   position: absolute;
   width: 3px;
@@ -77,7 +74,6 @@
   }
 }
 
-/* Padrão de hexágonos */
 .app-hex {
   position: fixed;
   bottom: 0;
@@ -103,7 +99,6 @@
   }
 }
 
-/* Partículas de código */
 .app-particles {
   position: fixed;
   top: 0;
@@ -154,7 +149,6 @@
   animation: float-particle 11s ease-in-out infinite;
 }
 
-/* Linhas conectadas tema computação */
 .connection-line {
   position: fixed;
   background: linear-gradient(90deg, 
@@ -201,7 +195,6 @@
   }
 }
 
-/* Pontos nodais */
 .node-dot {
   position: fixed;
   width: 6px;
@@ -250,7 +243,6 @@
   }
 }
 
-/* Nós conectados com pulsação */
 .connection-node {
   position: absolute;
   width: 5px;
@@ -270,7 +262,6 @@
   }
 }
 
-/* Gradiente radial flutuante */
 .gradient-sphere {
   position: absolute;
   border-radius: 50%;
@@ -337,7 +328,7 @@
   z-index: 1;
 }
 
-/* Estilos para as páginas */
+
 .login-container,
 .register-container,
 .dashboard-container,
@@ -359,7 +350,7 @@
   }
 }
 
-/* Responsivo */
+
 @media (max-width: 768px) {
   .app-hex {
     height: 300px;

@@ -28,7 +28,6 @@ export default function Profile() {
 
   useEffect(() => {
     if (user) {
-      // Simular carregamento do perfil
       setProfile({
         name: user.name || 'Usuário',
         email: user.email || '',
@@ -41,7 +40,7 @@ export default function Profile() {
           github: ''
       })
       
-      // Calcular estatísticas
+  
       loadStats()
     }
   }, [user])
@@ -77,7 +76,7 @@ export default function Profile() {
       setLoading(true)
       setMessage({ type: '', text: '' })
       
-      // Simular save do perfil
+
       setTimeout(() => {
         setMessage({ 
           type: 'success', 
@@ -192,12 +191,11 @@ export default function Profile() {
       )}
 
       <div className="profile-content">
-        {/* Estatísticas */}
         <div className="stats-grid">
           <div className="stat-card">
             <div className="stat-icon">📋</div>
             <div className="stat-info">
-              <p className="stat-label">Total de Tarefas</p>
+              <p id='totaltarefas'>Total de Tarefas</p>
               <p className="stat-value">{stats.totalTasks}</p>
             </div>
           </div>
@@ -205,7 +203,7 @@ export default function Profile() {
           <div className="stat-card">
             <div className="stat-icon">✅</div>
             <div className="stat-info">
-              <p className="stat-label">Concluídas</p>
+              <p id='concluidas'>Concluídas</p>
               <p className="stat-value">{stats.completedTasks}</p>
             </div>
           </div>
@@ -213,7 +211,7 @@ export default function Profile() {
           <div className="stat-card">
             <div className="stat-icon">⏰</div>
             <div className="stat-info">
-              <p className="stat-label">Atrasadas</p>
+              <p id='atrasadas'>Atrasadas</p>
               <p className="stat-value">{stats.overdueTasks}</p>
             </div>
           </div>
@@ -221,13 +219,13 @@ export default function Profile() {
           <div className="stat-card">
             <div className="stat-icon">📈</div>
             <div className="stat-info">
-              <p className="stat-label">Taxa de Conclusão</p>
+              <p id='TaxadeConclusão'>Taxa de Conclusão</p>
               <p className="stat-value">{stats.completionRate}%</p>
             </div>
           </div>
         </div>
 
-        {/* Seção de Perfil */}
+
         <div className="profile-card">
           <div className="profile-card-header">
             <h3>Informações Profissionais</h3>
@@ -429,8 +427,6 @@ export default function Profile() {
             </div>
           )}
         </div>
-
-        {/* Seção de Objetivos */}
         <div className="profile-card">
           <h3>Metas e Objetivos</h3>
           <div className="objectives-list">
