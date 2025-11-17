@@ -288,7 +288,7 @@ export default function Goals() {
       ) : (
         <section className="goals-table-section">
           {goals.length > 0 ? (
-            <table className="goals-table">
+            <table className="goals-table-clean">
               <thead>
                 <tr>
                   <th>Meta</th>

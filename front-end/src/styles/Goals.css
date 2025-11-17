@@ -360,10 +360,19 @@
   overflow-x: auto;
 }
 
-.goals-table {
+.goals-table,
+.goals-table-clean {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.9rem;
+}
+
+/* Garantir que não apareçam botões */
+.goals-table-clean .goal-actions,
+.goals-table-clean .btn-update-table,
+.goals-table-clean .btn-edit-table,
+.goals-table-clean .btn-delete-table {
+  display: none !important;
 }
 
 .goals-table th {

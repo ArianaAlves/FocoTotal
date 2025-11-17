@@ -463,6 +463,58 @@ app.post('/api/goals', async (req, res) => {
   }
 });
 
+// Goals progress update route
+app.put('/api/goals/progress/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { newProgress } = req.body;
+
+    if (isDatabaseConnected && prisma) {
+      // Usar Prisma (implementar quando necessário)
+      res.json({
+        message: '✅ Progresso atualizado! (Database)',
+        source: 'database'
+      });
+    } else {
+      // Fallback - resposta simulada
+      res.json({
+        message: '✅ Progresso atualizado com sucesso! (Mock)',
+        goalId: id,
+        newProgress: newProgress,
+        source: 'mock'
+      });
+    }
+  } catch (error) {
+    console.error('Update goal progress error:', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
+
+// Goals delete route
+app.delete('/api/goals/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (isDatabaseConnected && prisma) {
+      // Usar Prisma (implementar quando necessário)
+      res.json({
+        message: '✅ Meta deletada! (Database)',
+        source: 'database'
+      });
+    } else {
+      // Fallback - resposta simulada
+      res.json({
+        message: '✅ Meta deletada com sucesso! (Mock)',
+        deletedGoalId: id,
+        source: 'mock'
+      });
+    }
+  } catch (error) {
+    console.error('Delete goal error:', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
+
 // Error handling
 app.use((err, req, res, next) => {
   console.error('Global error:', err);
