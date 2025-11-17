@@ -7,7 +7,7 @@
   --white: #ffffff;
   --border-color: #e5e7eb;
 }
-
+  
 .navbar {
   background: var(--surface);
   border-bottom: 2px solid var(--border);
@@ -318,7 +318,7 @@ html.dark-mode .btn-logout:hover {
     font-size: 11px;
     gap: 4px;
   }
-
+  
   .btn-logout {
     padding: 6px 10px;
     font-size: 11px;
