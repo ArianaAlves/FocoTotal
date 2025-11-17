@@ -1,0 +1,23 @@
+{
+  "buildCommand": "cd front-end && npm run build",
+  "outputDirectory": "front-end/dist",
+  "installCommand": "cd front-end && npm install",
+  "devCommand": "cd front-end && npm run dev",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/service-worker.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ]
+}

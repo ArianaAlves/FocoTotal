@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import AppRoutes from "./routes/AppRoutes";
+import "./styles/theme.css";
 import "./App.css";
 
 export default function App() {
