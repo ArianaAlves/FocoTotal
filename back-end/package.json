@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --legacy-watch --ext js,json src/server.js",
-    "start": "node src/server-basic.js",
+    "start": "node src/server-native.js",
     "build": "echo 'Build completed successfully'",
     "prisma:generate": "npx prisma generate",
     "prisma:migrate": "npx prisma migrate dev",
@@ -14,15 +14,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@prisma/client": "^6.19.0",
-    "bcryptjs": "^3.0.3",
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
-    "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.2",
-    "zod": "^3.25.76"
-  },
+  "dependencies": {},
   "devDependencies": {
     "nodemon": "^3.1.11",
     "prisma": "^6.19.0"
