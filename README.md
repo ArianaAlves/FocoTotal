@@ -5,6 +5,7 @@
 🗓️ Período: 10 de novembro a 17 de novembro
 
 🧑🏽‍💻 Equipe 4: Carlos, Iago, Ariana, Sheyenne, Beatriz
+>  AGILE TASK
 
 
 
@@ -16,7 +17,6 @@ Seu grupo é um squad de desenvolvimento contratado para construir um Módulo de
 
 Módulo MVP da "Foco Total"
 
-## Ferramenta - > AGILE TASK
 
 ## 📚 O objetivo principal
 
