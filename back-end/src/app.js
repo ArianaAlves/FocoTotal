@@ -8,7 +8,18 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use(routes);
+// Health check endpoint for Render
+app.get('/', (req, res) => {
+  res.json({ 
+    message: '🚀 FocoTotal API is running!', 
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    version: '1.0.0'
+  });
+});
+
+// API routes
+app.use('/api', routes);
 
 app.use(errorHandler);
 

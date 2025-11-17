@@ -2,36 +2,17 @@ import app from "./app.js";
 import { env } from "./config/env.js";
 
 const start = async () => {
-  const basePort = Number(env.PORT) || 3000;
-  let port = basePort;
-  const maxAttempts = 10;
-  let attempts = 0;
-
-  const tryListen = () =>
-    new Promise((resolve, reject) => {
-      const server = app
-        .listen(port, () => {
-          console.log(`Server running on PORT: ${port}...`);
-          resolve(server);
-        })
-        .on("error", (err) => {
-          if (err.code === "EADDRINUSE" && attempts < maxAttempts) {
-            attempts++;
-            port++;
-            console.warn(
-              `Port ${port - 1} in use. Trying port ${port} (attempt ${attempts}/${maxAttempts})...`
-            );
-            setTimeout(() => resolve(tryListen()), 100);
-          } else {
-            reject(err);
-          }
-        });
-    });
+  const port = Number(env.PORT) || 3000;
+  const host = '0.0.0.0';
 
   try {
-    await tryListen();
+    app.listen(port, host, () => {
+      console.log(`🚀 Server running on ${host}:${port}`);
+      console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
+      console.log(`🗄️  Database: ${process.env.DATABASE_URL ? 'Connected' : 'Not configured'}`);
+    });
   } catch (err) {
-    console.error("Failed to start server:", err);
+    console.error("❌ Failed to start server:", err);
     process.exit(1);
   }
 };

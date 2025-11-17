@@ -22,6 +22,7 @@ DATABASE_URL=sua_url_do_banco_de_dados_postgresql
 ### Configuração do Banco de Dados:
 
 O projeto usa Prisma ORM. No deploy, certifique-se de:
+
 1. Usar PostgreSQL como banco de dados
 2. Configurar a DATABASE_URL corretamente
 3. As migrações serão executadas automaticamente no build
