@@ -390,9 +390,11 @@ app.get('/api/goals', async (req, res) => {
 
 app.post('/api/goals', async (req, res) => {
   try {
-    const { title, description, targetValue, userId = 1 } = req.body;
+    const { title, description, target, dueDate, category, userId = 1 } = req.body;
 
-    if (!title || !targetValue) {
+    console.log('📝 Creating goal with data:', { title, description, target, dueDate, category });
+
+    if (!title || !target) {
       return res.status(400).json({
         error: 'Título e valor alvo são obrigatórios'
       });
@@ -405,8 +407,10 @@ app.post('/api/goals', async (req, res) => {
           data: {
             title,
             description: description || '',
-            targetValue: parseInt(targetValue),
-            currentValue: 0,
+            target: parseInt(target),
+            currentProgress: 0,
+            category: category || 'Outros',
+            dueDate: new Date(dueDate),
             userId: parseInt(userId)
           },
           include: {
@@ -429,11 +433,11 @@ app.post('/api/goals', async (req, res) => {
             id: Date.now(),
             title,
             description: description || '',
-            target: parseInt(targetValue),
+            target: parseInt(target),
             currentProgress: 0,
             status: 'Em Progresso',
-            category: 'Outros',
-            dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 dias
+            category: category || 'Outros',
+            dueDate: dueDate || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
             createdAt: new Date().toISOString()
           },
           source: 'mock'
@@ -447,11 +451,11 @@ app.post('/api/goals', async (req, res) => {
           id: Date.now(),
           title,
           description: description || '',
-          target: parseInt(targetValue),
+          target: parseInt(target),
           currentProgress: 0,
           status: 'Em Progresso',
-          category: 'Outros',
-          dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+          category: category || 'Outros',
+          dueDate: dueDate || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
           createdAt: new Date().toISOString()
         },
         source: 'mock'
