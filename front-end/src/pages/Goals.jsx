@@ -347,17 +347,95 @@ export default function Goals() {
       {isLoading ? (
         <div className="loading-message">Carregando metas...</div>
       ) : (
-        <section className="goals-list-grid">
+        <section className="goals-table-section">
           {goals.length > 0 ? (
-            goals.map((goal) => (
-              <GoalItem
-                key={goal.id}
-                goal={goal}
-                onUpdateProgress={handleUpdateProgress}
-                onEditGoal={handleEditGoal}
-                onDeleteGoal={handleDeleteGoal}
-              />
-            ))
+            <table className="goals-table">
+              <thead>
+                <tr>
+                  <th>Meta</th>
+                  <th>Categoria</th>
+                  <th>Progresso</th>
+                  <th>Status</th>
+                  <th>Vencimento</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                {goals.map((goal) => {
+                  const progressPercentage = goal.target > 0 
+                    ? ((goal.currentProgress / goal.target) * 100).toFixed(0) 
+                    : 0;
+                  
+                  let statusClass;
+                  if (goal.status === "Atrasada") {
+                    statusClass = 'status-late';
+                  } else if (goal.status === "Concluída") {
+                    statusClass = 'status-completed';
+                  } else {
+                    statusClass = 'status-progress';
+                  }
+                  
+                  const isCompleted = goal.status === "Concluída";
+                  
+                  return (
+                    <tr key={goal.id} className="goal-row">
+                      <td className="goal-info">
+                        <div className="goal-title-desc">
+                          <strong>{goal.title}</strong>
+                          <span className="goal-desc">{goal.description}</span>
+                        </div>
+                      </td>
+                      <td className="goal-category">{goal.category}</td>
+                      <td className="goal-progress">
+                        <div className="progress-container">
+                          <div className="progress-bar-bg">
+                            <div 
+                              className="progress-bar" 
+                              style={{ width: `${progressPercentage}%` }}
+                            />
+                          </div>
+                          <span className="progress-text">
+                            {goal.currentProgress}/{goal.target} ({progressPercentage}%)
+                          </span>
+                        </div>
+                      </td>
+                      <td>
+                        <span className={`goal-status ${statusClass}`}>
+                          {goal.status}
+                        </span>
+                      </td>
+                      <td className="goal-due-date">
+                        {new Date(goal.dueDate).toLocaleDateString('pt-BR')}
+                      </td>
+                      <td className="goal-actions">
+                        <button 
+                          className="btn-update-table" 
+                          onClick={() => handleUpdateProgress(goal.id)}
+                          disabled={isCompleted}
+                          title="Atualizar progresso"
+                        >
+                          {isCompleted ? '✓' : '📈'}
+                        </button>
+                        <button 
+                          className="btn-edit-table" 
+                          onClick={() => handleEditGoal(goal)}
+                          title="Editar meta"
+                        >
+                          ✏️
+                        </button>
+                        <button 
+                          className="btn-delete-table" 
+                          onClick={() => handleDeleteGoal(goal.id)}
+                          title="Deletar meta"
+                        >
+                          🗑️
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
           ) : (
             <p className="no-goals-message">
               Você não tem metas ativas. Clique em "Adicionar Nova Meta" para

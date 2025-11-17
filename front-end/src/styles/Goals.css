@@ -355,3 +355,210 @@ ease;
 .btn-cancel:hover:not(:disabled) {
     background-color: #4b5563;
 }
+
+/* ========================================== */
+/* ESTILOS DA TABELA DE METAS */
+/* ========================================== */
+
+.goals-table-section {
+    background-color: var(--color-card-bg);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+
+.goals-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.goals-table th {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.goals-table th:first-child {
+    border-radius: 0.5rem 0 0 0;
+}
+
+.goals-table th:last-child {
+    border-radius: 0 0.5rem 0 0;
+}
+
+.goals-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--color-border);
+    vertical-align: middle;
+}
+
+.goal-row:hover {
+    background-color: rgba(154, 184, 250, 0.1);
+}
+
+.goal-info .goal-title-desc {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.goal-info .goal-title-desc strong {
+    color: var(--color-text);
+    font-size: 1rem;
+}
+
+.goal-info .goal-desc {
+    color: #6b7280;
+    font-size: 0.85rem;
+}
+
+.goal-category {
+    background-color: rgba(154, 184, 250, 0.2);
+    color: var(--color-primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.progress-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 120px;
+}
+
+.progress-bar-bg {
+    background-color: #e5e7eb;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.dark .progress-bar-bg {
+    background-color: #4b5563;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-primary) 0%, #60a5fa 100%);
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    font-size: 0.8rem;
+    color: #6b7280;
+    text-align: center;
+    font-weight: 500;
+}
+
+.goal-status {
+    padding: 0.4rem 0.8rem;
+    border-radius: 1rem;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.goal-status.status-completed {
+    background-color: rgba(16, 185, 129, 0.2);
+    color: var(--color-success);
+}
+
+.goal-status.status-late {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: var(--color-error);
+}
+
+.goal-status.status-progress {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: var(--color-primary);
+}
+
+.goal-due-date {
+    font-size: 0.9rem;
+    color: #6b7280;
+    white-space: nowrap;
+}
+
+.goal-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.btn-update-table,
+.btn-edit-table,
+.btn-delete-table {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 1rem;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-update-table {
+    background-color: var(--color-success);
+    color: white;
+}
+
+.btn-update-table:hover:not(:disabled) {
+    background-color: #059669;
+    transform: translateY(-1px);
+}
+
+.btn-update-table:disabled {
+    background-color: #d1d5db;
+    cursor: not-allowed;
+}
+
+.btn-edit-table {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.btn-edit-table:hover {
+    background-color: #2563eb;
+    transform: translateY(-1px);
+}
+
+.btn-delete-table {
+    background-color: var(--color-error);
+    color: white;
+}
+
+.btn-delete-table:hover {
+    background-color: #dc2626;
+    transform: translateY(-1px);
+}
+
+/* Responsividade da tabela */
+@media (max-width: 768px) {
+    .goals-table-section {
+        padding: 1rem;
+        overflow-x: scroll;
+    }
+    
+    .goals-table {
+        min-width: 700px;
+    }
+    
+    .goals-table th,
+    .goals-table td {
+        padding: 0.75rem 0.5rem;
+    }
+}
