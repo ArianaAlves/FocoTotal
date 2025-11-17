@@ -1,7 +1,12 @@
 import axios from "axios";
 
-// Configuração da API - usar sempre o servidor Render que está funcionando
-const API_BASE = "https://focototal.onrender.com/api";
+// Configuração da API - detectar ambiente automaticamente
+const API_BASE = import.meta.env.DEV
+    ? "http://localhost:3000/api"  // Desenvolvimento local
+    : "https://focototal.onrender.com/api";  // Produção
+
+console.log("🔗 API Base URL:", API_BASE);
+console.log("🛠️ Development mode:", import.meta.env.DEV);
 
 export const api = axios.create({
     baseURL: API_BASE,
