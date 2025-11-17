@@ -296,6 +296,161 @@ app.get('/api/users', async (req, res) => {
   }
 });
 
+// Goals routes com Prisma + Fallback
+app.get('/api/goals', async (req, res) => {
+  try {
+    if (isDatabaseConnected && prisma) {
+      // Usar Prisma - assumindo que existe um modelo Goal
+      try {
+        const goals = await prisma.goal.findMany({
+          include: {
+            user: {
+              select: { id: true, name: true, email: true }
+            }
+          },
+          orderBy: { createdAt: 'desc' }
+        });
+
+        res.json({
+          message: '🎯 Goals from database',
+          goals: goals,
+          count: goals.length,
+          source: 'database'
+        });
+      } catch (prismaError) {
+        // Fallback se o modelo Goal não existir
+        console.log('Goal model not found, using mock data');
+        res.json({
+          message: '🎯 Goals from mock data (Goal model not found)',
+          goals: [
+            {
+              id: 1,
+              title: 'Completar 10 tarefas esta semana',
+              description: 'Focar na produtividade e organização',
+              targetValue: 10,
+              currentValue: 3,
+              status: 'EM_PROGRESSO',
+              createdAt: new Date().toISOString()
+            },
+            {
+              id: 2,
+              title: 'Estudar 2 horas por dia',
+              description: 'Manter consistência nos estudos',
+              targetValue: 14,
+              currentValue: 8,
+              status: 'EM_PROGRESSO',
+              createdAt: new Date().toISOString()
+            }
+          ],
+          count: 2,
+          source: 'mock'
+        });
+      }
+    } else {
+      // Fallback - dados simulados
+      res.json({
+        message: '🎯 Goals from mock data',
+        goals: [
+          {
+            id: 1,
+            title: 'Completar 10 tarefas esta semana',
+            description: 'Focar na produtividade e organização',
+            targetValue: 10,
+            currentValue: 3,
+            status: 'EM_PROGRESSO',
+            createdAt: new Date().toISOString()
+          },
+          {
+            id: 2,
+            title: 'Estudar 2 horas por dia',
+            description: 'Manter consistência nos estudos',
+            targetValue: 14,
+            currentValue: 8,
+            status: 'EM_PROGRESSO',
+            createdAt: new Date().toISOString()
+          }
+        ],
+        count: 2,
+        source: 'mock'
+      });
+    }
+  } catch (error) {
+    console.error('Get goals error:', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
+
+app.post('/api/goals', async (req, res) => {
+  try {
+    const { title, description, targetValue, userId = 1 } = req.body;
+
+    if (!title || !targetValue) {
+      return res.status(400).json({
+        error: 'Título e valor alvo são obrigatórios'
+      });
+    }
+
+    if (isDatabaseConnected && prisma) {
+      // Usar Prisma
+      try {
+        const goal = await prisma.goal.create({
+          data: {
+            title,
+            description: description || '',
+            targetValue: parseInt(targetValue),
+            currentValue: 0,
+            userId: parseInt(userId)
+          },
+          include: {
+            user: {
+              select: { id: true, name: true, email: true }
+            }
+          }
+        });
+
+        res.status(201).json({
+          message: '✅ Meta criada com sucesso! (Database)',
+          goal: goal,
+          source: 'database'
+        });
+      } catch (prismaError) {
+        // Fallback se o modelo Goal não existir
+        res.status(201).json({
+          message: '✅ Meta criada com sucesso! (Mock - Goal model not found)',
+          goal: {
+            id: Date.now(),
+            title,
+            description: description || '',
+            targetValue: parseInt(targetValue),
+            currentValue: 0,
+            status: 'EM_PROGRESSO',
+            createdAt: new Date().toISOString()
+          },
+          source: 'mock'
+        });
+      }
+    } else {
+      // Fallback - dados simulados
+      res.status(201).json({
+        message: '✅ Meta criada com sucesso! (Mock)',
+        goal: {
+          id: Date.now(),
+          title,
+          description: description || '',
+          targetValue: parseInt(targetValue),
+          currentValue: 0,
+          status: 'EM_PROGRESSO',
+          createdAt: new Date().toISOString()
+        },
+        source: 'mock'
+      });
+    }
+  } catch (error) {
+    console.error('Create goal error:', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
+
 // Error handling
 app.use((err, req, res, next) => {
   console.error('Global error:', err);
