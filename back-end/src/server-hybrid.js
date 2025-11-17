@@ -327,18 +327,22 @@ app.get('/api/goals', async (req, res) => {
               id: 1,
               title: 'Completar 10 tarefas esta semana',
               description: 'Focar na produtividade e organização',
-              targetValue: 10,
-              currentValue: 3,
-              status: 'EM_PROGRESSO',
+              target: 10,
+              currentProgress: 3,
+              status: 'Em Progresso',
+              category: 'Desenvolvimento',
+              dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), // 7 dias a partir de hoje
               createdAt: new Date().toISOString()
             },
             {
               id: 2,
               title: 'Estudar 2 horas por dia',
               description: 'Manter consistência nos estudos',
-              targetValue: 14,
-              currentValue: 8,
-              status: 'EM_PROGRESSO',
+              target: 14,
+              currentProgress: 8,
+              status: 'Em Progresso',
+              category: 'Pessoal',
+              dueDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(), // 14 dias a partir de hoje
               createdAt: new Date().toISOString()
             }
           ],
@@ -355,18 +359,22 @@ app.get('/api/goals', async (req, res) => {
             id: 1,
             title: 'Completar 10 tarefas esta semana',
             description: 'Focar na produtividade e organização',
-            targetValue: 10,
-            currentValue: 3,
-            status: 'EM_PROGRESSO',
+            target: 10,
+            currentProgress: 3,
+            status: 'Em Progresso',
+            category: 'Desenvolvimento',
+            dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
             createdAt: new Date().toISOString()
           },
           {
             id: 2,
             title: 'Estudar 2 horas por dia',
             description: 'Manter consistência nos estudos',
-            targetValue: 14,
-            currentValue: 8,
-            status: 'EM_PROGRESSO',
+            target: 14,
+            currentProgress: 8,
+            status: 'Em Progresso',
+            category: 'Pessoal',
+            dueDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
             createdAt: new Date().toISOString()
           }
         ],
@@ -421,9 +429,11 @@ app.post('/api/goals', async (req, res) => {
             id: Date.now(),
             title,
             description: description || '',
-            targetValue: parseInt(targetValue),
-            currentValue: 0,
-            status: 'EM_PROGRESSO',
+            target: parseInt(targetValue),
+            currentProgress: 0,
+            status: 'Em Progresso',
+            category: 'Outros',
+            dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 dias
             createdAt: new Date().toISOString()
           },
           source: 'mock'
@@ -437,9 +447,11 @@ app.post('/api/goals', async (req, res) => {
           id: Date.now(),
           title,
           description: description || '',
-          targetValue: parseInt(targetValue),
-          currentValue: 0,
-          status: 'EM_PROGRESSO',
+          target: parseInt(targetValue),
+          currentProgress: 0,
+          status: 'Em Progresso',
+          category: 'Outros',
+          dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
           createdAt: new Date().toISOString()
         },
         source: 'mock'
