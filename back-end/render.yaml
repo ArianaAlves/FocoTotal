@@ -2,8 +2,10 @@ services:
   - type: web
     name: focototal-backend
     env: node
-    buildCommand: cd back-end && npm ci && npm run build
-    startCommand: cd back-end && npm start
+    region: ohio
+    plan: free
+    buildCommand: npm ci && npx prisma generate && npx prisma migrate deploy
+    startCommand: npm start
     envVars:
       - key: NODE_ENV
         value: production
