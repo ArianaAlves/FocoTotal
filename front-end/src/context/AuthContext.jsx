@@ -15,25 +15,23 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  const login = async (email, password) => {
-    const res = await api.post("/users/login", { email, password });
-    const { token, user } = res.data;
-    
-    localStorage.setItem("ft_token", token);
-    localStorage.setItem("ft_user", JSON.stringify(user));
+  const login = async (email, password) => {
+    const res = await api.post("/auth/login", { email, password });
+    const { token, user } = res.data;
+    
+    localStorage.setItem("ft_token", token);
+    localStorage.setItem("ft_user", JSON.stringify(user));
     
     setAuthToken(token); 
     
-    setUser(user);
-    return user;
-  };
+    setUser(user);
+    return user;
+  };
 
-  const register = async (data) => {
-    const res = await api.post("/users/register", data);
-    return res.data;
-  };
-
-  const logout = () => {
+  const register = async (data) => {
+    const res = await api.post("/auth/register", data);
+    return res.data;
+  };  const logout = () => {
     setAuthToken(null); 
     
     localStorage.removeItem("ft_token");

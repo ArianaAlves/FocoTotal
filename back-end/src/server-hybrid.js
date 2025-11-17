@@ -2,6 +2,14 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
+// Importar bcryptjs no topo para evitar problemas
+let bcrypt = null;
+try {
+  bcrypt = require('bcryptjs');
+} catch (error) {
+  console.log('⚠️ bcryptjs not available, passwords will not be hashed');
+}
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -71,8 +79,6 @@ app.post('/api/auth/register', async (req, res) => {
 
     if (isDatabaseConnected && prisma) {
       // Usar Prisma
-      const bcrypt = require('bcryptjs');
-
       const existingUser = await prisma.user.findUnique({
         where: { email }
       });
@@ -83,7 +89,7 @@ app.post('/api/auth/register', async (req, res) => {
         });
       }
 
-      const hashedPassword = await bcrypt.hash(password, 10);
+      const hashedPassword = bcrypt ? await bcrypt.hash(password, 10) : password;
 
       const user = await prisma.user.create({
         data: {
@@ -124,8 +130,6 @@ app.post('/api/auth/login', async (req, res) => {
 
     if (isDatabaseConnected && prisma) {
       // Usar Prisma
-      const bcrypt = require('bcryptjs');
-
       const user = await prisma.user.findUnique({
         where: { email }
       });
@@ -136,7 +140,7 @@ app.post('/api/auth/login', async (req, res) => {
         });
       }
 
-      const validPassword = await bcrypt.compare(password, user.password);
+      const validPassword = bcrypt ? await bcrypt.compare(password, user.password) : (password === user.password);
       if (!validPassword) {
         return res.status(401).json({
           error: 'Credenciais inválidas'
