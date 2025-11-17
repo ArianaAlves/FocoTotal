@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: focototal-backend
+    env: node
+    buildCommand: cd back-end && npm ci && npm run build
+    startCommand: cd back-end && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: focototal-db
+          property: connectionString
+
+databases:
+  - name: focototal-db
+    databaseName: focototal
+    user: focototal
