@@ -3,68 +3,7 @@ import { api } from "../api/api";
 import "../styles/Goals.css";
 import { ThemeContext } from "../context/ThemeContext";
 
-const GoalItem = ({ goal, onUpdateProgress, onEditGoal, onDeleteGoal }) => {
-  const progressPercentage =
-    goal.target > 0
-      ? ((goal.currentProgress / goal.target) * 100).toFixed(0)
-      : 0;
-
-  let statusClass;
-  if (goal.status === "Atrasada") {
-    statusClass = "status-late";
-  } else if (goal.status === "Concluída") {
-    statusClass = "status-completed";
-  } else {
-    statusClass = "status-progress";
-  }
-  const isCompleted = goal.status === "Concluída";
-
-  return (
-    <div className="goal-item-card">
-      <div className="goal-header">
-        <span className={`goal-status ${statusClass}`}>{goal.status}</span>
-        <span className="goal-category">{goal.category}</span>
-      </div>
-
-      <h3 className="goal-title">{goal.title}</h3>
-      <p className="goal-description">{goal.description}</p>
-
-      <div className="goal-progress-container">
-        <div className="goal-progress-bar-bg">
-          <div
-            className="goal-progress-bar"
-            style={{ width: `${progressPercentage}%` }}
-          ></div>
-        </div>
-        <span className="goal-progress-text">
-          {progressPercentage}% Completo
-        </span>
-      </div>
-
-      <div className="goal-footer">
-        <p>
-          Meta: **{goal.target}** / Atual: **{goal.currentProgress}**
-        </p>
-        <p>Vence em: {new Date(goal.dueDate).toLocaleDateString("pt-BR")}</p>
-      </div>
-      <div className="goal-actions">
-        <button
-          className="btn-update"
-          onClick={() => onUpdateProgress(goal.id)}
-          disabled={isCompleted}
-        >
-          {isCompleted ? "Concluída" : "Atualizar"}
-        </button>
-        <button className="btn-edit" onClick={() => onEditGoal(goal)}>
-          Editar
-        </button>
-        <button className="btn-delete" onClick={() => onDeleteGoal(goal.id)}>
-          Deletar
-        </button>
-      </div>
-    </div>
-  );
-};
+// Componente GoalItem removido - usando tabela simples
 
 const GoalForm = ({ isVisible, onClose, onSave, isSaving }) => {
   const [formData, setFormData] = useState({
@@ -357,26 +296,26 @@ export default function Goals() {
                   <th>Progresso</th>
                   <th>Status</th>
                   <th>Vencimento</th>
-                  <th>Ações</th>
                 </tr>
               </thead>
               <tbody>
                 {goals.map((goal) => {
-                  const progressPercentage = goal.target > 0 
-                    ? ((goal.currentProgress / goal.target) * 100).toFixed(0) 
-                    : 0;
-                  
+                  const progressPercentage =
+                    goal.target > 0
+                      ? ((goal.currentProgress / goal.target) * 100).toFixed(0)
+                      : 0;
+
                   let statusClass;
                   if (goal.status === "Atrasada") {
-                    statusClass = 'status-late';
+                    statusClass = "status-late";
                   } else if (goal.status === "Concluída") {
-                    statusClass = 'status-completed';
+                    statusClass = "status-completed";
                   } else {
-                    statusClass = 'status-progress';
+                    statusClass = "status-progress";
                   }
-                  
+
                   const isCompleted = goal.status === "Concluída";
-                  
+
                   return (
                     <tr key={goal.id} className="goal-row">
                       <td className="goal-info">
@@ -389,13 +328,14 @@ export default function Goals() {
                       <td className="goal-progress">
                         <div className="progress-container">
                           <div className="progress-bar-bg">
-                            <div 
-                              className="progress-bar" 
+                            <div
+                              className="progress-bar"
                               style={{ width: `${progressPercentage}%` }}
                             />
                           </div>
                           <span className="progress-text">
-                            {goal.currentProgress}/{goal.target} ({progressPercentage}%)
+                            {goal.currentProgress}/{goal.target} (
+                            {progressPercentage}%)
                           </span>
                         </div>
                       </td>
@@ -405,31 +345,7 @@ export default function Goals() {
                         </span>
                       </td>
                       <td className="goal-due-date">
-                        {new Date(goal.dueDate).toLocaleDateString('pt-BR')}
-                      </td>
-                      <td className="goal-actions">
-                        <button 
-                          className="btn-update-table" 
-                          onClick={() => handleUpdateProgress(goal.id)}
-                          disabled={isCompleted}
-                          title="Atualizar progresso"
-                        >
-                          {isCompleted ? '✓' : '📈'}
-                        </button>
-                        <button 
-                          className="btn-edit-table" 
-                          onClick={() => handleEditGoal(goal)}
-                          title="Editar meta"
-                        >
-                          ✏️
-                        </button>
-                        <button 
-                          className="btn-delete-table" 
-                          onClick={() => handleDeleteGoal(goal.id)}
-                          title="Deletar meta"
-                        >
-                          🗑️
-                        </button>
+                        {new Date(goal.dueDate).toLocaleDateString("pt-BR")}
                       </td>
                     </tr>
                   );
