@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tester - FocoTotal API</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #f5f5f5;
+      }
+      .test-section {
+        background: white;
+        margin: 20px 0;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      button {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 5px;
+      }
+      button:hover {
+        background: #0056b3;
+      }
+      .result {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        padding: 15px;
+        margin: 10px 0;
+        white-space: pre-wrap;
+        font-family: monospace;
+        max-height: 300px;
+        overflow-y: auto;
+      }
+      input,
+      textarea {
+        width: 100%;
+        padding: 8px;
+        margin: 5px 0;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      .success {
+        border-left: 4px solid #28a745;
+      }
+      .error {
+        border-left: 4px solid #dc3545;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🚀 FocoTotal API Tester</h1>
+    <p>Teste sua API de forma fácil!</p>
+
+    <!-- Health Check -->
+    <div class="test-section">
+      <h2>✅ Health Check</h2>
+      <button onclick="testHealthCheck()">Testar Health Check</button>
+      <div id="health-result" class="result"></div>
+    </div>
+
+    <!-- Get Tasks -->
+    <div class="test-section">
+      <h2>📋 Listar Tarefas</h2>
+      <button onclick="getTasks()">Buscar Tarefas</button>
+      <div id="tasks-result" class="result"></div>
+    </div>
+
+    <!-- Create Task -->
+    <div class="test-section">
+      <h2>➕ Criar Tarefa</h2>
+      <input
+        type="text"
+        id="task-title"
+        placeholder="Título da tarefa"
+        value="Minha primeira tarefa"
+      />
+      <textarea id="task-description" placeholder="Descrição da tarefa">
+Esta é uma tarefa de teste criada via API</textarea
+      >
+      <button onclick="createTask()">Criar Tarefa</button>
+      <div id="create-task-result" class="result"></div>
+    </div>
+
+    <!-- Login Test -->
+    <div class="test-section">
+      <h2>🔐 Teste de Login</h2>
+      <input
+        type="email"
+        id="login-email"
+        placeholder="Email"
+        value="test@test.com"
+      />
+      <input
+        type="password"
+        id="login-password"
+        placeholder="Senha"
+        value="123456"
+      />
+      <button onclick="testLogin()">Fazer Login</button>
+      <div id="login-result" class="result"></div>
+    </div>
+
+    <!-- Get Users -->
+    <div class="test-section">
+      <h2>👥 Listar Usuários</h2>
+      <button onclick="getUsers()">Buscar Usuários</button>
+      <div id="users-result" class="result"></div>
+    </div>
+
+    <script>
+      const API_BASE = "https://focototal.onrender.com";
+
+      async function makeRequest(url, options = {}) {
+        try {
+          const response = await fetch(API_BASE + url, {
+            headers: {
+              "Content-Type": "application/json",
+              ...options.headers,
+            },
+            ...options,
+          });
+
+          const data = await response.json();
+          return {
+            status: response.status,
+            ok: response.ok,
+            data: data,
+          };
+        } catch (error) {
+          return {
+            status: 0,
+            ok: false,
+            error: error.message,
+          };
+        }
+      }
+
+      function displayResult(elementId, result) {
+        const element = document.getElementById(elementId);
+        if (result.ok) {
+          element.className = "result success";
+          element.textContent = JSON.stringify(result.data, null, 2);
+        } else {
+          element.className = "result error";
+          element.textContent =
+            result.error || JSON.stringify(result.data, null, 2);
+        }
+      }
+
+      async function testHealthCheck() {
+        const result = await makeRequest("/");
+        displayResult("health-result", result);
+      }
+
+      async function getTasks() {
+        const result = await makeRequest("/api/tasks");
+        displayResult("tasks-result", result);
+      }
+
+      async function createTask() {
+        const title = document.getElementById("task-title").value;
+        const description = document.getElementById("task-description").value;
+
+        const result = await makeRequest("/api/tasks", {
+          method: "POST",
+          body: JSON.stringify({ title, description }),
+        });
+        displayResult("create-task-result", result);
+      }
+
+      async function testLogin() {
+        const email = document.getElementById("login-email").value;
+        const password = document.getElementById("login-password").value;
+
+        const result = await makeRequest("/api/auth/login", {
+          method: "POST",
+          body: JSON.stringify({ email, password }),
+        });
+        displayResult("login-result", result);
+      }
+
+      async function getUsers() {
+        const result = await makeRequest("/api/users");
+        displayResult("users-result", result);
+      }
+
+      // Teste automático ao carregar a página
+      window.onload = function () {
+        testHealthCheck();
+      };
+    </script>
+  </body>
+</html>

@@ -6,10 +6,7 @@
   "scripts": {
     "dev": "nodemon --legacy-watch --ext js,json src/server.js",
     "start": "node src/server-simple.js",
-    "build": "echo 'Build completed successfully'",
-    "prisma:generate": "npx prisma generate",
-    "prisma:migrate": "npx prisma migrate dev",
-    "prisma:deploy": "npx prisma migrate deploy"
+    "build": "echo 'Build completed successfully'"
   },
   "keywords": [],
   "author": "",
@@ -20,7 +17,6 @@
     "dotenv": "^16.3.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.11",
-    "prisma": "^6.19.0"
+    "nodemon": "^3.1.11"
   }
 }

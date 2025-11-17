@@ -30,13 +30,13 @@ app.get('/api/test', (req, res) => {
 // Auth routes (simulados)
 app.post('/api/auth/register', (req, res) => {
   const { name, email, password } = req.body;
-  
+
   if (!name || !email || !password) {
-    return res.status(400).json({ 
-      error: 'Nome, email e senha são obrigatórios' 
+    return res.status(400).json({
+      error: 'Nome, email e senha são obrigatórios'
     });
   }
-  
+
   res.json({
     message: 'Usuário registrado com sucesso!',
     user: { id: 1, name, email },
@@ -46,13 +46,13 @@ app.post('/api/auth/register', (req, res) => {
 
 app.post('/api/auth/login', (req, res) => {
   const { email, password } = req.body;
-  
+
   if (!email || !password) {
-    return res.status(400).json({ 
-      error: 'Email e senha são obrigatórios' 
+    return res.status(400).json({
+      error: 'Email e senha são obrigatórios'
     });
   }
-  
+
   res.json({
     message: 'Login realizado com sucesso!',
     user: { id: 1, name: 'Usuário Teste', email },
@@ -62,7 +62,7 @@ app.post('/api/auth/login', (req, res) => {
 
 // Users routes
 app.get('/api/users', (req, res) => {
-  res.json({ 
+  res.json({
     message: 'Users endpoint working',
     users: [
       { id: 1, name: 'Usuário 1', email: 'user1@test.com' },
@@ -81,7 +81,7 @@ app.get('/api/users/:id', (req, res) => {
 
 // Tasks routes
 app.get('/api/tasks', (req, res) => {
-  res.json({ 
+  res.json({
     message: 'Tasks endpoint working',
     tasks: [
       { id: 1, title: 'Tarefa 1', description: 'Descrição da tarefa 1', status: 'PENDENTE' },
@@ -92,19 +92,19 @@ app.get('/api/tasks', (req, res) => {
 
 app.post('/api/tasks', (req, res) => {
   const { title, description } = req.body;
-  
+
   if (!title) {
-    return res.status(400).json({ 
-      error: 'Título é obrigatório' 
+    return res.status(400).json({
+      error: 'Título é obrigatório'
     });
   }
-  
+
   res.status(201).json({
     message: 'Tarefa criada com sucesso!',
-    task: { 
-      id: Date.now(), 
-      title, 
-      description: description || '', 
+    task: {
+      id: Date.now(),
+      title,
+      description: description || '',
       status: 'PENDENTE',
       createdAt: new Date().toISOString()
     }
@@ -114,13 +114,13 @@ app.post('/api/tasks', (req, res) => {
 app.put('/api/tasks/:id', (req, res) => {
   const { id } = req.params;
   const { title, description, status } = req.body;
-  
+
   res.json({
     message: 'Tarefa atualizada com sucesso!',
-    task: { 
-      id: parseInt(id), 
-      title, 
-      description, 
+    task: {
+      id: parseInt(id),
+      title,
+      description,
       status,
       updatedAt: new Date().toISOString()
     }

@@ -1,11 +1,8 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -18,20 +15,14 @@ datasource db {
 // ===========================================
 
 enum TaskStatus {
-  PENDENTE
-  CONCLUIDA
+  PENDENTE
+  CONCLUIDA
 }
 
 enum Priority {
-  BAIXA
-  MEDIA
-  ALTA
-}
-
-enum GoalStatus { // ✨ NOVO ENUM
-  EM_PROGRESSO
-  CONCLUIDA
-  ATRASADA
+  BAIXA
+  MEDIA
+  ALTA
 }
 
 // ===========================================
@@ -39,47 +30,30 @@ enum GoalStatus { // ✨ NOVO ENUM
 // ===========================================
 
 model User {
-  id        Int       @id @default(autoincrement())
-  name      String
-  email     String    @unique
-  password  String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  tasks     Task[]
-  goals     Goal[]  // ✨ Relacionamento adicionado
+  id        Int       @id @default(autoincrement())
+  name      String
+  email     String    @unique
+  password  String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  tasks     Task[]
+
+  @@map("users")
 }
 
 model Task {
-  id           Int        @id @default(autoincrement())
-  title        String
-  description  String?
-  dueDate      DateTime
-  status       TaskStatus @default(PENDENTE)
-  subject      String?
-  priority     Priority?
-  reminderDate DateTime?
+  id          Int        @id @default(autoincrement())
+  title       String
+  description String?
+  dueDate     DateTime?
+  status      TaskStatus @default(PENDENTE)
+  priority    Priority   @default(MEDIA)
+  
+  userId      Int
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  userId       Int
-  user         User        @relation(fields: [userId], references: [id])
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
 
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
-}
-
-// --- ✨ NOVO MODELO GOAL PARA METAS ---
-model Goal {
-  id              Int         @id @default(autoincrement())
-  title           String
-  description     String?
-  target          Float       // O valor que você precisa alcançar (ex: 10 projetos)
-  currentProgress Float       @default(0) // O progresso atual
-  dueDate         DateTime
-  category        String      // Ex: "Desenvolvimento", "Finanças"
-  status          GoalStatus  @default(EM_PROGRESSO) // Usa o novo Enum
-
-  userId          Int
-  user            User        @relation(fields: [userId], references: [id])
-
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime    @updatedAt
+  @@map("tasks")
 }
