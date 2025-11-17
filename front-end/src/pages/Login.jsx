@@ -14,11 +14,12 @@ export default function Login() {
   const [error, setError] = useState("");
 
   const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  const isFormValid = email.trim() !== "" && password.trim() !== "" && isEmailValid;
+  const isFormValid =
+    email.trim() !== "" && password.trim() !== "" && isEmailValid;
 
   const handle = async (e) => {
     e.preventDefault();
-    
+
     if (!isFormValid) {
       setError("Por favor, preencha email e senha corretamente");
       return;
@@ -30,7 +31,22 @@ export default function Login() {
       await login(email, password);
       nav("/dashboard");
     } catch (err) {
-      setError(err.response?.data?.message || err.message);
+      console.error("Login error:", err);
+
+      // Tratamento específico para diferentes tipos de erro
+      if (
+        err.isNetworkError ||
+        err.message.includes("Network Error") ||
+        err.message.includes("conexão")
+      ) {
+        setError("Erro de conexão. Verifique sua internet e tente novamente.");
+      } else if (err.response?.data?.message) {
+        setError(err.response.data.message);
+      } else if (err.message) {
+        setError(err.message);
+      } else {
+        setError("Erro inesperado. Tente novamente.");
+      }
     } finally {
       setLoading(false);
     }
@@ -40,7 +56,7 @@ export default function Login() {
     <div className="auth-container">
       <div className="auth-bg-decoration auth-bg-decoration-1"></div>
       <div className="auth-bg-decoration auth-bg-decoration-2"></div>
-      
+
       <div className="auth-form-wrapper">
         <div className="auth-card">
           <div className="auth-header">
@@ -50,7 +66,7 @@ export default function Login() {
 
           <form onSubmit={handle} className="auth-form">
             {error && <div className="auth-error">{error}</div>}
-            
+
             <div className="form-group">
               <label htmlFor="email">
                 E-mail <span className="required">*</span>
@@ -60,7 +76,7 @@ export default function Login() {
                 type="email"
                 placeholder="seu@email.com"
                 value={email}
-                onChange={e => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
                 onBlur={() => setTouched({ ...touched, email: true })}
                 className={touched.email && !isEmailValid ? "input-error" : ""}
               />
@@ -82,9 +98,13 @@ export default function Login() {
                   type={showPassword ? "text" : "password"}
                   placeholder="••••••••"
                   value={password}
-                  onChange={e => setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                   onBlur={() => setTouched({ ...touched, password: true })}
-                  className={touched.password && password.trim() === "" ? "input-error" : ""}
+                  className={
+                    touched.password && password.trim() === ""
+                      ? "input-error"
+                      : ""
+                  }
                 />
                 <button
                   type="button"
@@ -100,9 +120,9 @@ export default function Login() {
               )}
             </div>
 
-            <button 
-              type="submit" 
-              className="auth-submit-btn" 
+            <button
+              type="submit"
+              className="auth-submit-btn"
               disabled={loading || !isFormValid}
             >
               <span>{loading ? "⏳ Entrando..." : "↗ Entrar"}</span>

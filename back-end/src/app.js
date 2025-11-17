@@ -12,9 +12,12 @@ const corsOptions = {
     'http://localhost:5173',  // Vite dev
     'http://localhost:3000',  // React dev alternativo
     'https://foco-total.vercel.app',  // Produção Vercel
-    'https://focototal.vercel.app'    // Variação do domínio
+    'https://focototal.vercel.app',   // Variação do domínio
+    /^https:\/\/.*\.vercel\.app$/     // Qualquer subdomínio do Vercel
   ],
-  credentials: true,
+  credentials: false, // Mudando para false para evitar problemas com CORS
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   optionsSuccessStatus: 200
 };
 

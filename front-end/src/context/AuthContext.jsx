@@ -37,16 +37,35 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password) => {
-    const res = await api.post("/users/login", { email, password });
-    const { token, user } = res.data;
+    try {
+      const res = await api.post("/users/login", { email, password });
+      const { token, user } = res.data;
 
-    localStorage.setItem("ft_token", token);
-    localStorage.setItem("ft_user", JSON.stringify(user));
+      localStorage.setItem("ft_token", token);
+      localStorage.setItem("ft_user", JSON.stringify(user));
 
-    setAuthToken(token);
+      setAuthToken(token);
+      setUser(user);
 
-    setUser(user);
-    return user;
+      console.log("Login successful for:", user.email);
+      return user;
+    } catch (error) {
+      console.error("Login error:", error);
+
+      // Se for erro de rede, melhorar a mensagem
+      if (
+        error.isNetworkError ||
+        error.code === "NETWORK_ERROR" ||
+        !error.response
+      ) {
+        throw new Error(
+          "Erro de conexão com o servidor. Verifique sua internet."
+        );
+      }
+
+      // Para outros erros, manter o comportamento original
+      throw error;
+    }
   };
 
   const register = async (data) => {
