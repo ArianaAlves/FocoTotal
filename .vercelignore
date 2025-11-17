@@ -1,0 +1,7 @@
+back-end/
+*.md
+.git/
+.gitignore
+node_modules/
+.env*
+*.log

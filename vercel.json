@@ -2,7 +2,7 @@
   "buildCommand": "cd front-end && npm run build",
   "outputDirectory": "front-end/dist",
   "installCommand": "cd front-end && npm install",
-  "devCommand": "cd front-end && npm run dev",
+  "framework": null,
   "rewrites": [
     {
       "source": "/(.*)",
