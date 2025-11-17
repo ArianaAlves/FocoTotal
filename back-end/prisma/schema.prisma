@@ -25,6 +25,12 @@ enum Priority {
   ALTA
 }
 
+enum GoalStatus {
+  EM_PROGRESSO
+  CONCLUIDA
+  ATRASADA
+}
+
 // ===========================================
 // MODELS
 // ===========================================
@@ -37,6 +43,7 @@ model User {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   tasks     Task[]
+  goals     Goal[]
 
   @@map("users")
 }
@@ -56,4 +63,23 @@ model Task {
   updatedAt   DateTime   @updatedAt
 
   @@map("tasks")
+}
+
+model Goal {
+  id              Int        @id @default(autoincrement())
+  title           String
+  description     String?
+  target          Int
+  currentProgress Int        @default(0)
+  status          GoalStatus @default(EM_PROGRESSO)
+  category        String     @default("Outros")
+  dueDate         DateTime
+  
+  userId          Int
+  user            User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  @@map("goals")
 }
