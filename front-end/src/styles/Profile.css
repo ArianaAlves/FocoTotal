@@ -28,7 +28,7 @@
   animation: fadeIn 0.4s ease;
   position: relative;
 }
-/* Banner Clean Style */
+
 .profile-banner-clean {
   background: linear-gradient(135deg, #E8E4FF 0%, #F0EBFF 100%);
   padding: 60px 40px 40px;
@@ -391,6 +391,7 @@
   animation: bounce 2s ease infinite;
 }
 
+
 .stat-card:nth-child(2) .stat-icon {
   animation-delay: 0.2s;
 }
@@ -446,6 +447,7 @@
   animation: fadeInUp 0.5s ease;
   backdrop-filter: blur(10px);
 }
+
 
 @keyframes fadeInUp {
   from {
@@ -973,10 +975,13 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
+#totaltarefas, #concluidas, #atrasadas, #TaxadeConclusão {
+  font-size: 1rem;
+}
 
 .stat-value {
   margin: 5px 0 0 0;
-  font-size: 24px;
+  font-size: 1rem !important;
   font-weight: 700;
   color: var(--text-dark);
 }
@@ -1213,7 +1218,6 @@
   font-weight: 500;
 }
 
-/* Responsive Design for Clean Banner */
 @media (max-width: 768px) {
   .profile-banner-clean {
     padding: 40px 24px 32px;

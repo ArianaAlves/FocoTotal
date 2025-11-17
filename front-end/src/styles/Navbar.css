@@ -20,7 +20,7 @@
 }
 
 html.dark-mode .navbar {
-  background: var(--surface-dark);
+  background: var(--bg);
   border-bottom: 2px solid var(--border-dark);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
@@ -150,7 +150,7 @@ html.dark-mode .user-name {
 }
 
 .btn-theme-toggle {
-  background: rgba(154, 184, 250, 0.1);
+  background: rgba(154, 184, 250, 0.9);
   border: 2px solid rgba(154, 184, 250, 0.3);
   padding: 8px;
   border-radius: 6px;
@@ -171,7 +171,7 @@ html.dark-mode .btn-theme-toggle {
 }
 
 .btn-theme-toggle:hover {
-  background: rgba(154, 184, 250, 0.2);
+  background: rgba(154, 184, 250, 0.9);
   border-color: rgba(154, 184, 250, 0.5);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(154, 184, 250, 0.2);

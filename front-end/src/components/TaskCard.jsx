@@ -20,7 +20,6 @@ export default function TaskCard({ task, onDelete, onUpdate }) {
   }
 
   const handleStatusChange = async () => {
-    // Ciclo: PENDENTE -> ATRASADA -> CONCLUIDA -> PENDENTE
     const statusCycle = {
       'PENDENTE': 'ATRASADA',
       'ATRASADA': 'CONCLUIDA',

@@ -9,11 +9,9 @@ export default function Dashboard() {
       <main className="dashboard-main">
         <div className="container">
           <div className="dashboard-content">
-            {/* Top row: Rank panel (left) + Featured card (right) */}
             <div className="dashboard-top-row">
               <div className="rank-panel" aria-label="Ranking de Habilidades">
                 <div className="rank-grid">
-                  {/* Segundo lugar */}
                   <div className="rank-item second">
                     <div className="rank-avatar" aria-hidden>
                       <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=fernanda&mouth=smile&hairColor=0000FF&skinColor=F1C27D" alt="Avatar de Fernando Araujo" crossOrigin="anonymous" />
@@ -25,8 +23,6 @@ export default function Dashboard() {
                       <div className="podium-label">Habilidades</div>
                     </div>
                   </div>
-
-                  {/* Primeiro lugar */}
                   <div className="rank-item first">
                     <div className="rank-avatar" aria-hidden>
                       <img
@@ -42,8 +38,6 @@ export default function Dashboard() {
                       <div className="podium-label">Habilidades</div>
                     </div>
                   </div>
-
-                  {/* Terceiro lugar */}
                   <div className="rank-item third">
                     <div className="rank-avatar" aria-hidden>
                       <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=robson-fun&mouth=twinkle&hairColor=7D3C98&skinColor=F1C27D" alt="Avatar de Robson Campelo" crossOrigin="anonymous" />
@@ -67,8 +61,6 @@ export default function Dashboard() {
                 </Link>
               </div>
             </div>
-
-            {/* Demais cards */}
             <div className="dashboard-grid">
               <div className="dashboard-card">
                 <div className="card-icon">👤</div>
@@ -78,19 +70,22 @@ export default function Dashboard() {
                   Ver Perfil →
                 </Link>
               </div>
-
               <div className="dashboard-card">
                 <div className="card-icon">⚡</div>
                 <h3>Produtividade</h3>
                 <p>Monitore seu progresso e melhore sua produtividade</p>
-                <p className="dashboard-stats">Em desenvolvimento</p>
+                <Link to="/productivity" className="dashboard-link-btn">
+                  Acessar Produtividade →
+                </Link>
               </div>
 
               <div className="dashboard-card">
                 <div className="card-icon">🎯</div>
                 <h3>Metas</h3>
                 <p>Defina e acompanhe suas metas pessoais e profissionais</p>
-                <p className="dashboard-stats">Em desenvolvimento</p>
+                <Link to="/goals" className="dashboard-link-btn">
+                  Acessar Metas →
+                </Link>
               </div>
             </div>
 

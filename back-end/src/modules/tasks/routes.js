@@ -7,22 +7,25 @@ import { sanitize } from "../../middlewares/sanitize.js"
 
 const router = Router();
 
-router.post(
-  "/",
-  auth,
-  sanitize,
-  validate(createTaskSchema),
-  taskController.create
-);
+router.get("/statistics", auth, taskController.getStatistics); 
+router.get("/focus-trend", auth, taskController.getWeeklyFocus); 
 
 router.get("/", auth, taskController.list);
 
+router.post(
+  "/",
+  auth,
+  sanitize,
+  validate(createTaskSchema),
+  taskController.create
+);
+
 router.put(
-  "/:id",
-  auth,
-  sanitize,
-  validate(updateTaskSchema),
-  taskController.update
+  "/:id",
+  auth,
+  sanitize,
+  validate(updateTaskSchema),
+  taskController.update
 );
 
 router.delete("/:id", auth, taskController.remove);
