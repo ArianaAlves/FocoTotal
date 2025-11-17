@@ -10,8 +10,8 @@ app.use(express.json());
 
 // Health check endpoint for Render
 app.get('/', (req, res) => {
-  res.json({ 
-    message: '🚀 FocoTotal API is running!', 
+  res.json({
+    message: '🚀 FocoTotal API is running!',
     status: 'healthy',
     timestamp: new Date().toISOString(),
     version: '1.0.0'
