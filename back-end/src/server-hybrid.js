@@ -71,14 +71,18 @@ app.post('/api/auth/register', async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
+    console.log('📝 Register attempt:', { name, email, hasPassword: !!password });
+
     if (!name || !email || !password) {
       return res.status(400).json({
         error: 'Nome, email e senha são obrigatórios'
       });
     }
 
-    if (isDatabaseConnected && prisma) {
-      // Usar Prisma
+    if (isDatabaseConnected && prisma && bcrypt) {
+      // Usar Prisma com bcrypt
+      console.log('🔍 Checking existing user...');
+      
       const existingUser = await prisma.user.findUnique({
         where: { email }
       });
@@ -89,8 +93,10 @@ app.post('/api/auth/register', async (req, res) => {
         });
       }
 
-      const hashedPassword = bcrypt ? await bcrypt.hash(password, 10) : password;
+      console.log('🔐 Hashing password...');
+      const hashedPassword = await bcrypt.hash(password, 10);
 
+      console.log('💾 Creating user...');
       const user = await prisma.user.create({
         data: {
           name,
@@ -99,6 +105,7 @@ app.post('/api/auth/register', async (req, res) => {
         }
       });
 
+      console.log('✅ User created successfully:', user.id);
       res.status(201).json({
         message: '✅ Usuário registrado com sucesso! (Database)',
         user: { id: user.id, name: user.name, email: user.email },
@@ -106,15 +113,25 @@ app.post('/api/auth/register', async (req, res) => {
       });
     } else {
       // Fallback - dados simulados
+      console.log('📦 Using mock registration');
       res.status(201).json({
         message: '✅ Usuário registrado com sucesso! (Mock)',
         user: { id: Date.now(), name, email },
-        source: 'mock'
+        source: 'mock',
+        reasons: {
+          database: isDatabaseConnected ? 'connected' : 'not connected',
+          prisma: prisma ? 'available' : 'not available',
+          bcrypt: bcrypt ? 'available' : 'not available'
+        }
       });
     }
   } catch (error) {
-    console.error('Register error:', error);
-    res.status(500).json({ error: 'Erro interno do servidor' });
+    console.error('❌ Register error:', error);
+    res.status(500).json({ 
+      error: 'Erro interno do servidor',
+      details: error.message,
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    });
   }
 });
 
