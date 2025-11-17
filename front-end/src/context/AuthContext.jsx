@@ -5,14 +5,32 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("ft_token");
     const storedUser = localStorage.getItem("ft_user");
+    
+    console.log('AuthContext init:', { hasToken: !!token, hasUser: !!storedUser });
+    
     if (token && storedUser) {
-      setUser(JSON.parse(storedUser));
-      setAuthToken(token);
+      try {
+        setAuthToken(token);
+        const userData = JSON.parse(storedUser);
+        setUser(userData);
+        console.log('User restored from localStorage:', userData.email);
+      } catch (error) {
+        console.log('Error parsing stored user data:', error);
+        // Dados corrompidos, limpar
+        localStorage.removeItem("ft_token");
+        localStorage.removeItem("ft_user");
+        setAuthToken(null);
+        setUser(null);
+      }
+    } else {
+      console.log('No token or user found in localStorage');
     }
+    setLoading(false);
   }, []);
 
   const login = async (email, password) => {
@@ -44,8 +62,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout }}>
-            {children}   {" "}
+    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+      {children}
     </AuthContext.Provider>
   );
 };

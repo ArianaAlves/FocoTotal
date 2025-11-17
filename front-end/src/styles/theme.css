@@ -5,56 +5,56 @@
 :root {
   /* ============= CORES PRIMÁRIAS ============= */
   /* Azul profissional - cor principal */
-  --primary: #5B7EC4;
-  --primary-dark: #4A5FA0;
-  --primary-light: #7A99D4;
-  --primary-lighter: #E8EDFC;
+  --primary: #5b7ec4;
+  --primary-dark: #4a5fa0;
+  --primary-light: #7a99d4;
+  --primary-lighter: #e8edfc;
 
   /* ============= CORES SECUNDÁRIAS ============= */
-  --success: #2E7D32;
-  --success-light: #E8F5E9;
-  --warning: #D99E00;
-  --warning-light: #FFF8E1;
-  --danger: #C62828;
-  --danger-light: #FFEBEE;
-  --info: #0891B2;
-  --info-light: #E0F2FE;
+  --success: #2e7d32;
+  --success-light: #e8f5e9;
+  --warning: #d99e00;
+  --warning-light: #fff8e1;
+  --danger: #c62828;
+  --danger-light: #ffebee;
+  --info: #0891b2;
+  --info-light: #e0f2fe;
 
   /* ============= CORES DE ESTADO ============= */
-  --accent-light: #E0F2FE;
-  --accent-light-hover: #B3E5FC;
+  --accent-light: #e0f2fe;
+  --accent-light-hover: #b3e5fc;
 
   /* ============= TEMA LIGHT (PADRÃO) ============= */
   /* Background */
-  --bg: #F9FAFB;
-  --bg-secondary: #F3F4F6;
-  --bg-tertiary: #EEEFF2;
+  --bg: #f9fafb;
+  --bg-secondary: #f3f4f6;
+  --bg-tertiary: #eeeff2;
 
   /* Superfícies */
-  --surface: #FFFFFF;
-  --surface-light: #F9FAFB;
-  --surface-secondary: #F3F4F6;
+  --surface: #ffffff;
+  --surface-light: #f9fafb;
+  --surface-secondary: #f3f4f6;
 
   /* Texto */
-  --text: #1F2937;
+  --text: #1f2937;
   --text-secondary: #374151;
-  --text-light: #6B7280;
-  --text-lighter: #9CA3AF;
+  --text-light: #6b7280;
+  --text-lighter: #9ca3af;
 
   /* Borders */
-  --border: #E5E7EB;
-  --border-light: #F3F4F6;
+  --border: #e5e7eb;
+  --border-light: #f3f4f6;
 
   /* Inputs */
-  --input-bg: #FFFFFF;
-  --input-text: #1F2937;
-  --input-border: #D1D5DB;
-  --input-border-focus: #5B7EC4;
-  --input-caret: #5B7EC4;
+  --input-bg: #ffffff;
+  --input-text: #1f2937;
+  --input-border: #d1d5db;
+  --input-border-focus: #5b7ec4;
+  --input-caret: #5b7ec4;
 
   /* ============= EFEITOS ESPECIAIS ============= */
-  --matrix-green: #10B981;
-  --matrix-cyan: #06B6D4;
+  --matrix-green: #10b981;
+  --matrix-cyan: #06b6d4;
   --glow: 0 0 20px rgba(91, 126, 196, 0.2);
 
   /* ============= SOMBRAS ============= */
@@ -69,31 +69,31 @@
 /* ============= TEMA DARK ============= */
 html.dark-mode {
   /* Background */
-  --bg: #0F172A;
-  --bg-secondary: #1E293B;
+  --bg: #0f172a;
+  --bg-secondary: #1e293b;
   --bg-tertiary: #334155;
 
   /* Superfícies */
-  --surface: #1E293B;
+  --surface: #1e293b;
   --surface-light: #334155;
   --surface-secondary: #475569;
 
   /* Texto */
-  --text: #F1F5F9;
-  --text-secondary: #E2E8F0;
-  --text-light: #CBD5E1;
-  --text-lighter: #94A3B8;
+  --text: #f1f5f9;
+  --text-secondary: #e2e8f0;
+  --text-light: #cbd5e1;
+  --text-lighter: #94a3b8;
 
   /* Borders */
   --border: #334155;
   --border-light: #475569;
 
   /* Inputs */
-  --input-bg: #1E293B;
-  --input-text: #F1F5F9;
+  --input-bg: #1e293b;
+  --input-text: #f1f5f9;
   --input-border: #475569;
-  --input-border-focus: #7A99D4;
-  --input-caret: #7A99D4;
+  --input-border-focus: #7a99d4;
+  --input-caret: #7a99d4;
 
   /* Efeitos */
   --glow: 0 0 20px rgba(91, 126, 196, 0.3);
@@ -106,7 +106,9 @@ html.dark-mode {
   box-sizing: border-box;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   width: 100%;
 }
@@ -118,7 +120,8 @@ html {
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
@@ -175,7 +178,8 @@ select:focus {
 }
 
 /* ============= BOTÕES GLOBAIS - PROFISSIONAL ============= */
-button, .btn {
+button,
+.btn {
   cursor: pointer;
   border: none;
   border-radius: 8px;
@@ -186,7 +190,8 @@ button, .btn {
   font-family: inherit;
 }
 
-button:focus, .btn:focus {
+button:focus,
+.btn:focus {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
@@ -226,7 +231,8 @@ button:focus, .btn:focus {
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -277,7 +283,7 @@ button:focus, .btn:focus {
 
 .badge-warning {
   background: var(--warning-light);
-  color: #B8860B;
+  color: #b8860b;
 }
 
 .badge-danger {
@@ -293,23 +299,59 @@ button:focus, .btn:focus {
   color: var(--text-light);
 }
 
-.mb-1 { margin-bottom: 4px; }
-.mb-2 { margin-bottom: 8px; }
-.mb-3 { margin-bottom: 12px; }
-.mb-4 { margin-bottom: 16px; }
-.mb-5 { margin-bottom: 20px; }
-.mb-6 { margin-bottom: 24px; }
+.mb-1 {
+  margin-bottom: 4px;
+}
+.mb-2 {
+  margin-bottom: 8px;
+}
+.mb-3 {
+  margin-bottom: 12px;
+}
+.mb-4 {
+  margin-bottom: 16px;
+}
+.mb-5 {
+  margin-bottom: 20px;
+}
+.mb-6 {
+  margin-bottom: 24px;
+}
 
-.mt-1 { margin-top: 4px; }
-.mt-2 { margin-top: 8px; }
-.mt-3 { margin-top: 12px; }
-.mt-4 { margin-top: 16px; }
-.mt-5 { margin-top: 20px; }
-.mt-6 { margin-top: 24px; }
+.mt-1 {
+  margin-top: 4px;
+}
+.mt-2 {
+  margin-top: 8px;
+}
+.mt-3 {
+  margin-top: 12px;
+}
+.mt-4 {
+  margin-top: 16px;
+}
+.mt-5 {
+  margin-top: 20px;
+}
+.mt-6 {
+  margin-top: 24px;
+}
 
-.gap-1 { gap: 4px; }
-.gap-2 { gap: 8px; }
-.gap-3 { gap: 12px; }
-.gap-4 { gap: 16px; }
-.gap-5 { gap: 20px; }
-.gap-6 { gap: 24px; }
+.gap-1 {
+  gap: 4px;
+}
+.gap-2 {
+  gap: 8px;
+}
+.gap-3 {
+  gap: 12px;
+}
+.gap-4 {
+  gap: 16px;
+}
+.gap-5 {
+  gap: 20px;
+}
+.gap-6 {
+  gap: 24px;
+}
