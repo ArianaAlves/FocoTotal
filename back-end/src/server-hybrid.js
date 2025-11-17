@@ -66,6 +66,16 @@ app.get('/api/test', (req, res) => {
   });
 });
 
+// Simple register test route
+app.post('/api/register', (req, res) => {
+  console.log('📝 Simple register test');
+  res.status(201).json({
+    message: '✅ Usuário registrado com sucesso! (Simple)',
+    user: { id: 999, name: 'Test User', email: 'test@test.com' },
+    source: 'simple'
+  });
+});
+
 // Auth routes - Registro simplificado que sempre funciona
 app.post('/api/auth/register', async (req, res) => {
   try {
@@ -83,9 +93,9 @@ app.post('/api/auth/register', async (req, res) => {
     console.log('📦 Using simplified registration');
     res.status(201).json({
       message: '✅ Usuário registrado com sucesso!',
-      user: { 
-        id: Date.now(), 
-        name, 
+      user: {
+        id: Date.now(),
+        name,
         email,
         createdAt: new Date().toISOString()
       },
@@ -94,12 +104,25 @@ app.post('/api/auth/register', async (req, res) => {
 
   } catch (error) {
     console.error('❌ Register error:', error);
-    res.status(500).json({ 
+    res.status(500).json({
       error: 'Erro interno do servidor',
       details: error.message
     });
   }
-});app.post('/api/auth/login', async (req, res) => {
+});
+
+// Simple login test route
+app.post('/api/login', (req, res) => {
+  console.log('🔐 Simple login test');
+  res.json({
+    message: '✅ Login realizado com sucesso! (Simple)',
+    user: { id: 999, name: 'Test User', email: 'test@test.com' },
+    token: 'simple-test-token',
+    source: 'simple'
+  });
+});
+
+app.post('/api/auth/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -113,18 +136,18 @@ app.post('/api/auth/register', async (req, res) => {
     console.log('📦 Using simplified login');
     res.json({
       message: '✅ Login realizado com sucesso!',
-      user: { 
-        id: 1, 
-        name: 'Usuário Teste', 
+      user: {
+        id: 1,
+        name: 'Usuário Teste',
         email,
         createdAt: new Date().toISOString()
       },
       source: 'simplified'
     });
-    
+
   } catch (error) {
     console.error('❌ Login error:', error);
-    res.status(500).json({ 
+    res.status(500).json({
       error: 'Erro interno do servidor',
       details: error.message
     });

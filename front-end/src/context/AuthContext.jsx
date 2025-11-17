@@ -16,7 +16,8 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password) => {
-    const res = await api.post("/auth/login", { email, password });
+    // Usar rota simples temporariamente
+    const res = await api.post("/login", { email, password });
     const { token, user } = res.data;
 
     localStorage.setItem("ft_token", token);
@@ -29,7 +30,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const register = async (data) => {
-    const res = await api.post("/auth/register", data);
+    // Usar rota simples temporariamente
+    const res = await api.post("/register", data);
     return res.data;
   };
   const logout = () => {
