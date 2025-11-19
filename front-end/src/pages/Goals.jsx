@@ -55,7 +55,7 @@ const GoalForm = ({ isVisible, onClose, onSave, isSaving }) => {
             required
           />
 
-          <label>Descrição:</label>
+          <label>Descricao:</label>
           <textarea
             name="description"
             value={formData.description}
@@ -63,7 +63,7 @@ const GoalForm = ({ isVisible, onClose, onSave, isSaving }) => {
             required
           />
 
-          <label>Meta (Valor Numérico):</label>
+          <label>Meta (Valor Numerico):</label>
           <input
             type="number"
             name="target"

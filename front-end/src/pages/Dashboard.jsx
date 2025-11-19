@@ -1,9 +1,12 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "../styles/Dashboard.css";
 
 export default function Dashboard() {
+  const { t } = useTranslation();
+  
   return (
     <div className="min-h-screen">
       <main className="dashboard-main">
@@ -62,40 +65,39 @@ export default function Dashboard() {
 
               <div className="dashboard-card featured">
                 <div className="card-icon">📋</div>
-                <h3>Minhas Tarefas</h3>
+                <h3>{t('dashboard.myTasks')}</h3>
                 <p>
-                  Gerencie, organize e acompanhe o progresso de todas as suas
-                  tarefas
+                  {t('dashboard.myTasksDesc')}
                 </p>
                 <Link to="/tasks" className="dashboard-link-btn">
-                  Acessar Tarefas →
+                  {t('dashboard.accessTasks')} →
                 </Link>
               </div>
             </div>
             <div className="dashboard-grid">
               <div className="dashboard-card">
                 <div className="card-icon">👤</div>
-                <h3>Meu Perfil</h3>
-                <p>Veja e edite suas informações pessoais e estatísticas</p>
+                <h3>{t('dashboard.myProfile')}</h3>
+                <p>{t('dashboard.myProfileDesc')}</p>
                 <Link to="/profile" className="dashboard-link-btn">
-                  Ver Perfil →
+                  {t('dashboard.viewProfile')} →
                 </Link>
               </div>
               <div className="dashboard-card">
                 <div className="card-icon">⚡</div>
-                <h3>Produtividade</h3>
-                <p>Monitore seu progresso e melhore sua produtividade</p>
+                <h3>{t('dashboard.productivity')}</h3>
+                <p>{t('dashboard.productivityDesc')}</p>
                 <Link to="/productivity" className="dashboard-link-btn">
-                  Acessar Produtividade →
+                  {t('dashboard.accessProductivity')} →
                 </Link>
               </div>
 
               <div className="dashboard-card">
                 <div className="card-icon">🎯</div>
-                <h3>Metas</h3>
-                <p>Defina e acompanhe suas metas pessoais e profissionais</p>
+                <h3>{t('dashboard.goals')}</h3>
+                <p>{t('dashboard.goalsDesc')}</p>
                 <Link to="/goals" className="dashboard-link-btn">
-                  Acessar Metas →
+                  {t('dashboard.accessGoals')} →
                 </Link>
               </div>
             </div>

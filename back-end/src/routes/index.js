@@ -2,6 +2,8 @@ import { Router } from "express";
 import taskRoutes from "../modules/tasks/routes.js";
 import userRoutes from "../modules/user/routes.js";
 import goalsRoutes from "../modules/goals/routes.js";
+import gamificationRoutes from "../modules/gamification/gamificationRoutes.js";
+import profileRoutes from "../modules/user/profileRoutes.js";
 
 const router = Router();
 
@@ -18,5 +20,9 @@ router.get("/health", (req, res) => {
 });
 
 router.use("/users", userRoutes);
+router.use("/profile", profileRoutes);
 router.use("/tasks", taskRoutes);
-router.use("/goals", goalsRoutes); export default router;
+router.use("/goals", goalsRoutes);
+router.use("/gamification", gamificationRoutes);
+
+export default router;

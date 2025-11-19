@@ -3,7 +3,10 @@ import express from "express";
 import { errorHandler } from "./middlewares/errorHandler.js";
 import { requestLogger } from "./middlewares/requestLogger.js";
 import routes from "./routes/index.js";
+import path from "path";
+import { fileURLToPath } from "url";
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 
 // CORS configurado para aceitar requisições do frontend
@@ -22,6 +25,9 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+// Servir arquivos estáticos (uploads)
+app.use("/uploads", express.static(path.join(__dirname, "../public/uploads")));
 
 // Middleware para parsing JSON com tratamento de erro
 app.use(express.json({

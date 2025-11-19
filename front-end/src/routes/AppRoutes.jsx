@@ -7,6 +7,7 @@ import Tasks from "../pages/Tasks";
 import Profile from "../pages/Profile";
 import Productivity from "../pages/Productivity";
 import Goals from "../pages/Goals";
+import Ranking from "../pages/Ranking";
 import { AuthContext } from "../context/AuthContext";
 
 const Private = ({ children }) => {
@@ -57,12 +58,13 @@ const Private = ({ children }) => {
 
   return user ? children : <Navigate to="/login" replace />;
 };
+
 export default function AppRoutes() {
   return (
     <Routes>
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />     {" "}
+      <Route path="/" element={<Navigate to="/dashboard" replace />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
       <Route
         path="/dashboard"
         element={
@@ -71,7 +73,6 @@ export default function AppRoutes() {
           </Private>
         }
       />
-           {" "}
       <Route
         path="/tasks"
         element={
@@ -80,7 +81,6 @@ export default function AppRoutes() {
           </Private>
         }
       />
-           {" "}
       <Route
         path="/profile"
         element={
@@ -105,7 +105,14 @@ export default function AppRoutes() {
           </Private>
         }
       />
-         {" "}
+      <Route
+        path="/ranking"
+        element={
+          <Private>
+            <Ranking />
+          </Private>
+        }
+      />
     </Routes>
   );
 }

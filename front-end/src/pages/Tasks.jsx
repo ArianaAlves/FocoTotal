@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { api } from "../api/api";
+import { useTranslation } from "react-i18next";
 import "../styles/Tasks.css";
 
+/* eslint-disable react-hooks/set-state-in-effect */
 export default function Tasks() {
+  const { t } = useTranslation();
   const [tasks, setTasks] = useState([]);
   const [titleSearch, setTitleSearch] = useState("");
   const [statusSearch, setStatusSearch] = useState("");
+  const hasInitialized = useRef(false);
 
   const [editingTask, setEditingTask] = useState(null);
 
@@ -19,28 +23,28 @@ export default function Tasks() {
 
   const [currentTaskForm, setCurrentTaskForm] = useState(initialNewTaskState);
 
-  const fetchTasks = async () => {
+  const fetchTasks = useCallback(async () => {
     try {
       const res = await api.get("/tasks");
       setTasks(res.data);
     } catch (error) {
       console.error("Erro ao buscar tarefas:", error);
-      // Carregar dados locais se a API falhar
       const localTasks = JSON.parse(
         localStorage.getItem("ft_local_tasks") || "[]"
       );
       setTasks(localTasks);
     }
-  };
+  }, []);
 
   useEffect(() => {
-    fetchTasks();
+    if (hasInitialized.current) return;
+    hasInitialized.current = true;
 
-    // Se não há tarefas locais, criar algumas de exemplo
     const localTasks = JSON.parse(
       localStorage.getItem("ft_local_tasks") || "[]"
     );
-    if (localTasks.length === 0 && tasks.length === 0) {
+    
+    if (localTasks.length === 0) {
       const exampleTasks = [
         {
           id: 1,
@@ -74,9 +78,13 @@ export default function Tasks() {
         },
       ];
       localStorage.setItem("ft_local_tasks", JSON.stringify(exampleTasks));
-      setTimeout(() => setTasks(exampleTasks), 500);
+      setTasks(exampleTasks);
+    } else {
+      setTasks(localTasks);
     }
-  }, []);
+    
+    fetchTasks();
+  }, [fetchTasks]);
 
   const resetForm = () => {
     setCurrentTaskForm(initialNewTaskState);
@@ -85,7 +93,7 @@ export default function Tasks() {
 
   const handleSaveTask = async () => {
     if (!currentTaskForm.title || !currentTaskForm.dueDate) {
-      alert("Título e Data de Vencimento são obrigatórios!");
+      alert(t('tasks.requiredFields'));
       return;
     }
 
@@ -93,11 +101,11 @@ export default function Tasks() {
       if (editingTask) {
         // Tentar atualizar via API
         await api.put(`/tasks/${editingTask.id}`, currentTaskForm);
-        alert("Tarefa atualizada com sucesso!");
+        alert(t('tasks.updatedSuccess'));
       } else {
         // Tentar criar via API
         await api.post("/tasks", currentTaskForm);
-        alert("Tarefa criada com sucesso!");
+        alert(t('tasks.createdSuccess'));
       }
 
       resetForm();
@@ -178,7 +186,7 @@ export default function Tasks() {
         resetForm();
       }
 
-      alert("Tarefa excluída localmente!");
+        alert(t('tasks.deletedSuccess'));
     }
   };
 
@@ -259,18 +267,18 @@ export default function Tasks() {
   return (
     <div className="tasks-container">
       <aside className="tasks-sidebar">
-        <h2>{editingTask ? "Editar Tarefa" : "Criar Tarefa"}</h2>
+        <h2>{editingTask ? t('tasks.editTask') : t('tasks.createTask')}</h2>
 
         <input
           type="text"
-          placeholder="Título"
+          placeholder={t('tasks.title')}
           name="title"
           value={currentTaskForm.title}
           onChange={handleFormChange}
         />
         <input
           type="text"
-          placeholder="Descrição"
+          placeholder={t('tasks.description')}
           name="description"
           value={currentTaskForm.description}
           onChange={handleFormChange}
@@ -287,9 +295,9 @@ export default function Tasks() {
           value={currentTaskForm.status}
           onChange={handleFormChange}
         >
-          <option value="PENDENTE">Pendente</option>
-          <option value="ATRASADA">Atrasada</option>
-          <option value="CONCLUIDA">Concluída</option>
+          <option value="PENDENTE">{t('tasks.pending')}</option>
+          <option value="ATRASADA">{t('tasks.overdue')}</option>
+          <option value="CONCLUIDA">{t('tasks.completed')}</option>
         </select>
 
         <select
@@ -297,26 +305,26 @@ export default function Tasks() {
           value={currentTaskForm.priority}
           onChange={handleFormChange}
         >
-          <option value="BAIXA">Baixa</option>
-          <option value="MEDIA">Média</option>
-          <option value="ALTA">Alta</option>
+          <option value="BAIXA">{t('tasks.lowPriority')}</option>
+          <option value="MEDIA">{t('tasks.mediumPriority')}</option>
+          <option value="ALTA">{t('tasks.highPriority')}</option>
         </select>
 
         <button onClick={handleSaveTask}>
-          {editingTask ? "Salvar Alterações" : "Adicionar Tarefa"}
+          {editingTask ? t('common.saveChanges') : t('tasks.addTask')}
         </button>
         {editingTask && (
           <button onClick={resetForm} className="btn-cancel-edit">
-            Cancelar Edição
+            {t('common.cancelEdit')}
           </button>
         )}
 
         <hr />
 
-        <h3>Buscar Tarefas</h3>
+        <h3>{t('tasks.searchTasks')}</h3>
         <input
           type="text"
-          placeholder="Título"
+          placeholder={t('tasks.title')}
           value={titleSearch}
           onChange={(e) => setTitleSearch(e.target.value)}
         />
@@ -324,26 +332,26 @@ export default function Tasks() {
           value={statusSearch}
           onChange={(e) => setStatusSearch(e.target.value)}
         >
-          <option value="">Todos os status</option>
-          <option value="PENDENTE">Pendente</option>
-          <option value="ATRASADA">Atrasada</option>
-          <option value="CONCLUIDA">Concluída</option>
+          <option value="">{t('tasks.allStatus')}</option>
+          <option value="PENDENTE">{t('tasks.pending')}</option>
+          <option value="ATRASADA">{t('tasks.overdue')}</option>
+          <option value="CONCLUIDA">{t('tasks.completed')}</option>
         </select>
-        <button onClick={fetchTasks}>Buscar</button>
+        <button onClick={fetchTasks}>{t('tasks.search')}</button>
       </aside>
 
       <main className="tasks-main">
         <div className="tasks-block-container">
           <div className="tasks-column">
-            <h3>Pendentes ({pendingTasks.length})</h3>
+            <h3>{t('tasks.pending')} ({pendingTasks.length})</h3>
             {pendingTasks.map(renderTaskCard)}
           </div>
           <div className="tasks-column">
-            <h3>Concluídas ({concludedTasks.length})</h3>
+            <h3>{t('tasks.completed')} ({concludedTasks.length})</h3>
             {concludedTasks.map(renderTaskCard)}
           </div>
           <div className="tasks-column">
-            <h3>Atrasadas ({overdueTasks.length})</h3>
+            <h3>{t('tasks.overdue')} ({overdueTasks.length})</h3>
             {/*teste*/}
             {overdueTasks.map(renderTaskCard)}
           </div>

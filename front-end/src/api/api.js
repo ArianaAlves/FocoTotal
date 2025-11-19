@@ -3,7 +3,7 @@ import axios from "axios";
 // Configuração da API - detectar ambiente automaticamente
 const isLocalDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 const API_BASE = isLocalDev
-    ? "http://localhost:3000/api"  // Desenvolvimento local
+    ? "http://localhost:3001/api"  // Desenvolvimento local
     : import.meta.env.VITE_API_BASE_URL || "https://focototal.onrender.com/api";  // Produção
 
 console.log("🔗 API Base URL:", API_BASE);
@@ -92,3 +92,5 @@ api.interceptors.response.use(
         return Promise.reject(error);
     }
 );
+
+export default api;

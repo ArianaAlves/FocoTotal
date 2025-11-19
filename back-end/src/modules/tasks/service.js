@@ -1,6 +1,13 @@
 import { taskRepository } from "./repository.js";
 import { prisma } from "../../database/prismaClient.js";
 
+// Importar gamificação
+import {
+  addPoints,
+  checkAndUnlockAchievements,
+  POINTS,
+} from "../gamification/gamificationService.js";
+
 const formatDay = (date) => {
     return new Date(date).toLocaleDateString('pt-BR', { weekday: 'short' });
 }
@@ -36,7 +43,32 @@ export const taskService = {
             reminderDate: data.reminderDate ? new Date(data.reminderDate) : undefined,
         };
 
-        return taskRepository.update(Number(id), updateData);
+        const updatedTask = await taskRepository.update(Number(id), updateData);
+
+        // Se a tarefa foi concluída, adicionar pontos
+        if (data.status === "CONCLUIDA" && task.status !== "CONCLUIDA") {
+            try {
+                let points = POINTS.TASK_COMPLETED;
+                
+                // Bônus por prioridade alta
+                if (task.priority === "ALTA") {
+                    points += POINTS.TASK_HIGH_PRIORITY;
+                }
+                
+                // Bônus por estar no prazo
+                if (task.dueDate && new Date() <= new Date(task.dueDate)) {
+                    points += POINTS.TASK_COMPLETED_ON_TIME;
+                }
+                
+                await addPoints(Number(userId), points, "TASK_COMPLETED", id);
+                await checkAndUnlockAchievements(Number(userId));
+            } catch (error) {
+                console.error("Erro ao adicionar pontos:", error);
+                // Não falha a atualização da tarefa por erro de gamificação
+            }
+        }
+
+        return updatedTask;
     },
 
     delete: async (id, userId) => {

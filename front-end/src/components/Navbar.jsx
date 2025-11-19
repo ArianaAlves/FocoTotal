@@ -1,13 +1,16 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { AuthContext } from "../context/AuthContext";
 import { ThemeContext } from "../context/ThemeContext";
+import LanguageSelector from "./LanguageSelector";
 import "../styles/Navbar.css";
 
 export default function Navbar() {
   const { user, logout } = useContext(AuthContext);
-  const { cycleTheme, getThemeIcon, getThemeLabel, themeMode } =
+  const { cycleTheme, getThemeIcon, getThemeLabel } =
     useContext(ThemeContext);
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -31,6 +34,9 @@ export default function Navbar() {
           <Link to="/tasks" className="nav-link">
             📋 Tarefas
           </Link>
+          <Link to="/ranking" className="nav-link">
+            🏆 Ranking
+          </Link>
           <Link to="/profile" className="nav-link">
             👤 Perfil
           </Link>
@@ -38,6 +44,7 @@ export default function Navbar() {
 
         <div className="navbar-user">
           <span className="user-name">{user.name}</span>
+          <LanguageSelector />
           <button
             className="btn-theme-toggle"
             onClick={cycleTheme}
@@ -47,7 +54,7 @@ export default function Navbar() {
             {getThemeIcon()}
           </button>
           <button className="btn-logout" onClick={handleLogout}>
-            Sair
+            {t('navigation.logout')}
           </button>
         </div>
       </div>

@@ -34,6 +34,10 @@
   border-radius: 0 0 24px 24px;
   box-shadow: 0 4px 20px rgba(93, 95, 239, 0.1);
   margin-bottom: 40px;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
 }
 
 .profile-banner-content {
@@ -58,6 +62,54 @@
   box-shadow: 0 8px 32px rgba(93, 95, 239, 0.3);
   border: 6px solid white;
   flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-avatar-clean .avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.avatar-upload-label {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-size: 32px;
+  border-radius: 50%;
+}
+
+.profile-avatar-clean:hover .avatar-upload-label {
+  opacity: 1;
+}
+
+.cover-upload-label {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  color: #222831;
+  z-index: 10;
+}
+
+.cover-upload-label:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.05);
 }
 
 .profile-info-section {

@@ -1,10 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { api } from "../api/api";
+import { useTranslation } from "react-i18next";
+import api from "../api/api";
 import "../styles/Profile.css";
 
 export default function Profile() {
   const { user } = useContext(AuthContext);
+  const { t } = useTranslation();
   const [profile, setProfile] = useState({
     name: "",
     email: "",
@@ -15,6 +17,8 @@ export default function Profile() {
     instagram: "",
     linkedin: "",
     github: "",
+    avatar: null,
+    coverImage: null,
   });
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -28,21 +32,34 @@ export default function Profile() {
 
   useEffect(() => {
     if (user) {
-      setProfile({
-        name: user.name || "Usuário",
-        email: user.email || "",
-        bio: "Estudante dedicado ao desenvolvimento pessoal",
-        discipline: "Desenvolvimento Web",
-        joinDate: new Date().toLocaleDateString("pt-BR"),
-        discord: "",
-        instagram: "",
-        linkedin: "",
-        github: "",
-      });
-
+      loadProfile();
       loadStats();
     }
   }, [user]);
+
+  const loadProfile = async () => {
+    try {
+      const response = await api.get(`/profile/${user.id}`);
+      if (response.data.success) {
+        const data = response.data.data;
+        setProfile({
+          name: data.name || "Usuário",
+          email: data.email || "",
+          bio: data.bio || "Estudante dedicado ao desenvolvimento pessoal",
+          discipline: "Desenvolvimento Web",
+          joinDate: new Date(data.createdAt).toLocaleDateString("pt-BR"),
+          discord: "",
+          instagram: "",
+          linkedin: "",
+          github: "",
+          avatar: data.avatar,
+          coverImage: data.coverImage,
+        });
+      }
+    } catch (error) {
+      console.error("Erro ao carregar perfil:", error);
+    }
+  }
 
   const loadStats = async () => {
     try {
@@ -78,19 +95,64 @@ export default function Profile() {
       setLoading(true);
       setMessage({ type: "", text: "" });
 
-      setTimeout(() => {
+      // Primeiro, fazer upload das imagens se houver
+      if (profile.avatar_file) {
+        const formData = new FormData();
+        formData.append("avatar", profile.avatar_file);
+        
+        const avatarResponse = await api.post("/profile/upload/avatar", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+        
+        if (avatarResponse.data.success) {
+          setProfile((prev) => ({
+            ...prev,
+            avatar: avatarResponse.data.data.avatar,
+            avatar_file: null,
+          }));
+        }
+      }
+
+      // Fazer upload da capa se houver
+      if (profile.coverImage_file) {
+        const formData = new FormData();
+        formData.append("cover", profile.coverImage_file);
+        
+        const coverResponse = await api.post("/profile/upload/cover", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+        
+        if (coverResponse.data.success) {
+          setProfile((prev) => ({
+            ...prev,
+            coverImage: coverResponse.data.data.coverImage,
+            coverImage_file: null,
+          }));
+        }
+      }
+
+      // Atualizar perfil (nome e bio)
+      const updateData = {
+        name: profile.name,
+        bio: profile.bio,
+      };
+
+      const response = await api.put("/profile", updateData);
+
+      if (response.data.success) {
         setMessage({
           type: "success",
-          text: "✅ Perfil atualizado com sucesso!",
+          text: t('profile.updateSuccess'),
         });
         setIsEditing(false);
-        setLoading(false);
-      }, 500);
+      }
     } catch (error) {
+      console.error("Erro ao salvar perfil:", error);
       setMessage({
         type: "error",
-        text: "❌ Erro ao salvar perfil",
+        text: t('profile.updateError'),
       });
+    } finally {
       setLoading(false);
     }
   };
@@ -98,6 +160,26 @@ export default function Profile() {
   const handleCancel = () => {
     setIsEditing(false);
     setMessage({ type: "", text: "" });
+    loadProfile();
+  };
+
+  const handleImageChange = (e, imageType) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setProfile((prev) => ({
+          ...prev,
+          [imageType]: event.target.result,
+          [`${imageType}_file`]: file, // Armazenar arquivo também
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const getAvatarLetter = () => {
+    return profile.name ? profile.name.substring(0, 2).toUpperCase() : "U";
   };
 
   const handleContactClick = () => {
@@ -112,10 +194,46 @@ export default function Profile() {
 
   return (
     <div className="profile-container">
-      <div className="profile-banner-clean">
+      <div
+        className="profile-banner-clean"
+        style={{
+          backgroundImage: profile.coverImage
+            ? `url(${profile.coverImage})`
+            : "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        {isEditing && (
+          <label className="cover-upload-label">
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => handleImageChange(e, "coverImage")}
+              style={{ display: "none" }}
+            />
+            📸 Mudar capa
+          </label>
+        )}
+
         <div className="profile-banner-content">
           <div className="profile-avatar-clean">
-            {profile.name ? profile.name.substring(0, 2).toUpperCase() : "U"}
+            {profile.avatar ? (
+              <img src={profile.avatar} alt="Avatar" className="avatar-img" />
+            ) : (
+              getAvatarLetter()
+            )}
+            {isEditing && (
+              <label className="avatar-upload-label">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleImageChange(e, "avatar")}
+                  style={{ display: "none" }}
+                />
+                ✏️
+              </label>
+            )}
           </div>
 
           <div className="profile-info-section">
@@ -234,7 +352,7 @@ export default function Profile() {
           <div className="stat-card">
             <div className="stat-icon">📋</div>
             <div className="stat-info">
-              <p id="totaltarefas">Total de Tarefas</p>
+              <p id="totaltarefas">{t('profile.totalTasks')}</p>
               <p className="stat-value">{stats.totalTasks}</p>
             </div>
           </div>
@@ -242,7 +360,7 @@ export default function Profile() {
           <div className="stat-card">
             <div className="stat-icon">✅</div>
             <div className="stat-info">
-              <p id="concluidas">Concluídas</p>
+              <p id="concluidas">{t('profile.completed')}</p>
               <p className="stat-value">{stats.completedTasks}</p>
             </div>
           </div>
@@ -250,7 +368,7 @@ export default function Profile() {
           <div className="stat-card">
             <div className="stat-icon">⏰</div>
             <div className="stat-info">
-              <p id="atrasadas">Atrasadas</p>
+              <p id="atrasadas">{t('profile.overdue')}</p>
               <p className="stat-value">{stats.overdueTasks}</p>
             </div>
           </div>
@@ -258,7 +376,7 @@ export default function Profile() {
           <div className="stat-card">
             <div className="stat-icon">📈</div>
             <div className="stat-info">
-              <p id="TaxadeConclusão">Taxa de Conclusão</p>
+              <p id="TaxadeConclusão">{t('profile.completionRate')}</p>
               <p className="stat-value">{stats.completionRate}%</p>
             </div>
           </div>
@@ -266,7 +384,7 @@ export default function Profile() {
 
         <div className="profile-card">
           <div className="profile-card-header">
-            <h3>Informações Profissionais</h3>
+            <h3>{t('profile.professionalInfo')}</h3>
             {!isEditing && (
               <button className="btn-edit" onClick={() => setIsEditing(true)}>
                 ✏️ Editar
@@ -283,7 +401,7 @@ export default function Profile() {
                   name="name"
                   value={profile.name}
                   onChange={handleChange}
-                  placeholder="Seu nome completo"
+                  placeholder={t('profile.placeholderFullName')}
                   maxLength="100"
                 />
               </div>

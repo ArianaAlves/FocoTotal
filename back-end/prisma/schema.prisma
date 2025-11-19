@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -15,14 +15,24 @@ datasource db {
 // ===========================================
 
 model User {
-  id        Int       @id @default(autoincrement())
-  name      String
-  email     String    @unique
-  password  String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  tasks     Task[]
-  goals     Goal[]
+  id              Int       @id @default(autoincrement())
+  name            String
+  email           String    @unique
+  password        String
+  avatar          String?
+  coverImage      String?
+  bio             String?
+  points          Int       @default(0)
+  level           Int       @default(1)
+  streakDays      Int       @default(0)
+  lastActivityDay DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  tasks           Task[]
+  goals           Goal[]
+  achievements    Achievement[]
+  pointsHistory   PointsHistory[]
+  leaderboard     Leaderboard?
 
   @@map("users")
 }
@@ -61,4 +71,53 @@ model Goal {
   updatedAt       DateTime @updatedAt
 
   @@map("goals")
+}
+
+// ===========================================
+// GAMIFICATION MODELS
+// ===========================================
+
+model Achievement {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String
+  icon        String    @default("⭐")
+  points      Int       @default(100)
+  condition   String    // ex: "5_TASKS_COMPLETED", "7_DAY_STREAK"
+  
+  userId      Int
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  unlockedAt  DateTime  @default(now())
+  
+  @@map("achievements")
+}
+
+model PointsHistory {
+  id          Int       @id @default(autoincrement())
+  userId      Int
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  points      Int
+  reason      String    // ex: "TASK_COMPLETED", "ACHIEVEMENT_UNLOCKED"
+  reference   String?   // id da task ou achievement
+  
+  createdAt   DateTime  @default(now())
+  
+  @@map("points_history")
+}
+
+model Leaderboard {
+  id          Int       @id @default(autoincrement())
+  userId      Int       @unique
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  rank        Int
+  totalPoints Int
+  tasksCompleted Int @default(0)
+  currentStreak Int @default(0)
+  
+  updatedAt   DateTime  @updatedAt
+  
+  @@map("leaderboard")
 }
